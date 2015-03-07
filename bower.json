@@ -1,0 +1,6 @@
+{
+  "name": "thinkful-deployment-ui",
+  "dependencies": {
+    "bootstrap": "~3.3.2"
+  }
+}
