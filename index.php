@@ -8,9 +8,7 @@
   <link rel="stylesheet" href="/assets/css/style.css">
 <body>
   <div class="container-fluid">
-  	<section id="breadcrumb" class="col-xs-12">
-	  	
-  	</section>
+  	<section id="breadcrumb" class="col-xs-12"></section>
 	  <section id="questions" class="col-xs-12">	
 	  	<label id="question" class="required">Question</label>
 	  	<div id="answer" class=""><input type="text"   /></div>
@@ -18,5 +16,6 @@
 	  <section id="actions" class="actions col-xs-12">	
 		  <button></button>
 	  </section>
+  </div>
 </body>
 </html>
