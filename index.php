@@ -9,10 +9,7 @@
 <body>
   <div class="container-fluid">
   	<section id="breadcrumb" class="col-xs-12">
-  		<ul>
-  		
-  		
-  		</ul>
+	  	
   	</section>
 	  <section id="questions" class="col-xs-12">	
 	  	<label id="question" class="required">Question</label>
