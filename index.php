@@ -7,6 +7,8 @@
   <script src="/js/app.min.js"></script>
   <link rel="stylesheet" href="/assets/css/style.css">
 <body>
-  
+  <div class="container-fluid">
+  ...
+	</div>
 </body>
 </html>
