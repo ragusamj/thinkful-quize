@@ -13,4 +13,7 @@ Version 1
 1. You can run ```grunt build``` 
 2. You can run ```grunt watch```to build the file whan you save the code
 
-
+###Serverside
+1. Apache
+2. Local Development: MAMP 3.0
+3. PHP: 5.6.2
