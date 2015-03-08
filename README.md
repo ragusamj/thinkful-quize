@@ -9,7 +9,7 @@ Version 1
 4. RUN: ```npm install```
 5. RUN: ```grunt build```
 
-####Once installed 
+#####Once installed 
 1. You can run ```grunt build``` 
 2. You can run ```grunt watch```to build the file whan you save the code
 
