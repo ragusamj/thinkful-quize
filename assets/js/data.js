@@ -1,71 +1,97 @@
 {
-  "form": "Creative Brief",
-  "requester": {
-    "name": {
-      "first": "String",
-      "last": "String"
-    },
-    "email": "String",
-    "department": "String"
-  },
+  "form": "Front End Quize",
   "questions": [
     {
-      "question": "What is the project name?",
+      "question": "What does HTML stand for?",
       "answer": "String",
       "required": true,
+      "answer": "HyperText Markup Language",
       "tag": {
         "name": "input",
         "type": "text"
       }
     },
     {
-      "question": "What type of project?",
+      "question": "What does CSS stand for?",
       "answer": "String",
       "required": true,
+      "answer": "Cascading Style Sheets",
       "tag": {
-        "name": "select",
+        "name": "input",
+        "type": "text"
+      }
+    },
+    {
+      "question": "What is Emmet?",
+      "answer": "String",
+      "required": true,
+      "answer": "A plug in for fast code short cuts",
+      "tag": {
+        "name": "input",
+        "type": "radio",
         "options": [
           {
-            "name": "Fix / Patch / Issue",
-            "value": "Fix / Patch / Issue"
+            "name": "A city in Nebraska",
+            "value": "A city in Nebraska"
           },
           {
-            "name": "Marketing Campaign",
-            "value": "Marketing Campaign"
+            "name": "A web application for web developers",
+            "value": "A web application for web developers"
           },
           {
-            "name": "Web Site Enhancment",
-            "value": "Web Site Enhancment"
+            "name": "A plug in for fast code short cuts",
+            "value": "A plug in for fast code short cuts"
           },
           {
-            "name": "Event Assets",
-            "value": "Event Assets"
+            "name": "The heraldic ant",
+            "value": "The heraldic ant"
           }
         ]
       }
     },
     {
-      "question": "What type of project?",
+      "question": "Enter the id selector in CSS?",
+      "answer": "String",
+      "required": true,
+      "answer": "#",
+      "tag": {
+        "name": "input",
+        "type": "text"
+      }
+    },
+    {
+      "question": "Enter the class selector in CSS?",
+      "answer": "String",
+      "required": true,
+      "answer": ".",
+      "tag": {
+        "name": "input",
+        "type": "text"
+      }
+    },
+    {
+      "question": "What is the correct example of a attribute selector in CSS?",
       "answer": "String",
       "required": true,
       "tag": {
-        "name": "select",
+        "name": "input",
+        "type": "radio",
         "options": [
           {
-            "name": "Fix / Patch / Issue",
-            "value": "Fix / Patch / Issue"
+            "name": "input>type.text",
+            "value": "input>type.text"
           },
           {
-            "name": "Marketing Campaign",
-            "value": "Marketing Campaign"
+            "name": "input#type>text",
+            "value": "input#type>text"
           },
           {
-            "name": "Web Site Enhancment",
-            "value": "Web Site Enhancment"
+            "name": "input{type=text}",
+            "value": "input{type=text}"
           },
           {
-            "name": "Event Assets",
-            "value": "Event Assets"
+            "name": "input[type=text]",
+            "value": "input[type=text]"
           }
         ]
       }
