@@ -1,4 +1,4 @@
-{
+var quize = {
   "form": "Front End Quize",
   "questions": [
     {
