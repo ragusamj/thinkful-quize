@@ -11517,6 +11517,7 @@ if(! window.console) {
 (function () {
   'use strict';
   
+  
   //- OBJECT: Questions() ---- 
   //- DESCRIPTION: Handle questions & answers
   function Questions() {
@@ -11536,14 +11537,24 @@ if(! window.console) {
 
     //- METHOD: getQuestionProperty() ---- 
     //- DESCRIPTION: Get property of a question JSON segment
-    this.getQuestionProperty(hash, property, dataJSON) {
-      var data = typeof dataJSON !== 'undefined' ? dataJSON : that.data;
+    this.getQuestionProperty(hash, property) {
+      
       var question = that.getQuestionSegment(hash);
+      
+      // IF PROPERTY EXISTS RETURN PROPERTY
       if(data.hasOwnProperty(property)) {
         return question[property];
       }
       
+      // FALLBACK IF YOU REACH HERE THEN LOG AN ERROR & RETURN FASLE
+      console.log('!- ERROR -');
+      console.log('Proprty '+property+' does not exist in the "'+hash+'" json segment');
+      console.log(question);
+      
+      return false;
+      
     }    
+    
     
     //- METHOD: getQuestionArray() ---- 
     //- DESCRIPTION: Check to see if Question Data is loaded
@@ -11574,142 +11585,3 @@ if(! window.console) {
 }());
 
 
-
-
-
-
-
-
-
-
-
-/*
-
-
-
-function getQuestionProperty(hash, property) {
-  var question = getQuestionSegment(hash);
-  
-  if(myObj.hasOwnProperty(property)) {
-    return question[property];
-  }
-  
-  // DEBUG
-  console.log('!- ERROR -');
-  console.log('Proprty '+property+' does not exist in the "'+hash+'" json segment');
-  console.log(question);
-  return false;
-  
-}
-
-function getAnswer(hash) {
-  var question = getQuestionSegment(hash);
-
-  if(myObj.hasOwnProperty('question')) {
-    return question.question;
-  }
-  
-}
-
-*/
-
-;var quize = {
-  "form": "Front End Quize",
-  "questions": [
-    {
-      "question": "What does HTML stand for?",
-      "answer": "String",
-      "required": true,
-      "answer": "HyperText Markup Language",
-      "tag": {
-        "name": "input",
-        "type": "text"
-      }
-    },
-    {
-      "question": "What does CSS stand for?",
-      "answer": "String",
-      "required": true,
-      "answer": "Cascading Style Sheets",
-      "tag": {
-        "name": "input",
-        "type": "text"
-      }
-    },
-    {
-      "question": "What is Emmet?",
-      "answer": "String",
-      "required": true,
-      "answer": "A plug in for fast code short cuts",
-      "tag": {
-        "name": "input",
-        "type": "radio",
-        "options": [
-          {
-            "name": "A city in Nebraska",
-            "value": "A city in Nebraska"
-          },
-          {
-            "name": "A web application for web developers",
-            "value": "A web application for web developers"
-          },
-          {
-            "name": "A plug in for fast code short cuts",
-            "value": "A plug in for fast code short cuts"
-          },
-          {
-            "name": "The heraldic ant",
-            "value": "The heraldic ant"
-          }
-        ]
-      }
-    },
-    {
-      "question": "Enter the id selector in CSS?",
-      "answer": "String",
-      "required": true,
-      "answer": "#",
-      "tag": {
-        "name": "input",
-        "type": "text"
-      }
-    },
-    {
-      "question": "Enter the class selector in CSS?",
-      "answer": "String",
-      "required": true,
-      "answer": ".",
-      "tag": {
-        "name": "input",
-        "type": "text"
-      }
-    },
-    {
-      "question": "What is the correct example of a attribute selector in CSS?",
-      "answer": "String",
-      "required": true,
-      "tag": {
-        "name": "input",
-        "type": "radio",
-        "options": [
-          {
-            "name": "input>type.text",
-            "value": "input>type.text"
-          },
-          {
-            "name": "input#type>text",
-            "value": "input#type>text"
-          },
-          {
-            "name": "input{type=text}",
-            "value": "input{type=text}"
-          },
-          {
-            "name": "input[type=text]",
-            "value": "input[type=text]"
-          }
-        ]
-      }
-    }
-  ]
-}
