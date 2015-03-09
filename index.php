@@ -5,17 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Thinkful Quize App</title>
   <script src="/js/app.min.js"></script>
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
+
 <body>
   <div class="container-fluid">
-  	<section id="breadcrumb" class="col-xs-12"></section>
-	  <section id="questions" class="col-xs-12">	
-	  	<label id="question" class="required">Question</label>
-	  	<div id="answer" class=""><input type="text"   /></div>
-	  </section>
-	  <section id="actions" class="actions col-xs-12">	
-		  <button></button>
-	  </section>
+    <section id="breadcrumb" class="col-xs-12"></section>
+    <section id="questions" class="col-xs-12">	
+      <div class="form-group">
+        <label id="question" for="answer" class="required lead">Question</label>
+        <input id="answer" type="text" value="" class="form-control" />
+      </div>
+      </section>
+      <section id="actions" class="actions col-xs-12">
+      <div class="text-right">	
+        <button class="btn btn-success" >Next Question <span class="glyphicon glyphicon-chevron-right"></span></button>
+      </div>
+    </section>
   </div>
 </body>
 </html>
