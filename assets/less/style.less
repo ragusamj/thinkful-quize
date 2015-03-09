@@ -1,1 +1,35 @@
 @import "import-bootstrap.less";
+
+
+.container {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+
+#question {
+	padding-top:20px;
+	display: block;
+	font-size:3.5rem;
+	text-align: center;
+}
+
+// Modify Bootstrap form-control
+input.form-control[type=text] {
+  border: none;
+	border-bottom: 1px solid #ddd;
+	box-shadow: none!important;
+	border-radius:0;
+	font-size: 3rem;
+	line-height: 3rem;
+	height:auto;
+	font-weight: 100;
+	
+}
