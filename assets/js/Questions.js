@@ -6,6 +6,8 @@ if(! window.console) {
 (function () {
   'use strict';
   
+  //- OBJECT: Questions() ---- 
+  //- DESCRIPTION: Handle questions & answers
   function Questions() {
     var that = this;
     
@@ -19,6 +21,16 @@ if(! window.console) {
       } 
       return false;
     };
+
+
+    //- METHOD: getQuestionProperty() ---- 
+    //- DESCRIPTION: Get property of a question JSON segment
+    this.getQuestionProperty(hash, property) {
+      var question = that.getQuestionSegment(hash);
+      if(data.hasOwnProperty(property)) {
+        return question[property];
+      }
+    }    
     
     //- METHOD: getQuestionArray() ---- 
     //- DESCRIPTION: Check to see if Question Data is loaded
@@ -40,9 +52,11 @@ if(! window.console) {
       console.log('!- ERROR -');
       console.log('Array hash does not exist return the first item in the array');
       return  data.questions[0];
+      
     };
     
   }
+  
   
 }());
 
@@ -59,31 +73,6 @@ if(! window.console) {
 /*
 
 
-function getQuestionSegment(hash) {
-
-  // JSON DATA ARRAY
-  var data = [];
-  
-  // CHECK IF BLANK
-  if(array.length === 0) {
-    console.log('!- ERROR -');
-    console.log('Array is empty');
-    return false;
-  }
-  
-  // CHECK IF HASH IS IN LENGTH
-  if(array.length > hash) {
-    return data.questions[0];
-  }
-  
-  // DEBUG
-  console.log('!- ERROR -');
-  console.log('Array hash does not exist return the first item in the array');
-  
-  // DEFUALT RETURN FIST VALUE
-  return  data.questions[0];
-  
-}
 
 function getQuestionProperty(hash, property) {
   var question = getQuestionSegment(hash);
