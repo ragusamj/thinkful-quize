@@ -6,6 +6,7 @@ if(! window.console) {
 (function () {
   'use strict';
   
+  
   //- OBJECT: Questions() ---- 
   //- DESCRIPTION: Handle questions & answers
   function Questions() {
@@ -26,11 +27,23 @@ if(! window.console) {
     //- METHOD: getQuestionProperty() ---- 
     //- DESCRIPTION: Get property of a question JSON segment
     this.getQuestionProperty(hash, property) {
+      
       var question = that.getQuestionSegment(hash);
+      
+      // IF PROPERTY EXISTS RETURN PROPERTY
       if(data.hasOwnProperty(property)) {
         return question[property];
       }
+      
+      // FALLBACK IF YOU REACH HERE THEN LOG AN ERROR & RETURN FASLE
+      console.log('!- ERROR -');
+      console.log('Proprty '+property+' does not exist in the "'+hash+'" json segment');
+      console.log(question);
+      
+      return false;
+      
     }    
+    
     
     //- METHOD: getQuestionArray() ---- 
     //- DESCRIPTION: Check to see if Question Data is loaded
@@ -60,43 +73,4 @@ if(! window.console) {
   
 }());
 
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-
-function getQuestionProperty(hash, property) {
-  var question = getQuestionSegment(hash);
-  
-  if(myObj.hasOwnProperty(property)) {
-    return question[property];
-  }
-  
-  // DEBUG
-  console.log('!- ERROR -');
-  console.log('Proprty '+property+' does not exist in the "'+hash+'" json segment');
-  console.log(question);
-  return false;
-  
-}
-
-function getAnswer(hash) {
-  var question = getQuestionSegment(hash);
-
-  if(myObj.hasOwnProperty('question')) {
-    return question.question;
-  }
-  
-}
-
-*/
 
