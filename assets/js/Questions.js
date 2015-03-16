@@ -1,76 +1,176 @@
-// ADD ERROR HANDLING FOR COONSOLE.LOG & IE
-if(! window.console) {
-  console = { log: function(){} };
-}
 
 (function () {
-  'use strict';
-  
-  
-  //- OBJECT: Questions() ---- 
-  //- DESCRIPTION: Handle questions & answers
-  function Questions() {
-    var that = this;
-    
-    
-    //- METHOD: isQuestionsLoaded() ---- 
-    //- DESCRIPTION: Check to see if Question Data is loaded
-    this.isQuestionsLoaded = function(dataJSON) {      
-      var data = typeof dataJSON !== 'undefined' ? dataJSON : that.data;
-      if(data.length > 0) {
-        return true;
-      } 
-      return false;
-    };
+    'use strict';    
+         
+    var Questions = function(){
+        
+        var that = this,
+            isDebug = true,
+            current = 0,
+            hash = '', 
+            src = '/json/data.json',
+            length = 0,
+            data = {
+                loaded: false
+            }
+            
+            
+        function loadData (){
+            
+            debug("- CALL LOAD DATA");
+            
+            $.ajax({
+                url:src, 
+                dataType: "json",  
+                beforeSend: function( xhr ) {
+                    debug('- GETTING JSON DATA QUESTIONS');
+                    debug(xhr); 
+                },
+            })
+            .done(function( jsonData ) {
 
+                debug('- RETURN JSON DATA QUESTIONS');
+                debug(jsonData);
+                
+                debug('- ASSIGN DATA TO PRIVATE "data" PROPERTY');
+                jsonData.loaded = true; 
+                data = jsonData;
+                length = jsonData.questions.length; 
+                
+                window.onhashchange = function () {
+                    setQuestionNumber();
+                    $("#question").html(data.questions[current].question);
+                }
+                
+                $(document).ready(function(){      
+                    setQuestionNumber();
+                    $("#question").html(data.questions[current].question);
+                    getQuestionInput();
+                });
+                
+            });   
+        }
+        
+        function setQuestionNumber() {
+            if(window.location.hash) {
+                hash = window.location.hash.replace("#", "");
+                debug('- BOOKMARK DETECTED ' + hash); 
+                
+                if(!isNaN(hash)) {
+                    hash = parseInt(hash);
+                    debug('- BOOKMARK INT ' + hash); 
+                    
+                    if(hash < length) {
+                        debug('- SET QUESTION NUMBER: ' + hash);                                
+                        current = parseInt(hash);
+                    }
+                }
+            }
+            
+            debug('- KEEP QUESTION NUMBER: ' + 0); 
+        }
+        
+        function getQuestionInput() {
+           
+            debug('- GET QUESTION INPUT');
+            
+            var tagObject = data.questions[current].tag;
+            var tags = {};
+            var tagsArray = [];
+            var tag = {};
 
-    //- METHOD: getQuestionProperty() ---- 
-    //- DESCRIPTION: Get property of a question JSON segment
-    this.getQuestionProperty(hash, property) {
-      
-      var question = that.getQuestionSegment(hash);
-      
-      // IF PROPERTY EXISTS RETURN PROPERTY
-      if(data.hasOwnProperty(property)) {
-        return question[property];
-      }
-      
-      // FALLBACK IF YOU REACH HERE THEN LOG AN ERROR & RETURN FASLE
-      console.log('!- ERROR -');
-      console.log('Proprty '+property+' does not exist in the "'+hash+'" json segment');
-      console.log(question);
-      
-      return false;
-      
-    }    
-    
-    
-    //- METHOD: getQuestionArray() ---- 
-    //- DESCRIPTION: Check to see if Question Data is loaded
-    this.getQuestionArray = function(hash) {
+            var tagName = tagObject.name;
+            var tagType = tagObject.type;
+            var tagOptions = {};
+            
+            if(tagObject.hasOwnProperty('options')) {
+                var tagOptions =  tagObject.options;
+            }
+            
+            debug('- TAG OBJECT' );
+            debug(tagObject);
+            
+            if(tagName == "input") {
+                
+                if(tagType == "text") {
+                    
+                    debug("ANSWER IS A INPUT TEXT");
+                    
+                    tag = $('<'+tagName+'/>', {
+                        'id':'answer-'+current,
+                        'name':'answer-'+index,
+                        'class':'answer form-control',
+                        'type':tagType,
+                    });
+                    
+                    debug(tag);
+                    
+                    tagsArray.push(tag);
+                    
+                }
+                
+                if(tagType == "radio" || tagType == "checkbox") {
+                    
+                    debug("ANSWER IS A INPUT " + tagType.toUpperCase() );
+                    
+                    $.each( tagOptions, function( index, inputObject ){
+                        debug('index: ' + index ); 
+                        debug(inputObject);
+                        
+                        tag = $('<'+tagName+'/>', {
+                            'id':'answer-'+index,
+                            'name':'answer-'+index,
+                            'class':'answer form-control',
+                            'type':tagType,
+                        });
+                        
+                        debug(tag);
+                        
+                        tagsArray.push(tag);
+                    });
+                    
+                    var test = $('<'+tagName+'/>', {
+                        'id':'answer-'+current,
+                        'class': 'answer form-control',
+                        'type': tagType,
+                    });
+                    
+                }
+                
+            }
+            
+            debug( data.questions[current].tag );
+            //debug(tagsArray);
+            
+        }
+        
+        function debug(message) {
+            if(isDebug === true) {
+                console.log(message);
+            }
+        }
+        
+        function getMemberDetails () {
+            debug(data);
+            debug('getMemberDetails');
+        } 
 
-      // IF ARRAY EMPTY RETURN "false"
-      if(that.data.length === 0) {
-        console.log('!- ERROR -');
-        console.log('Array is empty');
-        return false;
-      }
-      
-      // CHECK IF HASH IS IN THE LENGTH... IF "true" RETURN ARRAY SEGMENT
-      if(array.length > hash) {
-        return data.questions[0];
-      }
-      
-      // FALLBACK IF YOU REACH HERE THEN LOG AN ERROR & RETURN THE FIRST ITEM IN ARRAY
-      console.log('!- ERROR -');
-      console.log('Array hash does not exist return the first item in the array');
-      return  data.questions[0];
-      
-    };
+        return{
+            loadData:loadData,
+            get:getMemberDetails
+        }
+            
+    }();
+
     
-  }
-  
-  
+    Questions.loadData();
+    
+        
 }());
+
+
+
+
+
 
 
