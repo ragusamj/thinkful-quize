@@ -11537,19 +11537,21 @@ if (typeof Object.create !== 'function') {
     
     //- QUESTIONS --------------------------------------
     //-- NOTES: COLLECTION OF QUESTIONS
-    
-    //-- PUBLIC PROPERTIES:
-    //----- none
 
     //-- PRIVATE PROPERTIES:
+    //----- loaded = false
     //----- questions = array
-    //----- results: object { 
-    //-----   correct : int
-    //-----   incorrect : int
-    //-----   attempts : int
+    //----- results = object { 
+    //-----   correct = int
+    //-----   incorrect = int
+    //-----   attempts = int  
+    //----- }
+    
+    //-- PUBLIC PROPERTIES:
+    //----- completed = boolean
     
     //-- METHODS:
-    //----- setCorrect()
+    //----- setCorrect() 
     //----- setIncorrect()
     
     var surveyMaker = function (questions) {
@@ -11563,6 +11565,7 @@ if (typeof Object.create !== 'function') {
         }
         
         var survey = {},
+            loaded = false,
             questions = [],
             results = {
                 correct: 0,
@@ -11570,6 +11573,8 @@ if (typeof Object.create !== 'function') {
                 attempts: 0
             },
             completed = false
+            
+        survey.completed = false;
                     
         inputTag.setCorrect = function(correct) {
             // NEED TO ADD MORE TO RECALCUALTE WITH TOTAL
