@@ -11574,22 +11574,25 @@ if (typeof Object.create !== 'function') {
             },
             completed = false
             
-        survey.completed = false;
         
+        // isLoaded() 
         inputTag.isLoaded = function() {
             return loaded;
         };
-                    
+        
+        // setCorrect()          
         inputTag.setCorrect = function(correct) {
             // NEED TO ADD MORE TO RECALCUALTE WITH TOTAL
             results.correct = correct;
         };
         
+        // setIncorrect()
         inputTag.setIncorrect = function(incorrect) {
             // NEED TO ADD MORE TO RECALCUALTE WITH TOTAL
             results.incorrect = incorrect;
         };
         
+        // isCompleted()
         inputTag.isCompleted = function() {
             return completed;
         };
