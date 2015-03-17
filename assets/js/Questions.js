@@ -1,4 +1,152 @@
 
+
+
+(function () {
+    
+    
+    // CODING NOTES: Still working this out!
+    
+    
+    //- QUESTIONS --------------------------------------
+    //-- NOTES: COLLECTION OF QUESTIONS
+    
+    //-- PROPERTIES:
+    //----- "length": int
+    //----- "questions" : array
+    
+    //-- METHODS:
+    //----- set() : 
+    //----- get() : 
+    
+    var surveyMaker = (questions) {
+        
+        if(typeof question === 'undefined') {
+            console.log("ERROR: questions not passed");
+        }
+        
+        if(questions.length === 0) {
+            console.log("WARNING: questions length 0");
+        }
+        
+        var survey = {};
+        
+        survey.questions = [];
+        survey.length = survey.questions.length;
+        
+        var results = {
+            correct: 0;
+            incorrect: 0;
+            attempts: 0;
+        }
+        
+        var completed = false;
+        
+        inputTag.setCorrect = function(correct) {
+            // NEED TO ADD MORE TO RECALCUALTE WITH TOTAL
+            results.correct = correct;
+        };
+        
+        inputTag.setIncorrect = function(incorrect) {
+            // NEED TO ADD MORE TO RECALCUALTE WITH TOTAL
+            results.incorrect = incorrect;
+        };
+        
+        inputTag.isCompleted = function() {
+            return completed;
+        };
+
+        return survey;
+        
+    };
+    
+    
+    //- QUESTION --------------------------------------
+    //-- NOTES: EACH QUESTION OBJECT
+    
+    //-- PROPERTIES:
+    //---- "question": string
+    //---- "name" : string
+    //---- "answer": string
+    //---- "required": boolean
+    //---- "tag": object
+    
+    //-- METHODS:
+    
+    var questionMaker = (question, answer, options) {
+        
+        if(typeof question === 'undefined') {
+            console.log("ERROR: question not passed");
+        }
+        
+        if(typeof answer === 'undefined') {
+            console.log("ERROR: answer not passed");
+        }
+        
+        var question = {};
+        var answer = answer;
+        
+        a = typeof a !== 'undefined' ? a : 42;
+        b = typeof b !== 'undefined' ? b : 'default_b';
+        
+        question.question = question;
+        question.required = required;
+        question.input = '';
+        
+        question.tag = { };
+                        
+        question.validate = function(value) {
+            question.input = value;
+            if(answer === value) {
+                question.valid = true;
+                return true;
+            } else {
+                question.valid = false;
+                return false;
+            }
+        };
+        
+        return question;
+        
+    };
+    
+    
+    
+    //- HTML TAG --------------------------------------
+    //-- NOTES: EACH QUESTION OBJECT
+    
+    //-- PROPERTIES:
+    //---- "tagName": string
+    //---- "name" : string
+    //---- "type": string
+    //---- "options": array
+    
+    //-- METHODS:
+    
+    var inputTagMaker = (name, answer) {
+        
+        var inputTag = {};
+        
+        inputTag.tagName = '';
+        inputTag.name = '';
+        inputTag.type = '';
+        inputTag.options = [];
+                        
+        inputTag.set = function(index) {
+            
+        };
+        
+        inputTag.get = function(index) {
+            
+        };
+
+        return inputTag;
+        
+    };
+    
+    
+}());
+
+
 (function () {
     'use strict';    
          
