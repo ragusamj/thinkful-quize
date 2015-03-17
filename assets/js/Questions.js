@@ -7,8 +7,8 @@ length
     // CODING NOTES: Still working this out!
     
     
-    //- QUESTIONS --------------------------------------
-    //-- NOTES: COLLECTION OF QUESTIONS
+    //- QUESTIONS ( OBJECT ) ==============================================
+    //-- DESCRIPTION: COLLECTION OF QUESTIONS
 
     //-- PRIVATE / PROTECTED PROPERTIES:
     //----- loaded = false
@@ -18,14 +18,17 @@ length
     //-----   incorrect = int
     //-----   attempts = int  
     //----- }
+    //----- completed = boolean
     
     //-- PUBLIC PROPERTIES:
-    //----- completed = boolean
+    //----- NULL
     
     //-- PUBLIC METHODS:
     //----- isLoaded() : return protected "loaded" property
+    //----- isCompleted() : return protected "completed" property
     //----- setCorrect(value) : default is 1
     //----- setIncorrect(value) : default is 1
+    
     
     var surveyMaker = function (questions) {
         
@@ -52,6 +55,13 @@ length
         //-- RETURNS: protected "loaded"
         inputTag.isLoaded = function() {
             return loaded;
+        };
+        
+        
+        // isCompleted()
+        //-- RETURNS: protected "completed" property
+        inputTag.isCompleted = function() {
+            return completed;
         };
         
                 
@@ -85,10 +95,7 @@ length
             results.incorrect = results.incorrect + value;
         };
         
-        // isCompleted()
-        inputTag.isCompleted = function() {
-            return completed;
-        };
+       
 
         return survey;
         
