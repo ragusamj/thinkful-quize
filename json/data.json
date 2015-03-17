@@ -7,7 +7,7 @@
       "required": true,
       "answer": "HyperText Markup Language",
       "tag": {
-        "name": "input",
+        "tagName": "input",
         "type": "text"
       }
     },
@@ -17,7 +17,7 @@
       "required": true,
       "answer": "Cascading Style Sheets",
       "tag": {
-        "name": "input",
+        "tagName": "input",
         "type": "text"
       }
     },
@@ -27,7 +27,7 @@
       "required": true,
       "answer": "A plug in for fast code short cuts",
       "tag": {
-        "name": "input",
+        "tagName": "input",
         "type": "radio",
         "options": [
           {
@@ -55,7 +55,7 @@
       "required": true,
       "answer": "#",
       "tag": {
-        "name": "input",
+        "tagName": "input",
         "type": "text"
       }
     },
@@ -65,7 +65,7 @@
       "required": true,
       "answer": ".",
       "tag": {
-        "name": "input",
+        "tagName": "input",
         "type": "text"
       }
     },
@@ -74,7 +74,7 @@
       "answer": "String",
       "required": true,
       "tag": {
-        "name": "input",
+        "tagName": "input",
         "type": "radio",
         "options": [
           {
