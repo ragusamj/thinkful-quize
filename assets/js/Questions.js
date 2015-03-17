@@ -18,7 +18,7 @@
     //----- set() : 
     //----- get() : 
     
-    var surveyMaker = (questions) {
+    var surveyMaker = function (questions) {
         
         if(typeof question === 'undefined') {
             console.log("ERROR: questions not passed");
@@ -34,9 +34,9 @@
         survey.length = survey.questions.length;
         
         var results = {
-            correct: 0;
-            incorrect: 0;
-            attempts: 0;
+            correct: 0,
+            incorrect: 0,
+            attempts: 0
         }
         
         var completed = false;
@@ -72,7 +72,7 @@
     
     //-- METHODS:
     
-    var questionMaker = (question, answer, options) {
+    var questionMaker = function (question, answer, options) {
         
         if(typeof question === 'undefined') {
             console.log("ERROR: question not passed");
@@ -111,9 +111,10 @@
     
     
     
-    //- HTML TAG --------------------------------------
-    //-- NOTES: EACH QUESTION OBJECT
-    
+    //- INPUTTAG  --------------------------------------
+    //-- NOTES: INPUT TAG OBJECT.  
+    //          EXTENDING TO MERGE OPTION WITH THE TAG & ADD VALIDATION
+     
     //-- PROPERTIES:
     //---- "tagName": string
     //---- "name" : string
@@ -122,7 +123,7 @@
     
     //-- METHODS:
     
-    var inputTagMaker = (name, answer) {
+    var inputTagMaker = function (name, answer) {
         
         var inputTag = {};
         
