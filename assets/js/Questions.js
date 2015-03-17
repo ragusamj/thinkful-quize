@@ -10,13 +10,19 @@
     //- QUESTIONS --------------------------------------
     //-- NOTES: COLLECTION OF QUESTIONS
     
-    //-- PROPERTIES:
-    //----- "length": int
-    //----- "questions" : array
+    //-- PUBLIC PROPERTIES:
+    //----- none
+
+    //-- PRIVATE PROPERTIES:
+    //----- questions = array
+    //----- results: object { 
+    //-----   correct : int
+    //-----   incorrect : int
+    //-----   attempts : int
     
     //-- METHODS:
-    //----- set() : 
-    //----- get() : 
+    //----- setCorrect()
+    //----- setIncorrect()
     
     var surveyMaker = function (questions) {
         
@@ -28,19 +34,15 @@
             console.log("WARNING: questions length 0");
         }
         
-        var survey = {};
-        
-        survey.questions = [];
-        survey.length = survey.questions.length;
-        
-        var results = {
-            correct: 0,
-            incorrect: 0,
-            attempts: 0
-        }
-        
-        var completed = false;
-        
+        var survey = {},
+            questions = [],
+            results = {
+                correct: 0,
+                incorrect: 0,
+                attempts: 0
+            },
+            completed = false
+                    
         inputTag.setCorrect = function(correct) {
             // NEED TO ADD MORE TO RECALCUALTE WITH TOTAL
             results.correct = correct;
