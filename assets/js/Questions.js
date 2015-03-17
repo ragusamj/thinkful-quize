@@ -29,7 +29,6 @@ length
     //----- setCorrect(value) : default is 1
     //----- setIncorrect(value) : default is 1
     
-    
     var surveyMaker = function (questions) {
         
         if(typeof question === 'undefined') {
@@ -80,6 +79,7 @@ length
             results.correct = results.correct + value;
         };
         
+        
         //- setIncorrect()
         //-- PARAMETERS: value = optional : default will be 1
         inputTag.setIncorrect = function(value) {
@@ -94,7 +94,6 @@ length
             
             results.incorrect = results.incorrect + value;
         };
-        
        
 
         return survey;

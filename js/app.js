@@ -11557,7 +11557,6 @@ if (typeof Object.create !== 'function') {
     //----- setCorrect(value) : default is 1
     //----- setIncorrect(value) : default is 1
     
-    
     var surveyMaker = function (questions) {
         
         if(typeof question === 'undefined') {
@@ -11608,6 +11607,7 @@ if (typeof Object.create !== 'function') {
             results.correct = results.correct + value;
         };
         
+        
         //- setIncorrect()
         //-- PARAMETERS: value = optional : default will be 1
         inputTag.setIncorrect = function(value) {
@@ -11622,7 +11622,6 @@ if (typeof Object.create !== 'function') {
             
             results.incorrect = results.incorrect + value;
         };
-        
        
 
         return survey;
