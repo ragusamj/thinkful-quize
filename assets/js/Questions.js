@@ -1,4 +1,4 @@
-
+length 
 
 
 (function () {
@@ -46,22 +46,36 @@
             },
             completed = false
             
+         
                     
         // isLoaded() 
         inputTag.isLoaded = function() {
             return loaded;
         };
         
+                
         // setCorrect()          
-        inputTag.setCorrect = function(correct) {
-            // NEED TO ADD MORE TO RECALCUALTE WITH TOTAL
-            results.correct = correct;
+        inputTag.setCorrect = function(value) {
+            if (typeof(value)==='undefined') value = 1;
+            
+            // IF RESULTS ADDS UP TO TOTAL QUESTIONS.. DECREMENT "incorrect"
+            if(( results.correct + results.incorrect ) === questions.length ) {
+                results.incorrect = results.incorrect - value;
+            } 
+            
+            results.correct = results.correct + value;
         };
         
         // setIncorrect()
-        inputTag.setIncorrect = function(incorrect) {
-            // NEED TO ADD MORE TO RECALCUALTE WITH TOTAL
-            results.incorrect = incorrect;
+        inputTag.setIncorrect = function(value) {
+            if (typeof(value)==='undefined') value = 1;
+            
+            // IF RESULTS ADDS UP TO TOTAL QUESTIONS.. DECREMENT "correct"
+            if(( results.incorrect + results.incorrect ) === questions.length ) {
+                results.correct = results.correct - value;
+            } 
+            
+            results.incorrect = results.incorrect + value;
         };
         
         // isCompleted()
