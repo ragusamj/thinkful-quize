@@ -3,6 +3,7 @@
   "questions": [
     {
       "question": "What does HTML stand for?",
+      "name" : "what-is-html",
       "answer": "String",
       "required": true,
       "answer": "HyperText Markup Language",
@@ -13,6 +14,7 @@
     },
     {
       "question": "What does CSS stand for?",
+      "name" : "what-is-css",
       "answer": "String",
       "required": true,
       "answer": "Cascading Style Sheets",
@@ -24,6 +26,7 @@
     {
       "question": "What is Emmet?",
       "answer": "String",
+      "name" : "what-is-emmet",
       "required": true,
       "answer": "A plug in for fast code short cuts",
       "tag": {
@@ -51,6 +54,7 @@
     },
     {
       "question": "Enter the id selector in CSS?",
+      "name" : "what-the-id-selector",
       "answer": "String",
       "required": true,
       "answer": "#",
@@ -61,6 +65,7 @@
     },
     {
       "question": "Enter the class selector in CSS?",
+      "name" : "what-the-class-selector",
       "answer": "String",
       "required": true,
       "answer": ".",
@@ -71,6 +76,7 @@
     },
     {
       "question": "What is the correct example of a attribute selector in CSS?",
+      "name" : "what-the-attribute-selector",
       "answer": "String",
       "required": true,
       "tag": {
