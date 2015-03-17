@@ -11538,7 +11538,7 @@ if (typeof Object.create !== 'function') {
     //- QUESTIONS --------------------------------------
     //-- NOTES: COLLECTION OF QUESTIONS
 
-    //-- PRIVATE PROPERTIES:
+    //-- PRIVATE / PROTECTED PROPERTIES:
     //----- loaded = false
     //----- questions = array
     //----- results = object { 
@@ -11550,9 +11550,10 @@ if (typeof Object.create !== 'function') {
     //-- PUBLIC PROPERTIES:
     //----- completed = boolean
     
-    //-- METHODS:
-    //----- setCorrect() 
-    //----- setIncorrect()
+    //-- PUBLIC METHODS:
+    //----- isLoaded() : return protected "loaded" property
+    //----- setCorrect(value) : default is 1
+    //----- setIncorrect(value) : default is 1
     
     var surveyMaker = function (questions) {
         
@@ -11574,16 +11575,19 @@ if (typeof Object.create !== 'function') {
             },
             completed = false
             
-         
                     
         // isLoaded() 
+        //-- RETURNS: protected "loaded"
         inputTag.isLoaded = function() {
             return loaded;
         };
         
                 
-        // setCorrect()          
+        //- setCorrect() 
+        //-- PARAMETERS: value = optional : default will be 1
         inputTag.setCorrect = function(value) {
+            
+            // SET DEFAULT TO 1 IF "undefined"
             if (typeof(value)==='undefined') value = 1;
             
             // IF RESULTS ADDS UP TO TOTAL QUESTIONS.. DECREMENT "incorrect"
@@ -11594,8 +11598,11 @@ if (typeof Object.create !== 'function') {
             results.correct = results.correct + value;
         };
         
-        // setIncorrect()
+        //- setIncorrect()
+        //-- PARAMETERS: value = optional : default will be 1
         inputTag.setIncorrect = function(value) {
+            
+            // SET DEFAULT TO 1 IF "undefined"
             if (typeof(value)==='undefined') value = 1;
             
             // IF RESULTS ADDS UP TO TOTAL QUESTIONS.. DECREMENT "correct"
