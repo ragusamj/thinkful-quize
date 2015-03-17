@@ -11575,6 +11575,10 @@ if (typeof Object.create !== 'function') {
             completed = false
             
         survey.completed = false;
+        
+        inputTag.isLoaded = function() {
+            return loaded;
+        };
                     
         inputTag.setCorrect = function(correct) {
             // NEED TO ADD MORE TO RECALCUALTE WITH TOTAL
