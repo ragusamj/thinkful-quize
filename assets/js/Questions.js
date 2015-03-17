@@ -1,5 +1,3 @@
-length 
-
 
 (function () {
     
@@ -11,7 +9,9 @@ length
     //-- DESCRIPTION: COLLECTION OF QUESTIONS
 
     //-- PRIVATE / PROTECTED PROPERTIES:
+    //----- debug = false
     //----- loaded = false
+    //----- src = string
     //----- questions = array
     //----- results = object { 
     //-----   correct = int
@@ -32,15 +32,17 @@ length
     var surveyMaker = function (questions) {
         
         if(typeof question === 'undefined') {
-            console.log("ERROR: questions not passed");
+            debug("ERROR: questions not passed");
         }
         
         if(questions.length === 0) {
-            console.log("WARNING: questions length 0");
+            debug("WARNING: questions length 0");
         }
         
         var survey = {},
+            debug = false,
             loaded = false,
+            src = '/json/data.json',
             questions = [],
             results = {
                 correct: 0,
@@ -49,10 +51,49 @@ length
             },
             completed = false
             
+        $.ajax({
+            url:src, 
+            dataType: "json",  
+            beforeSend: function( xhr ) {
+                debug('- GETTING JSON DATA QUESTIONS');
+                debug(xhr); 
+            },
+        })
+        .done(function( jsonData ) {
+
+            debug('- RETURN JSON DATA QUESTIONS');
+            debug(jsonData);
+                
+            debug('- ASSIGN DATA TO PRIVATE "data" PROPERTY');
+            loaded = true; 
+            questions = jsonData;
+                
+            window.onhashchange = function () {
+                //setQuestionNumber();
+                //$("#question").html(data.questions[current].question);
+            }
+                
+            $(document).ready(function(){      
+                //setQuestionNumber();
+                //$("#question").html(data.questions[current].question);
+                //getQuestionInput();
+            });
+            
+        });
+        
+        
+        // debug(message) 
+        function debug(message) {
+            if(debug === true) {
+                console.log(message);
+            }
+        }  
+        
                     
         // isLoaded() 
         //-- RETURNS: protected "loaded"
         inputTag.isLoaded = function() {
+            debug('- isLoaded() : return ' + loaded);
             return loaded;
         };
         
@@ -60,6 +101,7 @@ length
         // isCompleted()
         //-- RETURNS: protected "completed" property
         inputTag.isCompleted = function() {
+            debug('- isCompleted() : return ' + completed);
             return completed;
         };
         
@@ -67,6 +109,7 @@ length
         //- setCorrect() 
         //-- PARAMETERS: value = optional : default will be 1
         inputTag.setCorrect = function(value) {
+            debug('- setCorrect( ' + value + ' )');
             
             // SET DEFAULT TO 1 IF "undefined"
             if (typeof(value)==='undefined') value = 1;
@@ -74,15 +117,18 @@ length
             // IF RESULTS ADDS UP TO TOTAL QUESTIONS.. DECREMENT "incorrect"
             if(( results.correct + results.incorrect ) === questions.length ) {
                 results.incorrect = results.incorrect - value;
+                debug('- DECREMENT INCORRECT: ' + results.correct );
             } 
             
             results.correct = results.correct + value;
+            debug('- SET CORRECT: ' + results.correct );
         };
         
         
         //- setIncorrect()
         //-- PARAMETERS: value = optional : default will be 1
         inputTag.setIncorrect = function(value) {
+            debug('- setIncorrect( ' + value + ' )');
             
             // SET DEFAULT TO 1 IF "undefined"
             if (typeof(value)==='undefined') value = 1;
@@ -90,11 +136,14 @@ length
             // IF RESULTS ADDS UP TO TOTAL QUESTIONS.. DECREMENT "correct"
             if(( results.incorrect + results.incorrect ) === questions.length ) {
                 results.correct = results.correct - value;
+                debug('- DECREMENT CORRECT: ' + results.correct );
             } 
             
             results.incorrect = results.incorrect + value;
+            debug('- SET INCORRECT: ' + results.incorrect );
+            
         };
-       
+    
 
         return survey;
         
