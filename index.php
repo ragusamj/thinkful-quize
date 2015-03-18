@@ -12,7 +12,7 @@
     <section id="breadcrumb" class="col-xs-12"></section>
     <section id="questions" class="col-xs-12">	
       <div class="form-group">
-        <label id="question" for="answer" class="required lead">Question</label>
+        <label id="question" for="answer" class="required">Question</label>
         <input id="answer" type="text" value="" class="form-control" />
       </div>
       </section>
