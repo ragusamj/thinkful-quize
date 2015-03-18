@@ -108,10 +108,11 @@
         };
         
         // getCurrent() 
-        //-- RETURNS: protected "loaded"
+        //-- RETURNS: protected "current" property... question
         inputTag.getCurrent = function() {
             return current;
         };
+        
                 
         //- setCorrect() 
         //-- PARAMETERS: value = optional : default will be 1
