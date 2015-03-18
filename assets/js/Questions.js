@@ -239,8 +239,8 @@
             var questionWrapper = $("<div>", {"class" : "form-group"}),
                 questionLabel = $("<label>", {
                     'id' : "question", 
-                    "for": "[ getTagName() ]",
                     "text" : question
+                    "for": "[ tag.getTagId() ]",
                 });
             
             if(required === true) {
