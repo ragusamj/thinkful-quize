@@ -33,6 +33,8 @@
     
     var surveyMaker = function (questions) {
         
+        debug('- surveyMaker( ' + questions + '  )');
+        
         if(typeof question === 'undefined') {
             debug("ERROR: questions not passed");
         }
@@ -186,7 +188,7 @@
     
     //-- PRIVATE / PROTECTED PROPERTIES:
     //----- answer = string
-    //----- title = string
+    //----- label = string
     //----- correct = boolean
     //----- required = boolean
     //----- tag = object -- "inputTag"
@@ -196,23 +198,27 @@
     //-- PUBLIC METHODS:
     //----- getQuestion() : return protected "loaded" property
     
-    var questionMaker = function (question, title, options) {
+    var questionMaker = function (label, answer, options) {
+        
+        debug('- questionMaker( ' + label + ',' + answer + ',' + options + '  )');
+        
         
         if(typeof question === 'undefined') {
-            console.log("ERROR: question not passed");
+            debug("ERROR: question not passed" + label );
         }
         
         if(typeof answer === 'undefined') {
-            console.log("ERROR: answer not passed");
+            debug("ERROR: question not passed" + answer );
         }
         
         var question = {},
             answer = answer,
-            title = title,
+            label = label,
             correct = false,
             required = false,
             tag = {};
-                                        
+                
+                                
         question.validate = function(value) {
             question.input = value;
             if(answer === value) {
@@ -228,7 +234,7 @@
         question.getQuestion = function(value) {            
             
         };
-                        
+
         
         return question;
         
@@ -271,6 +277,10 @@
     
     
 }());
+
+
+
+
 
 
 
