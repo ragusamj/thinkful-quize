@@ -275,7 +275,7 @@
 
 
 
-
+/*
 
 (function () {
     'use strict';    
@@ -421,13 +421,7 @@
             //debug(tagsArray);
             
         }
-        
-        function debug(message) {
-            if(isDebug === true) {
-                console.log(message);
-            }
-        }
-        
+    
         function getMemberDetails () {
             debug(data);
             debug('getMemberDetails');
@@ -445,6 +439,7 @@
     
         
 }());
+*/
 
 
 

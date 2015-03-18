@@ -11798,7 +11798,7 @@ function debug(message) {
 
 
 
-
+/*
 
 (function () {
     'use strict';    
@@ -11944,13 +11944,7 @@ function debug(message) {
             //debug(tagsArray);
             
         }
-        
-        function debug(message) {
-            if(isDebug === true) {
-                console.log(message);
-            }
-        }
-        
+    
         function getMemberDetails () {
             debug(data);
             debug('getMemberDetails');
@@ -11968,6 +11962,7 @@ function debug(message) {
     
         
 }());
+*/
 
 
 
