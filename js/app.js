@@ -11702,9 +11702,7 @@ function debug(message) {
     };
     
     
-    
-    
-    
+        
     
     //- QUESTION --------------------------------------
     //-- NOTES: EACH QUESTION OBJECT
@@ -11754,8 +11752,13 @@ function debug(message) {
         };
         
                 
-        question.getQuestion = function(value) {            
-            
+        question.getQuestion = function() {            
+            debug('- getQuestion( )');
+            var questionWrapper = $("<div>", {"class" : "form-group"});
+            var questionLabel = $("<label>", {
+                'id' : "question", 
+                "for": "[ getTagName() ]",
+            });
         };
 
         
