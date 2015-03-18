@@ -6,7 +6,7 @@
   <title>Thinkful Quize App</title>
   <script src="/js/app.min.js"></script>
   <link rel="stylesheet" href="/css/style.css">
-
+</head>
 <body>
   <div class="container-fluid">
     <section id="breadcrumb" class="col-xs-12"></section>
