@@ -11,6 +11,7 @@
     //-- PRIVATE / PROTECTED PROPERTIES:
     //----- debug = false
     //----- loaded = false
+    //----- current = int
     //----- src = string
     //----- questions = array
     //----- results = object { 
@@ -26,6 +27,7 @@
     //-- PUBLIC METHODS:
     //----- isLoaded() : return protected "loaded" property
     //----- isCompleted() : return protected "completed" property
+    //----- getCurrent() : return protected "current" property
     //----- setCorrect(value) : default is 1
     //----- setIncorrect(value) : default is 1
     
@@ -42,6 +44,7 @@
         var survey = {},
             debug = false,
             loaded = false,
+            current = 0,
             src = '/json/data.json',
             questions = [],
             results = {
@@ -95,8 +98,7 @@
         inputTag.isLoaded = function() {
             debug('- isLoaded() : return ' + loaded);
             return loaded;
-        };
-        
+        };  
         
         // isCompleted()
         //-- RETURNS: protected "completed" property
@@ -105,6 +107,11 @@
             return completed;
         };
         
+        // getCurrent() 
+        //-- RETURNS: protected "loaded"
+        inputTag.getCurrent = function() {
+            return current;
+        };
                 
         //- setCorrect() 
         //-- PARAMETERS: value = optional : default will be 1

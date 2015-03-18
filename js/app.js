@@ -11526,6 +11526,7 @@ if(! window.console) {
     //-- PRIVATE / PROTECTED PROPERTIES:
     //----- debug = false
     //----- loaded = false
+    //----- current = int
     //----- src = string
     //----- questions = array
     //----- results = object { 
@@ -11541,6 +11542,7 @@ if(! window.console) {
     //-- PUBLIC METHODS:
     //----- isLoaded() : return protected "loaded" property
     //----- isCompleted() : return protected "completed" property
+    //----- getCurrent() : return protected "current" property
     //----- setCorrect(value) : default is 1
     //----- setIncorrect(value) : default is 1
     
@@ -11557,6 +11559,7 @@ if(! window.console) {
         var survey = {},
             debug = false,
             loaded = false,
+            current = 0,
             src = '/json/data.json',
             questions = [],
             results = {
@@ -11610,8 +11613,7 @@ if(! window.console) {
         inputTag.isLoaded = function() {
             debug('- isLoaded() : return ' + loaded);
             return loaded;
-        };
-        
+        };  
         
         // isCompleted()
         //-- RETURNS: protected "completed" property
@@ -11620,6 +11622,11 @@ if(! window.console) {
             return completed;
         };
         
+        // getCurrent() 
+        //-- RETURNS: protected "loaded"
+        inputTag.getCurrent = function() {
+            return current;
+        };
                 
         //- setCorrect() 
         //-- PARAMETERS: value = optional : default will be 1
