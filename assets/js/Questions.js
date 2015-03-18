@@ -43,7 +43,7 @@
             debug("WARNING: questions length 0");
         }
         
-        var survey = {},
+        var Survey = {},
             debug = false,
             loaded = false,
             current = 0,
@@ -93,21 +93,21 @@
                     
         // isLoaded() 
         //-- RETURNS: protected "loaded"
-        inputTag.isLoaded = function() {
+        Survey.isLoaded = function() {
             debug('- isLoaded() : return ' + loaded);
             return loaded;
         };  
         
         // isCompleted()
         //-- RETURNS: protected "completed" property
-        inputTag.isCompleted = function() {
+        Survey.isCompleted = function() {
             debug('- isCompleted() : return ' + completed);
             return completed;
         };
         
         // getCurrent() 
         //-- RETURNS: protected "current" property... question
-        inputTag.getCurrent = function() {
+        Survey.getCurrent = function() {
             debug('- getCurrent() : return ' + current);
             return current;
         };
@@ -115,7 +115,7 @@
         // setCurrent() 
         //-- PARAMETERS: value is the current question number to be set... default: 0
         //-- RETURNS: true of false
-        inputTag.setCurrent = function(value) {
+        Survey.setCurrent = function(value) {
             debug('- setCurrent() : passed ' + value);
             
             if(typeof value === 'undefined') {
@@ -137,7 +137,7 @@
                 
         //- setCorrect() 
         //-- PARAMETERS: value = optional : default will be 1
-        inputTag.setCorrect = function(value) {
+        Survey.setCorrect = function(value) {
             debug('- setCorrect( ' + value + ' )');
             
             // SET DEFAULT TO 1 IF "undefined"
@@ -156,7 +156,7 @@
         
         //- setIncorrect()
         //-- PARAMETERS: value = optional : default will be 1
-        inputTag.setIncorrect = function(value) {
+        Survey.setIncorrect = function(value) {
             debug('- setIncorrect( ' + value + ' )');
             
             // SET DEFAULT TO 1 IF "undefined"
@@ -174,7 +174,7 @@
         };
     
 
-        return survey;
+        return Survey;
         
     };
     
@@ -189,14 +189,17 @@
     //----- label = string
     //----- correct = boolean
     //----- required = boolean
+    //----- attempts = int
     //----- tag = object -- "inputTag"
     
     //-- PUBLIC PROPERTIES:
-    
+    //----- input = string : users attempted answer
+
     //-- PUBLIC METHODS:
+    //----- validate() : validates user input... returns true or false
     //----- getQuestion() : return protected "loaded" property
     
-    var questionMaker = function (label, answer, options) {
+    var questionMaker = function (question, answer, options) {
         
         debug('- questionMaker( ' + label + ',' + answer + ',' + options + '  )');
         
@@ -209,16 +212,18 @@
             debug("ERROR: question not passed" + answer );
         }
         
-        var question = {},
+        var Question = {},
             answer = answer,
-            label = label,
+            question = question, 
             correct = false,
             required = false,
+            attempts = 0;
             tag = {};
-                
+            
+        Question.input = "";
                                 
-        question.validate = function(value) {
-            question.input = value;
+        Question.validate = function(value) {
+            Question.input = value;
             if(answer === value) {
                 question.valid = true;
                 return true;
@@ -228,18 +233,27 @@
             }
         };
         
-                
-        question.getQuestion = function() {            
+        Question.getQuestion = function() {            
             debug('- getQuestion( )');
-            var questionWrapper = $("<div>", {"class" : "form-group"});
-            var questionLabel = $("<label>", {
-                'id' : "question", 
-                "for": "[ getTagName() ]",
-            });
+            
+            var questionWrapper = $("<div>", {"class" : "form-group"}),
+                questionLabel = $("<label>", {
+                    'id' : "question", 
+                    "for": "[ getTagName() ]",
+                    "text" : label
+                });
+            
+            if(required === true) {
+                questionLabel.addClass('required');
+            }
+            
+            $(questionWrapper).append(questionLabel);
+            
+            
         };
 
         
-        return question;
+        return Question;
         
     };
     
@@ -259,22 +273,22 @@
     
     var inputTagMaker = function (name, answer) {
         
-        var inputTag = {};
+        var InputTag = {};
         
         inputTag.tagName = '';
         inputTag.name = '';
         inputTag.type = '';
         inputTag.options = [];
                         
-        inputTag.set = function(index) {
+        InputTag.set = function(index) {
             
         };
         
-        inputTag.get = function(index) {
+        InputTag.get = function(index) {
             
         };
 
-        return inputTag;
+        return InputTag;
         
     };
     
