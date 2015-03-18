@@ -54,6 +54,7 @@
             },
             completed = false
             
+            
         $.ajax({
             url:src, 
             dataType: "json",  
@@ -69,14 +70,18 @@
                 
             debug('- ASSIGN DATA TO PRIVATE "data" PROPERTY');
             loaded = true; 
-            questions = jsonData;
+            
+            // NEED TO ADD DETECTION
+            questions = jsonData.questions;
                 
             window.onhashchange = function () {
+                debug('- onhashchange() Event');
                 //setQuestionNumber();
                 //$("#question").html(data.questions[current].question);
             }
                 
             $(document).ready(function(){      
+                debug('- domready() Event');
                 //setQuestionNumber();
                 //$("#question").html(data.questions[current].question);
                 //getQuestionInput();
@@ -84,14 +89,12 @@
             
         });
         
-        
         // debug(message) 
         function debug(message) {
             if(debug === true) {
                 console.log(message);
             }
         }  
-        
                     
         // isLoaded() 
         //-- RETURNS: protected "loaded"
@@ -114,7 +117,6 @@
             return current;
         };
         
-        
         // setCurrent() 
         //-- PARAMETERS: value is the current question number to be set... default: 0
         //-- RETURNS: true of false
@@ -133,9 +135,7 @@
                 1) if value is int proceed
                 2) if value is in range of questions length proceed
                 3) change up the UI to new set current value?
-                4) once ui is succesfully changed set current?
-                
-                
+                4) once ui is succesfully changed set current?                
             */
         };
                 
@@ -182,6 +182,8 @@
         return survey;
         
     };
+    
+    
     
     
     //- QUESTION --------------------------------------

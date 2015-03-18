@@ -11569,6 +11569,7 @@ if(! window.console) {
             },
             completed = false
             
+            
         $.ajax({
             url:src, 
             dataType: "json",  
@@ -11584,14 +11585,17 @@ if(! window.console) {
                 
             debug('- ASSIGN DATA TO PRIVATE "data" PROPERTY');
             loaded = true; 
-            questions = jsonData;
+            // NEED TO ADD DETECTION
+            questions = jsonData.questions;
                 
             window.onhashchange = function () {
+                debug('- onhashchange() Event');
                 //setQuestionNumber();
                 //$("#question").html(data.questions[current].question);
             }
                 
             $(document).ready(function(){      
+                debug('- domready() Event');
                 //setQuestionNumber();
                 //$("#question").html(data.questions[current].question);
                 //getQuestionInput();
@@ -11599,14 +11603,12 @@ if(! window.console) {
             
         });
         
-        
         // debug(message) 
         function debug(message) {
             if(debug === true) {
                 console.log(message);
             }
         }  
-        
                     
         // isLoaded() 
         //-- RETURNS: protected "loaded"
@@ -11629,7 +11631,6 @@ if(! window.console) {
             return current;
         };
         
-        
         // setCurrent() 
         //-- PARAMETERS: value is the current question number to be set... default: 0
         //-- RETURNS: true of false
@@ -11648,9 +11649,7 @@ if(! window.console) {
                 1) if value is int proceed
                 2) if value is in range of questions length proceed
                 3) change up the UI to new set current value?
-                4) once ui is succesfully changed set current?
-                
-                
+                4) once ui is succesfully changed set current?                
             */
         };
                 
@@ -11697,6 +11696,8 @@ if(! window.console) {
         return survey;
         
     };
+    
+    
     
     
     //- QUESTION --------------------------------------
