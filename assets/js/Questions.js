@@ -240,7 +240,7 @@
                 questionLabel = $("<label>", {
                     'id' : "question", 
                     "for": "[ getTagName() ]",
-                    "text" : label
+                    "text" : question
                 });
             
             if(required === true) {
