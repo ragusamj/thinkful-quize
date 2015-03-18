@@ -9,8 +9,8 @@
     //-- DESCRIPTION: COLLECTION OF QUESTIONS
 
     //-- PRIVATE / PROTECTED PROPERTIES:
-    //----- debug = false
-    //----- loaded = false
+    //----- debug = boolean
+    //----- loaded = boolean
     //----- current = int
     //----- src = string
     //----- questions = array
@@ -88,13 +88,6 @@
             });
             
         });
-        
-        // debug(message) 
-        function debug(message) {
-            if(debug === true) {
-                console.log(message);
-            }
-        }  
                     
         // isLoaded() 
         //-- RETURNS: protected "loaded"
@@ -186,19 +179,24 @@
     
     
     
+    
+    
     //- QUESTION --------------------------------------
     //-- NOTES: EACH QUESTION OBJECT
     
-    //-- PROPERTIES:
-    //---- "question": string
-    //---- "name" : string
-    //---- "answer": string
-    //---- "required": boolean
-    //---- "tag": object
+    //-- PRIVATE / PROTECTED PROPERTIES:
+    //----- answer = string
+    //----- title = string
+    //----- correct = boolean
+    //----- required = boolean
+    //----- tag = object -- "inputTag"
     
-    //-- METHODS:
+    //-- PUBLIC PROPERTIES:
     
-    var questionMaker = function (question, answer, options) {
+    //-- PUBLIC METHODS:
+    //----- getQuestion() : return protected "loaded" property
+    
+    var questionMaker = function (question, title, options) {
         
         if(typeof question === 'undefined') {
             console.log("ERROR: question not passed");
@@ -208,18 +206,13 @@
             console.log("ERROR: answer not passed");
         }
         
-        var question = {};
-        var answer = answer;
-        
-        a = typeof a !== 'undefined' ? a : 42;
-        b = typeof b !== 'undefined' ? b : 'default_b';
-        
-        question.question = question;
-        question.required = required;
-        question.input = '';
-        
-        question.tag = { };
-                        
+        var question = {},
+            answer = answer,
+            title = title,
+            correct = false,
+            required = false,
+            tag = {};
+                                        
         question.validate = function(value) {
             question.input = value;
             if(answer === value) {
@@ -230,6 +223,12 @@
                 return false;
             }
         };
+        
+                
+        question.getQuestion = function(value) {            
+            
+        };
+                        
         
         return question;
         
@@ -272,6 +271,10 @@
     
     
 }());
+
+
+
+
 
 
 (function () {

@@ -11513,7 +11513,15 @@ if (typeof jQuery === 'undefined') {
 // ADD ERROR HANDLING FOR COONSOLE.LOG & IE
 if(! window.console) {
   console = { log: function(){} };
-};
+}
+
+
+ // debug(message) 
+function debug(message) {
+    if(debug === true) {
+        console.log(message);
+    }
+}  ;
 (function () {
     
     
@@ -11524,8 +11532,8 @@ if(! window.console) {
     //-- DESCRIPTION: COLLECTION OF QUESTIONS
 
     //-- PRIVATE / PROTECTED PROPERTIES:
-    //----- debug = false
-    //----- loaded = false
+    //----- debug = boolean
+    //----- loaded = boolean
     //----- current = int
     //----- src = string
     //----- questions = array
@@ -11585,6 +11593,7 @@ if(! window.console) {
                 
             debug('- ASSIGN DATA TO PRIVATE "data" PROPERTY');
             loaded = true; 
+            
             // NEED TO ADD DETECTION
             questions = jsonData.questions;
                 
@@ -11602,13 +11611,6 @@ if(! window.console) {
             });
             
         });
-        
-        // debug(message) 
-        function debug(message) {
-            if(debug === true) {
-                console.log(message);
-            }
-        }  
                     
         // isLoaded() 
         //-- RETURNS: protected "loaded"
@@ -11700,19 +11702,24 @@ if(! window.console) {
     
     
     
+    
+    
     //- QUESTION --------------------------------------
     //-- NOTES: EACH QUESTION OBJECT
     
-    //-- PROPERTIES:
-    //---- "question": string
-    //---- "name" : string
-    //---- "answer": string
-    //---- "required": boolean
-    //---- "tag": object
+    //-- PRIVATE / PROTECTED PROPERTIES:
+    //----- answer = string
+    //----- title = string
+    //----- correct = boolean
+    //----- required = boolean
+    //----- tag = object -- "inputTag"
     
-    //-- METHODS:
+    //-- PUBLIC PROPERTIES:
     
-    var questionMaker = function (question, answer, options) {
+    //-- PUBLIC METHODS:
+    //----- getQuestion() : return protected "loaded" property
+    
+    var questionMaker = function (question, title, options) {
         
         if(typeof question === 'undefined') {
             console.log("ERROR: question not passed");
@@ -11722,18 +11729,13 @@ if(! window.console) {
             console.log("ERROR: answer not passed");
         }
         
-        var question = {};
-        var answer = answer;
-        
-        a = typeof a !== 'undefined' ? a : 42;
-        b = typeof b !== 'undefined' ? b : 'default_b';
-        
-        question.question = question;
-        question.required = required;
-        question.input = '';
-        
-        question.tag = { };
-                        
+        var question = {},
+            answer = answer,
+            title = title,
+            correct = false,
+            required = false,
+            tag = {};
+                                        
         question.validate = function(value) {
             question.input = value;
             if(answer === value) {
@@ -11744,6 +11746,12 @@ if(! window.console) {
                 return false;
             }
         };
+        
+                
+        question.getQuestion = function(value) {            
+            
+        };
+                        
         
         return question;
         
@@ -11786,6 +11794,10 @@ if(! window.console) {
     
     
 }());
+
+
+
+
 
 
 (function () {
