@@ -110,9 +110,35 @@
         // getCurrent() 
         //-- RETURNS: protected "current" property... question
         inputTag.getCurrent = function() {
+            debug('- getCurrent() : return ' + current);
             return current;
         };
         
+        
+        // setCurrent() 
+        //-- PARAMETERS: value is the current question number to be set... default: 0
+        //-- RETURNS: true of false
+        inputTag.setCurrent = function(value) {
+            debug('- setCurrent() : passed ' + value);
+            
+            if(typeof value === 'undefined') {
+                debug("ERROR: value not passed");
+            }
+            
+            /*
+                Note: 
+                I Want to prtect set to ensure the UI get updated
+                
+                psuedo code
+                1) if value is int proceed
+                2) if value is in range of questions length proceed
+                3) change up the UI to new set current value?
+                4) once ui is succesfully changed set current?
+                
+                
+            */
+        };
+                
                 
         //- setCorrect() 
         //-- PARAMETERS: value = optional : default will be 1
