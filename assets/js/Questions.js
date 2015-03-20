@@ -107,7 +107,7 @@
                 debug('- CREATE QUESTION OBJECT');
                 var questionObj = questionMaker(value.question, value.answer, value.required, inputTag);
                 
-                debug('- PUSH QUESTION OBJECT');
+                ebug('- PUSH QUESTION OBJECT');
                 questions.push( questionObj );
                 
             });  
@@ -239,26 +239,35 @@
     //----- validate() : validates user input... returns true or false
     //----- getQuestion() : return protected "loaded" property
     
-    var questionMaker = function (question, answer, required, tag) {
+    var questionMaker = function (question, answer, tagObj, required) {
         
-        debug('- questionMaker( ' + label + ',' + answer + ',' + options + '  )');
-        
-        
-        if(typeof questions === 'undefined') {
-            debug("ERROR: question not passed" + label );
+        debug('- questionMaker( ' + label + ',' + answer + ',' + required + ',' + tagObj + '   )');
+                
+        if(typeof question === 'undefined') {
+            debug("ERROR: question not passed" + question + 'returned false' );
+            return false;
         }
         
         if(typeof answer === 'undefined') {
-            debug("ERROR: question not passed" + answer );
+            debug("ERROR: answer not passed" + answer + 'returned false');
+            return false;
         }
+        
+        if(typeof tagObj !== 'object' ) {
+            debug("ERROR: tagObj is not a object... returned false");
+            return false;
+        }
+        
+        if (typeof(required)==='undefined') value = false;
+        
         
         var Question = {},
             answer = answer,
-            question = question, 
+            question = question,
+            required = required,
+            tag = tagObj,
             correct = false,
-            required = false,
             attempts = 0;
-            tag = {};
             
         Question.input = "";
                                 
