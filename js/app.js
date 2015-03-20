@@ -11630,7 +11630,7 @@ function debug(message) {
                 debug('- CREATE QUESTION OBJECT');
                 var questionObj = questionMaker(value.question, value.answer, value.required, inputTag);
                 
-                ebug('- PUSH QUESTION OBJECT');
+                debug('- PUSH QUESTION OBJECT');
                 questions.push( questionObj );
                 
             });  
