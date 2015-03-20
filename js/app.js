@@ -11599,8 +11599,41 @@ function debug(message) {
             if(jsonData.hasOwnProperty('questions') === false){
                 debug('- ERROR DATA RETURN WITH NO "questions"');
                 return false;
-            }       
-                 
+            }     
+            
+            debug('- LOOPING QUESTIONS');
+            $.each( jsonData.questions, function( key, value ) {
+                
+                if(value.hasOwnProperty('question') === false) {
+                    debug('- ERROR DATA ' + key + ' RETURN WITH NO "questions"');
+                    return;
+                }
+                
+                if(value.hasOwnProperty('answer') === false) {
+                    debug('- ERROR DATA ' + key + ' RETURN WITH NO "answer"');
+                    return;
+                }
+                
+                if(value.hasOwnProperty('required') === false) {
+                    debug('- ERROR DATA ' + key + ' RETURN WITH NO "required"');
+                    return;
+                }
+                
+                if(value.hasOwnProperty('tag') === false) {
+                    debug('- ERROR DATA ' + key + ' RETURN WITH NO "tag"');
+                    return;
+                }
+                
+                debug('- CREATE INPUT OBJECT');
+                var inputTagObj = inputTagMaker();
+                
+                debug('- CREATE QUESTION OBJECT');
+                var questionObj = questionMaker(value.question, value.answer, value.required, inputTag);
+                
+                ebug('- PUSH QUESTION OBJECT');
+                questions.push( questionObj );
+                
+            });  
             
             // NEED TO ADD DETECTION
             questions = jsonData.questions;
@@ -11729,7 +11762,7 @@ function debug(message) {
     //----- validate() : validates user input... returns true or false
     //----- getQuestion() : return protected "loaded" property
     
-    var questionMaker = function (question, answer, options) {
+    var questionMaker = function (question, answer, required, tag) {
         
         debug('- questionMaker( ' + label + ',' + answer + ',' + options + '  )');
         
