@@ -73,6 +73,12 @@
             debug('- ASSIGN DATA TO PRIVATE "data" PROPERTY');
             loaded = true; 
             
+            if(jsonData.hasOwnProperty('questions') === false){
+                debug('- ERROR DATA RETURN WITH NO "questions"');
+                return false;
+            }       
+                 
+            
             // NEED TO ADD DETECTION
             questions = jsonData.questions;
                 
@@ -104,6 +110,7 @@
             debug('- isCompleted() : return ' + completed);
             return completed;
         };
+        
         
         // getCurrent() 
         //-- RETURNS: protected "current" property... question
