@@ -11558,7 +11558,7 @@ function debug(message) {
         
         debug('- surveyMaker( ' + questions + '  )');
         
-        if(typeof question === 'undefined') {
+        if(typeof questions === 'undefined') {
             debug("ERROR: questions not passed");
         }
         
