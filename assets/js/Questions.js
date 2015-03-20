@@ -204,7 +204,7 @@
         debug('- questionMaker( ' + label + ',' + answer + ',' + options + '  )');
         
         
-        if(typeof question === 'undefined') {
+        if(typeof questions === 'undefined') {
             debug("ERROR: question not passed" + label );
         }
         
@@ -239,8 +239,8 @@
             var questionWrapper = $("<div>", {"class" : "form-group"}),
                 questionLabel = $("<label>", {
                     'id' : "question", 
-                    "text" : question
-                    "for": "[ tag.getTagId() ]",
+                    "text" : question, 
+                    "for": "[ tag.getTagId() ]"
                 });
             
             if(required === true) {
