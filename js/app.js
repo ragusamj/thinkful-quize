@@ -11762,12 +11762,19 @@ function debug(message) {
     
     var questionMaker = function (attributes) {
         
-        debug('- questionMaker( ' + label + ',' + answer + ',' + required + ',' + tagObj + '   )');
+        debug('- questionMaker( )');
+        debug(attributes);
                 
         if(typeof question === 'undefined') {
             debug("ERROR: question not passed" + question + 'returned false' );
             return false;
         }
+        
+        if(value.hasOwnProperty('question') === false) {
+                    debug('- ERROR DATA ' + key + ' RETURN WITH NO "questions"');
+                    return;
+                }
+
         
         if(typeof answer === 'undefined') {
             debug("ERROR: answer not passed" + answer + 'returned false');
