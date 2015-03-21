@@ -363,16 +363,35 @@
         inputTag.tagName = tagName;
         inputTag.attributes = attributes;
                         
-        InputTag.set = function(index) {
-            
+        InputTag.set = function(name, value) {
+            if(name = 'tagName') {
+                this.tagName = value;
+                return true;
+            }
+            inputTag.attributes[name.replace(/[^a-zA-Z]+/g,"")] = value.replace(/[^0-9a-z-]/g,"");
+            return true;
         };
         
-        InputTag.get = function(index) {
+        InputTag.get = function(name) {
             
+            if(name = 'tagName') {
+                return this.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"");
+            }
+            
+            if(name = 'tag') {
+                var tag '<'+this.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"")+' ';
+                $.each( inputTag.attributes, function(name, value ) {
+                    tag = tag + name.toLowerCase().replace(/[^a-zA-Z]+/g,"")+'="' + value.toLowerCase().replace(/[^0-9a-z-]/g,"")+'" ';
+                });
+                tag = tag + " />"
+                return tag;
+            }
+            
+            
+            
+            return inputTag.attributes[name];
         };
-
-        return InputTag;
-        
+                        
     };
     
     
