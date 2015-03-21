@@ -11602,7 +11602,7 @@ function debug(message) {
             }     
             
             debug('- LOOPING QUESTIONS');
-            $.each( jsonData.questions, function( key, value ) {
+            $.each( jsonData.questions, function( key, attributes ) {
                 
                 if(value.hasOwnProperty('question') === false) {
                     debug('- ERROR DATA ' + key + ' RETURN WITH NO "questions"');
@@ -11625,7 +11625,7 @@ function debug(message) {
                 }
                 
                 debug('- CREATE QUESTION OBJECT');
-                var questionObj = questionMaker(value.question, value.answer,  value.tag, value.required);
+                var questionObj = questionMaker(attributes);
 
                 debug('- PUSH QUESTION OBJECT');
                 questions.push( questionObj );
@@ -11760,7 +11760,7 @@ function debug(message) {
     //----- validate() : validates user input... returns true or false
     //----- getQuestion() : return protected "loaded" property
     
-    var questionMaker = function (question, answer, tagObj, required) {
+    var questionMaker = function (attributes) {
         
         debug('- questionMaker( ' + label + ',' + answer + ',' + required + ',' + tagObj + '   )');
                 
