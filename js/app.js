@@ -11910,6 +11910,15 @@ function debug(message) {
                 return tag;
             }
             
+             if(name = 'tags') {
+                var tag '<'+this.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"")+' ';
+                $.each( inputTag.attributes, function(name, value ) {
+                    tag = tag + name.toLowerCase().replace(/[^a-zA-Z]+/g,"")+'="' + value.toLowerCase().replace(/[^0-9a-z-]/g,"")+'" ';
+                });
+                tag = tag + " />"
+                return tag;
+            }
+            
             
             
             return inputTag.attributes[name];
