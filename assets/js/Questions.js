@@ -31,7 +31,7 @@
     //----- setCorrect(value) : default is 1
     //----- setIncorrect(value) : default is 1
     
-    var surveyMaker = function (questions) {
+    var quizeMaker = function (questions) {
         
         debug('LOG: surveyMaker( ' + questions + '  )');
         
@@ -43,7 +43,7 @@
             debug("WARNING: questions length 0");
         }
         
-        var Survey = {},
+        var Quize = {},
             debug = false,
             loaded = false,
             current = 0,
@@ -253,7 +253,6 @@
             debug("ERROR: attributes.question not passed returned false" );
              return false;
         }
-
         
         if(attributes.hasOwnProperty('answer') === false) {
             debug("ERROR: attributes.answer not passed returned false" );
@@ -330,7 +329,7 @@
     
     //-- METHODS:
     
-    var inputTagMaker = function (name, answer) {
+    var inputTagMaker = function (attributes) {
         
         var InputTag = {};
         
