@@ -111,8 +111,6 @@
                 
             });  
             
-            // NEED TO ADD DETECTION
-            questions = jsonData.questions;
                 
             window.onhashchange = function () {
                 debug('LOG: onhashchange() Event');
