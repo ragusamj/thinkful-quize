@@ -102,11 +102,10 @@
                 
                 debug('LOG: CREATE AND PUSH QUESTION OBJECT to "questions" ARRAY ');
                 questions.push( questionMaker(attributes) );
-                
-                debug(questions);                
-                
+                return true;                
             });  
             
+            debug(questions);                            
             
             debug('LOG: ASSIGN DATA TO PRIVATE "data" PROPERTY');
             loaded = true; 
