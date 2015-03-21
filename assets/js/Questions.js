@@ -81,24 +81,26 @@
             debug('LOG: LOOPING QUESTIONS');
             $.each( jsonData.questions, function( key, attributes ) {
                 
+                debug('LOG: LOOPING [' + key + '] QUESTION');
+                
                 if(value.hasOwnProperty('question') === false) {
                     debug('ERROR: DATA ' + key + ' RETURN WITH NO "questions"');
-                    return;
+                    return false;
                 }
                 
                 if(value.hasOwnProperty('answer') === false) {
                     debug('ERROR: DATA ' + key + ' RETURN WITH NO "answer"');
-                    return;
+                    return false;
                 }
                 
                 if(value.hasOwnProperty('required') === false) {
                     debug('ERROR: DATA ' + key + ' RETURN WITH NO "required"');
-                    return;
+                    return false;
                 }
                 
                 if(value.hasOwnProperty('tag') === false) {
                     debug('ERROR: DATA ' + key + ' RETURN WITH NO "tag"');
-                    return;
+                    return false;
                 }
                 
                 debug('LOG: CREATE QUESTION OBJECT');
@@ -351,6 +353,15 @@
     
     
 }());
+
+
+
+
+
+
+
+
+
 
 
 
