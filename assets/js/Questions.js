@@ -33,7 +33,7 @@
     
     var surveyMaker = function (questions) {
         
-        debug('- surveyMaker( ' + questions + '  )');
+        debug('LOG: surveyMaker( ' + questions + '  )');
         
         if(typeof questions === 'undefined') {
             debug("ERROR: questions not passed");
@@ -61,50 +61,50 @@
             url:src, 
             dataType: "json",  
             beforeSend: function( xhr ) {
-                debug('- GETTING JSON DATA QUESTIONS');
+                debug('LOG: GETTING JSON DATA QUESTIONS');
                 debug(xhr); 
             },
         })
         .done(function( jsonData ) {
 
-            debug('- RETURN JSON DATA QUESTIONS');
+            debug('LOG: RETURN JSON DATA QUESTIONS');
             debug(jsonData);
                 
-            debug('- ASSIGN DATA TO PRIVATE "data" PROPERTY');
+            debug('LOG: ASSIGN DATA TO PRIVATE "data" PROPERTY');
             loaded = true; 
             
             if(jsonData.hasOwnProperty('questions') === false){
-                debug('- ERROR DATA RETURN WITH NO "questions"');
+                debug('ERROR: ERROR DATA RETURN WITH NO "questions"');
                 return false;
             }     
             
-            debug('- LOOPING QUESTIONS');
+            debug('LOG: LOOPING QUESTIONS');
             $.each( jsonData.questions, function( key, attributes ) {
                 
                 if(value.hasOwnProperty('question') === false) {
-                    debug('- ERROR DATA ' + key + ' RETURN WITH NO "questions"');
+                    debug('ERROR: DATA ' + key + ' RETURN WITH NO "questions"');
                     return;
                 }
                 
                 if(value.hasOwnProperty('answer') === false) {
-                    debug('- ERROR DATA ' + key + ' RETURN WITH NO "answer"');
+                    debug('ERROR: DATA ' + key + ' RETURN WITH NO "answer"');
                     return;
                 }
                 
                 if(value.hasOwnProperty('required') === false) {
-                    debug('- ERROR DATA ' + key + ' RETURN WITH NO "required"');
+                    debug('ERROR: DATA ' + key + ' RETURN WITH NO "required"');
                     return;
                 }
                 
                 if(value.hasOwnProperty('tag') === false) {
-                    debug('- ERROR DATA ' + key + ' RETURN WITH NO "tag"');
+                    debug('ERROR: DATA ' + key + ' RETURN WITH NO "tag"');
                     return;
                 }
                 
-                debug('- CREATE QUESTION OBJECT');
+                debug('LOG: CREATE QUESTION OBJECT');
                 var questionObj = questionMaker(attributes);
 
-                debug('- PUSH QUESTION OBJECT');
+                debug('LOG: PUSH QUESTION OBJECT');
                 questions.push( questionObj );
                 
             });  
@@ -113,13 +113,13 @@
             questions = jsonData.questions;
                 
             window.onhashchange = function () {
-                debug('- onhashchange() Event');
+                debug('LOG: onhashchange() Event');
                 //setQuestionNumber();
                 //$("#question").html(data.questions[current].question);
             }
                 
             $(document).ready(function(){      
-                debug('- domready() Event');
+                debug('LOG: domready() Event');
                 //setQuestionNumber();
                 //$("#question").html(data.questions[current].question);
                 //getQuestionInput();
@@ -130,14 +130,14 @@
         // isLoaded() 
         //-- RETURNS: protected "loaded"
         Survey.isLoaded = function() {
-            debug('- isLoaded() : return ' + loaded);
+            debug('LOG: isLoaded() : return ' + loaded);
             return loaded;
         };  
         
         // isCompleted()
         //-- RETURNS: protected "completed" property
         Survey.isCompleted = function() {
-            debug('- isCompleted() : return ' + completed);
+            debug('LOG: isCompleted() : return ' + completed);
             return completed;
         };
         
@@ -145,7 +145,7 @@
         // getCurrent() 
         //-- RETURNS: protected "current" property... question
         Survey.getCurrent = function() {
-            debug('- getCurrent() : return ' + current);
+            debug('LOG: getCurrent() : return ' + current);
             return current;
         };
         
@@ -153,7 +153,7 @@
         //-- PARAMETERS: value is the current question number to be set... default: 0
         //-- RETURNS: true of false
         Survey.setCurrent = function(value) {
-            debug('- setCurrent() : passed ' + value);
+            debug('LOG: setCurrent() : passed ' + value);
             
             if(typeof value === 'undefined') {
                 debug("ERROR: value not passed");
@@ -176,7 +176,7 @@
         //- setCorrect() 
         //-- PARAMETERS: value = optional : default will be 1
         Survey.setCorrect = function(value) {
-            debug('- setCorrect( ' + value + ' )');
+            debug('LOG: setCorrect( ' + value + ' )');
             
             // SET DEFAULT TO 1 IF "undefined"
             if (typeof(value)==='undefined') value = 1;
@@ -184,18 +184,18 @@
             // IF RESULTS ADDS UP TO TOTAL QUESTIONS.. DECREMENT "incorrect"
             if(( results.correct + results.incorrect ) === questions.length ) {
                 results.incorrect = results.incorrect - value;
-                debug('- DECREMENT INCORRECT: ' + results.correct );
+                debug('LOG: DECREMENT INCORRECT: ' + results.correct );
             } 
             
             results.correct = results.correct + value;
-            debug('- SET CORRECT: ' + results.correct );
+            debug('LOG: SET CORRECT: ' + results.correct );
         };
         
         
         //- setIncorrect()
         //-- PARAMETERS: value = optional : default will be 1
         Survey.setIncorrect = function(value) {
-            debug('- setIncorrect( ' + value + ' )');
+            debug('LOG: setIncorrect( ' + value + ' )');
             
             // SET DEFAULT TO 1 IF "undefined"
             if (typeof(value)==='undefined') value = 1;
@@ -203,11 +203,11 @@
             // IF RESULTS ADDS UP TO TOTAL QUESTIONS.. DECREMENT "correct"
             if(( results.incorrect + results.incorrect ) === questions.length ) {
                 results.correct = results.correct - value;
-                debug('- DECREMENT CORRECT: ' + results.correct );
+                debug('LOG: DECREMENT CORRECT: ' + results.correct );
             } 
             
             results.incorrect = results.incorrect + value;
-            debug('- SET INCORRECT: ' + results.incorrect );
+            debug('LOG: SET INCORRECT: ' + results.incorrect );
             
         };
     
@@ -239,32 +239,34 @@
     
     var questionMaker = function (attributes) {
         
-        debug('- questionMaker( )');
+        debug('LOG: questionMaker( )');
         debug(attributes);
                 
-        if(typeof question === 'undefined') {
-            debug("ERROR: question not passed" + question + 'returned false' );
+        if(typeof attributes === 'undefined') {
+            debug('ERROR: attributes not passed' + attributes + 'returned false' );
             return false;
         }
         
-        if(value.hasOwnProperty('question') === false) {
-                    debug('- ERROR DATA ' + key + ' RETURN WITH NO "questions"');
-                    return;
-                }
+        if(attributes.hasOwnProperty('question') === false) {
+            debug("ERROR: attributes.question not passed returned false" );
+             return;
+        }
 
         
-        if(typeof answer === 'undefined') {
-            debug("ERROR: answer not passed" + answer + 'returned false');
+        if(attributes.hasOwnProperty('answer') === false) {
+            debug("ERROR: attributes.answer not passed returned false" );
             return false;
         }
         
-        if(typeof tagObj !== 'object' ) {
-            debug("ERROR: tagObj is not a object... returned false");
-            return false;
+        if(attributes.hasOwnProperty('required') === false) {
+            debug("LOG: required not passed, set to false" );
+            attributes.required = false;
         }
         
-        if (typeof(required)==='undefined') value = false;
-        
+        if(typeof attributes.required !== boolean) {
+            debug("LOG: required wrong type, set to false" );
+            attributes.required = false;
+        }
         
         var Question = {},
             answer = answer,
@@ -288,7 +290,7 @@
         };
         
         Question.getQuestion = function() {            
-            debug('- getQuestion( )');
+            debug('LOG: getQuestion( )');
             
             var questionWrapper = $("<div>", {"class" : "form-group"}),
                 questionLabel = $("<label>", {
