@@ -11629,7 +11629,7 @@ function debug(message) {
                 debug('LOG: CREATE QUESTION OBJECT');
                 var questionObj = questionMaker(attributes);
 
-                debug('LOG: PUSH QUESTION OBJECT to :"questions" ARRAY ');
+                debug('LOG: PUSH QUESTION OBJECT to "questions" ARRAY ');
                 questions.push( questionObj );
                 
             });  
@@ -11774,7 +11774,7 @@ function debug(message) {
         
         if(attributes.hasOwnProperty('question') === false) {
             debug("ERROR: attributes.question not passed returned false" );
-             return;
+             return false;
         }
 
         

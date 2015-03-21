@@ -251,7 +251,7 @@
         
         if(attributes.hasOwnProperty('question') === false) {
             debug("ERROR: attributes.question not passed returned false" );
-             return;
+             return false;
         }
 
         
