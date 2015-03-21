@@ -209,7 +209,6 @@
             
         };
     
-
         return Quize;
         
     };
@@ -247,7 +246,7 @@
         
         if(attributes.hasOwnProperty('question') === false) {
             debug("ERROR: attributes.question not passed returned false" );
-             return false;
+            return false;
         }
         
         if(attributes.hasOwnProperty('answer') === false) {
@@ -256,12 +255,12 @@
         }
         
         if(attributes.hasOwnProperty('required') === false) {
-            debug("LOG: required not passed, set to false" );
+            debug("LOG: required not passed, set to false" ); 
             attributes.required = false;
         }
         
         if(typeof attributes.required !== boolean) {
-            debug("LOG: required wrong type, set to false" );
+            debug("LOG: required missing, set defualt to false" );
             attributes.required = false;
         }
         
@@ -325,14 +324,44 @@
     
     //-- METHODS:
     
-    var inputTagMaker = function (attributes) {
+    var inputTagMaker = function (tagName, attributes) {
+        
+        if(typeof tagName === 'undefined') {
+            debug('ERROR: tagName not passed' +tagName + 'returned false' );
+            return false;
+        }
+        
+        if(value.hasOwnProperty('required') === false) {
+            debug('ERROR: DATA ' + key + ' RETURN WITH NO "required"');
+            return false;
+        }
+        
+        if(value.hasOwnProperty('required') === false) {
+            debug('ERROR: DATA ' + key + ' RETURN WITH NO "required"');
+            return false;
+        }
+        
+        if(tagName.toLowerCase() === 'input') {
+            
+            if(attributes.hasOwnProperty('type') === false) {
+                debug('ERROR: attributes.type not passed' + attributes + 'returned false' );
+                return false;
+            } 
+            
+            if(attributes.hasOwnProperty('name') === false) {
+                debug('ERROR: attributes.name not passed' + attributes + 'returned false' );
+                return false;
+            }                 
+                
+            debug('ERROR: tagName not passed' +tagName + 'returned false' );
+            return false;
+        }
+
         
         var InputTag = {};
         
-        inputTag.tagName = '';
-        inputTag.name = '';
-        inputTag.type = '';
-        inputTag.options = [];
+        inputTag.tagName = tagName;
+        inputTag.attributes = attributes;
                         
         InputTag.set = function(index) {
             
