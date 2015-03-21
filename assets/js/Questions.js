@@ -106,7 +106,7 @@
                 debug('LOG: CREATE QUESTION OBJECT');
                 var questionObj = questionMaker(attributes);
 
-                debug('LOG: PUSH QUESTION OBJECT');
+                debug('LOG: PUSH QUESTION OBJECT to "questions" ARRAY ');
                 questions.push( questionObj );
                 
             });  
