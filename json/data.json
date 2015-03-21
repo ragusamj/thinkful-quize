@@ -3,35 +3,38 @@
   "questions": [
     {
       "question": "What does HTML stand for?",
-      "answer": "String",
-      "required": true,
       "answer": "HyperText Markup Language",
       "tag": {
         "tagName": "input",
-        "name" : "what-is-html",
-        "type": "text"
+        "attributes": [
+            "name" : "what-is-html",
+            "type": "text",
+            "required": true,
+        ]
       }
     },
     {
       "question": "What does CSS stand for?",
-      "answer": "String",
-      "required": true,
       "answer": "Cascading Style Sheets",
       "tag": {
         "tagName": "input",
-        "name" : "what-is-css",
-        "type": "text"
+        "attributes": [
+            "name" : "what-is-css",
+            "type": "text",
+            "required": true,
+        ]
       }
     },
     {
       "question": "What is Emmet?",
-      "answer": "String",
-      "required": true,
       "answer": "A plug in for fast code short cuts",
       "tag": {
         "tagName": "input",
-        "name" : "what-is-emmet",
-        "type": "radio",
+        "attributes": [
+            "name" : "what-is-emmet",
+            "type": "radio",
+            "required": true
+        ],
         "options": [
           {
             "name": "A city in Nebraska",
@@ -54,34 +57,33 @@
     },
     {
       "question": "Enter the id selector in CSS?",
-      "answer": "String",
-      "required": true,
       "answer": "#",
       "tag": {
         "tagName": "input",
-        "name" : "what-the-id-selector",
-        "type": "text"
+        "attributes": [
+            "name" : "what-the-id-selector",
+            "type": "text",
+            "required": true
+        ]
       }
     },
     {
       "question": "Enter the class selector in CSS?",
-      "answer": "String",
-      "required": true,
       "answer": ".",
       "tag": {
         "tagName": "input",
-        "name" : "what-the-class-selector",
-        "type": "text"
+        "attributes": [
+            "name" : "what-the-class-selector",
+            "type": "text",
+            "required": true
+        ]
       }
     },
     {
       "question": "What is the correct example of a attribute selector in CSS?",
-      "answer": "String",
-      "required": true,
+      "answer": "input[type=text]",
       "tag": {
         "tagName": "input",
-        "name" : "what-the-attribute-selector",
-        "type": "radio",
         "options": [
           {
             "name": "input>type.text",
@@ -99,6 +101,11 @@
             "name": "input[type=text]",
             "value": "input[type=text]"
           }
+        ],
+        "attributes": [
+            "name" : "what-the-attribute-selector",
+            "type": "radio",
+            "required": true,
         ]
       }
     }
