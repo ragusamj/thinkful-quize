@@ -139,7 +139,6 @@
             return completed;
         };
         
-        
         // getCurrent() 
         //-- RETURNS: protected "current" property... question
         Survey.getCurrent = function() {
@@ -157,6 +156,7 @@
                 debug("ERROR: value not passed");
             }
             
+            
             /*
                 Note: 
                 I Want to prtect set to ensure the UI get updated
@@ -166,8 +166,8 @@
                 2) if value is in range of questions length proceed
                 3) change up the UI to new set current value?
                 4) once ui is succesfully changed set current?    
-                            
             */
+            
         };
                 
                 
@@ -210,7 +210,7 @@
         };
     
 
-        return Survey;
+        return Quize;
         
     };
     

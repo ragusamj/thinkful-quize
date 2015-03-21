@@ -11628,9 +11628,7 @@ function debug(message) {
                 return true;                
             });  
             
-            debug(questions);                
-
-            
+            debug(questions);                            
             
             debug('LOG: ASSIGN DATA TO PRIVATE "data" PROPERTY');
             loaded = true; 
@@ -11664,7 +11662,6 @@ function debug(message) {
             return completed;
         };
         
-        
         // getCurrent() 
         //-- RETURNS: protected "current" property... question
         Survey.getCurrent = function() {
@@ -11682,6 +11679,7 @@ function debug(message) {
                 debug("ERROR: value not passed");
             }
             
+            
             /*
                 Note: 
                 I Want to prtect set to ensure the UI get updated
@@ -11691,8 +11689,8 @@ function debug(message) {
                 2) if value is in range of questions length proceed
                 3) change up the UI to new set current value?
                 4) once ui is succesfully changed set current?    
-                            
             */
+            
         };
                 
                 
@@ -11735,7 +11733,7 @@ function debug(message) {
         };
     
 
-        return Survey;
+        return Quize;
         
     };
     
