@@ -11885,6 +11885,27 @@ function debug(message) {
         
         inputTag.tagName = tagName;
         inputTag.attributes = attributes;
+        
+        
+        getTag = function() {
+            var tag '<'+this.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"")+' ';
+            
+            if(this.hasOwnProperty('attributes') === true) {
+                $.each( attributes.options, function(attributeName, attributeValue ) {
+                    tag = tag + attributeName.toLowerCase().replace(/[^a-zA-Z]+/g,"")+'="'+attributeValue.toLowerCase().replace(/[^0-9a-z-]/g,"")+'" ';
+                });
+            }
+            
+            if(inputTag.tagName.toLowerCase() == "input") {
+                tag = tag + " />"
+            } else {
+                tag = tag + " >"
+            }
+                        
+            return tag;
+            
+        };
+
                         
         InputTag.set = function(name, value) {
             if(name = 'tagName') {
@@ -11900,13 +11921,23 @@ function debug(message) {
             if(name = 'tagName') {
                 return this.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"");
             }
+                        
             
             if(name = 'tag') {
-                var tag '<'+this.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"")+' ';
-                $.each( inputTag.attributes, function(name, value ) {
-                    tag = tag + name.toLowerCase().replace(/[^a-zA-Z]+/g,"")+'="' + value.toLowerCase().replace(/[^0-9a-z-]/g,"")+'" ';
-                });
-                tag = tag + " />"
+                if(tagName.toLowerCase() === "select") {
+                    var tag = getTag();
+                    
+                    if(attributes.hasOwnProperty('options') === true) {
+                        if(attributes.options.length > 0) {                        
+                            if(tagName.toLowerCase() === "select") {
+                                $.each( attributes.options, function(name, value ) {
+                                    tag = tag + '<option value="'+ value.toLowerCase().replace(/[^a-zA-Z]+/g,"")+'">' + name.toLowerCase().replace(/[^0-9a-z-]/g,"") + '</option>';
+                                });
+                            } 
+                        
+                        }
+                    }
+                
                 return tag;
             }
             
@@ -11923,7 +11954,7 @@ function debug(message) {
             
             return inputTag.attributes[name];
         };
-                        
+        
     };
     
     
