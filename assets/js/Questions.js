@@ -69,9 +69,6 @@
 
             debug('LOG: RETURN JSON DATA QUESTIONS');
             debug(jsonData);
-                
-            debug('LOG: ASSIGN DATA TO PRIVATE "data" PROPERTY');
-            loaded = true; 
             
             if(jsonData.hasOwnProperty('questions') === false){
                 debug('ERROR: ERROR DATA RETURN WITH NO "questions"');
@@ -110,6 +107,10 @@
                 questions.push( questionObj );
                 
             });  
+            
+            
+            debug('LOG: ASSIGN DATA TO PRIVATE "data" PROPERTY');
+            loaded = true; 
             
                 
             window.onhashchange = function () {
