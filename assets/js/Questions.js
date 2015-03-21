@@ -101,13 +101,10 @@
                     return;
                 }
                 
-                debug('- CREATE INPUT OBJECT');
-                var inputTagObj = inputTagMaker();
-                
                 debug('- CREATE QUESTION OBJECT');
-                var questionObj = questionMaker(value.question, value.answer, value.required, inputTag);
-                
-                ebug('- PUSH QUESTION OBJECT');
+                var questionObj = questionMaker(value.question, value.answer,  value.tag, value.required);
+
+                debug('- PUSH QUESTION OBJECT');
                 questions.push( questionObj );
                 
             });  
@@ -170,7 +167,8 @@
                 1) if value is int proceed
                 2) if value is in range of questions length proceed
                 3) change up the UI to new set current value?
-                4) once ui is succesfully changed set current?                
+                4) once ui is succesfully changed set current?    
+                            
             */
         };
                 
