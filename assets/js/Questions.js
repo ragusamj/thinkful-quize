@@ -100,18 +100,16 @@
                     return false;
                 }
                 
-                debug('LOG: CREATE QUESTION OBJECT');
-                var questionObj = questionMaker(attributes);
-
-                debug('LOG: PUSH QUESTION OBJECT to "questions" ARRAY ');
-                questions.push( questionObj );
+                debug('LOG: CREATE AND PUSH QUESTION OBJECT to "questions" ARRAY ');
+                questions.push( questionMaker(attributes) );
+                
+                debug(questions);                
                 
             });  
             
             
             debug('LOG: ASSIGN DATA TO PRIVATE "data" PROPERTY');
             loaded = true; 
-            
                 
             window.onhashchange = function () {
                 debug('LOG: onhashchange() Event');

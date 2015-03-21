@@ -11593,7 +11593,6 @@ function debug(message) {
             debug('LOG: RETURN JSON DATA QUESTIONS');
             debug(jsonData);
             
-            
             if(jsonData.hasOwnProperty('questions') === false){
                 debug('ERROR: ERROR DATA RETURN WITH NO "questions"');
                 return false;
@@ -11624,11 +11623,10 @@ function debug(message) {
                     return false;
                 }
                 
-                debug('LOG: CREATE QUESTION OBJECT');
-                var questionObj = questionMaker(attributes);
-
-                debug('LOG: PUSH QUESTION OBJECT to "questions" ARRAY ');
-                questions.push( questionObj );
+                debug('LOG: CREATE AND PUSH QUESTION OBJECT to "questions" ARRAY ');
+                questions.push( questionMaker(attributes) );
+                
+                debug(questions);                
                 
             });  
             
