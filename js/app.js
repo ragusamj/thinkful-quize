@@ -11835,6 +11835,10 @@ function debug(message) {
     
     
     
+    
+    
+    
+    
     //- INPUTTAG  --------------------------------------
     //-- NOTES: INPUT TAG OBJECT.  
     //          EXTENDING TO MERGE OPTION WITH THE TAG & ADD VALIDATION
@@ -11847,22 +11851,16 @@ function debug(message) {
     
     //-- METHODS:
     
-    var inputTagMaker = function (tagName, attributes) {
+    var inputTagMaker = function (tagName, attributes, options) {
+        
         
         if(typeof tagName === 'undefined') {
             debug('ERROR: tagName not passed' +tagName + 'returned false' );
             return false;
         }
         
-        if(value.hasOwnProperty('required') === false) {
-            debug('ERROR: DATA ' + key + ' RETURN WITH NO "required"');
-            return false;
-        }
-        
-        if(value.hasOwnProperty('required') === false) {
-            debug('ERROR: DATA ' + key + ' RETURN WITH NO "required"');
-            return false;
-        }
+        if (typeof(attributes)==='undefined') attributes = {};
+        if (typeof(options)==='undefined') options = {};
         
         if(tagName.toLowerCase() === 'input') {
             
@@ -11885,72 +11883,84 @@ function debug(message) {
         
         inputTag.tagName = tagName;
         inputTag.attributes = attributes;
+        inputTag.options = options;
         
         
-        getTag = function() {
-            var tag '<'+this.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"")+' ';
+        
+        getTag = function(tagName, attributes) {
             
-            if(this.hasOwnProperty('attributes') === true) {
-                $.each( attributes.options, function(attributeName, attributeValue ) {
-                    tag = tag + attributeName.toLowerCase().replace(/[^a-zA-Z]+/g,"")+'="'+attributeValue.toLowerCase().replace(/[^0-9a-z-]/g,"")+'" ';
-                });
-            }
-            
-            if(inputTag.tagName.toLowerCase() == "input") {
-                tag = tag + " />"
-            } else {
-                tag = tag + " >"
-            }
-                        
-            return tag;
-            
-        };
+            if (typeof(attributes)==='undefined') attributes = {};
 
+            debug('LOG: getTag( ) : Private');
                         
+            var tag = $('<' + tagName.toLowerCase().replace(/[^a-zA-Z]+/g) + '/>');
+            debug(tag);
+
+            if(attributes.length > 0) {
+                $.each( attributes.options, function(attributeName, attributeValue ) {
+                    debug('LOG: ADDING: '+attributeName +' = ' + attributeValue);
+                    tag.attr(attributeName.toLowerCase().replace(/[^a-zA-Z]+/g,""), attributeValue.toLowerCase().replace(/[^0-9a-z-]/g,""));
+                });
+            } 
+            
+            debug(tag);
+            return tag;
+        };
+                
+         // set() 
+        //-- PARAMETERS: name, value...   
+        //----- if name = "tagName" : set the html tagName
+        //----- if name = "options" : push to the option in array
+        //----- if name set attribute set the option in array
+        //-- RETURNS: true of false        
         InputTag.set = function(name, value) {
-            if(name = 'tagName') {
-                this.tagName = value;
+            if(name.toLowerCase() = 'tagname') {
+                inputTag.tagName = value;
+                return true;
+            }
+            if(name.toLowerCase() = 'options') {
+                inputTag.options.push(value);
                 return true;
             }
             inputTag.attributes[name.replace(/[^a-zA-Z]+/g,"")] = value.replace(/[^0-9a-z-]/g,"");
             return true;
         };
         
-        InputTag.get = function(name) {
+        
+        InputTag.get = function(name) {            
+            if (typeof(name)==='undefined') name = 'tag';
             
-            if(name = 'tagName') {
-                return this.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"");
+            debug('LOG: get( ) : Public ' + name);
+            
+            if(name === 'tagName') {
+                return inputTag.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"");
             }
                         
-            
-            if(name = 'tag') {
-                if(tagName.toLowerCase() === "select") {
-                    var tag = getTag();
-                    
-                    if(attributes.hasOwnProperty('options') === true) {
-                        if(attributes.options.length > 0) {                        
-                            if(tagName.toLowerCase() === "select") {
-                                $.each( attributes.options, function(name, value ) {
-                                    tag = tag + '<option value="'+ value.toLowerCase().replace(/[^a-zA-Z]+/g,"")+'">' + name.toLowerCase().replace(/[^0-9a-z-]/g,"") + '</option>';
-                                });
-                            } 
-                        
-                        }
-                    }
+            if(name === 'tag') {
                 
-                return tag;
-            }
-            
-             if(name = 'tags') {
-                var tag '<'+this.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"")+' ';
+                if(inputTag.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"") === 'input') {
+                    $.each( inputTag.options, function(name, value ) {
+                    
+                    });
+                }
+                
+                if(this.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"") === 'select') {
+                    
+                    
+                }
+                                
+                /*
+                var tag getTag(this.tagName);
+                
                 $.each( inputTag.attributes, function(name, value ) {
                     tag = tag + name.toLowerCase().replace(/[^a-zA-Z]+/g,"")+'="' + value.toLowerCase().replace(/[^0-9a-z-]/g,"")+'" ';
                 });
                 tag = tag + " />"
                 return tag;
+                */
+               
             }
-            
-            
+
             
             return inputTag.attributes[name];
         };
