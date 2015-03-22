@@ -11554,30 +11554,26 @@ function debug(message) {
     //----- setCorrect(value) : default is 1
     //----- setIncorrect(value) : default is 1
     
-    var quizeMaker = function (questions) {
+    
+    var quizeMaker = function (options) {
         
-        debug('LOG: surveyMaker( ' + questions + '  )');
+        if (typeof(options)==='undefined') src = {};
         
-        if(typeof questions === 'undefined') {
-            debug("ERROR: questions not passed");
-        }
-        
-        if(questions.length === 0) {
-            debug("WARNING: questions length 0");
-        }
-        
+        debug('LOG: surveyMaker() -----------------');
+        debug(options);
+                
         var Quize = {},
-            debug = false,
-            loaded = false,
+            src = src,
+            debug = debug,
             current = 0,
-            src = '/json/data.json',
+            loaded = false,
             questions = [],
+            completed = false,
             results = {
                 correct: 0,
                 incorrect: 0,
                 attempts: 0
-            },
-            completed = false
+            }
             
             
         $.ajax({
