@@ -37,19 +37,19 @@
         ],
         "options": [
           {
-            "name": "A city in Nebraska",
+            "html": "A city in Nebraska",
             "value": "A city in Nebraska"
           },
           {
-            "name": "A web application for web developers",
+            "html": "A web application for web developers",
             "value": "A web application for web developers"
           },
           {
-            "name": "A plug in for fast code short cuts",
+            "html": "A plug in for fast code short cuts",
             "value": "A plug in for fast code short cuts"
           },
           {
-            "name": "The heraldic ant",
+            "html": "The heraldic ant",
             "value": "The heraldic ant"
           }
         ]
@@ -86,19 +86,19 @@
         "tagName": "input",
         "options": [
           {
-            "name": "input>type.text",
+            "html": "input>type.text",
             "value": "input>type.text"
           },
           {
-            "name": "input#type>text",
+            "html": "input#type>text",
             "value": "input#type>text"
           },
           {
-            "name": "input{type=text}",
+            "html": "input{type=text}",
             "value": "input{type=text}"
           },
           {
-            "name": "input[type=text]",
+            "html": "input[type=text]",
             "value": "input[type=text]"
           }
         ],
