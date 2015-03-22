@@ -11528,7 +11528,7 @@ function debug(message) {
     // CODING NOTES: Still working this out!
     
     
-    //- QUESTIONS ( OBJECT ) ==============================================
+    //- QUIZE ( OBJECT ) ==============================================
     //-- DESCRIPTION: COLLECTION OF QUESTIONS
 
     //-- PRIVATE / PROTECTED PROPERTIES:
@@ -11648,31 +11648,31 @@ function debug(message) {
             
         });
                     
-        // isLoaded() 
+        // Quize.isLoaded() -------------------------------
         //-- RETURNS: protected "loaded"
-        Survey.isLoaded = function() {
+        Quize.isLoaded = function() {
             debug('LOG: isLoaded() : return ' + loaded);
             return loaded;
         };  
         
-        // isCompleted()
+        // Quize.isCompleted() ----------------------------
         //-- RETURNS: protected "completed" property
-        Survey.isCompleted = function() {
+        Quize.isCompleted = function() {
             debug('LOG: isCompleted() : return ' + completed);
             return completed;
         };
         
-        // getCurrent() 
+        // Quize.getCurrent() -----------------------------
         //-- RETURNS: protected "current" property... question
-        Survey.getCurrent = function() {
+        Quize.getCurrent = function() {
             debug('LOG: getCurrent() : return ' + current);
             return current;
         };
         
-        // setCurrent() 
+        // Quize.setCurrent() -----------------------------
         //-- PARAMETERS: value is the current question number to be set... default: 0
         //-- RETURNS: true of false
-        Survey.setCurrent = function(value) {
+        Quize.setCurrent = function(value) {
             debug('LOG: setCurrent() : passed ' + value);
             
             if(typeof value === 'undefined') {
@@ -11694,9 +11694,9 @@ function debug(message) {
         };
                 
                 
-        //- setCorrect() 
+        //- Quize.setCorrect() -----------------------------
         //-- PARAMETERS: value = optional : default will be 1
-        Survey.setCorrect = function(value) {
+        Quize.setCorrect = function(value) {
             debug('LOG: setCorrect( ' + value + ' )');
             
             // SET DEFAULT TO 1 IF "undefined"
@@ -11713,9 +11713,9 @@ function debug(message) {
         };
         
         
-        //- setIncorrect()
+        //- Quize.setIncorrect() -----------------------------
         //-- PARAMETERS: value = optional : default will be 1
-        Survey.setIncorrect = function(value) {
+        Quize.setIncorrect = function(value) {
             debug('LOG: setIncorrect( ' + value + ' )');
             
             // SET DEFAULT TO 1 IF "undefined"
@@ -11884,8 +11884,7 @@ function debug(message) {
         inputTag.tagName = tagName;
         inputTag.attributes = attributes;
         inputTag.options = options;
-        
-        
+                
         
         getTag = function(tagName, attributes) {
             
@@ -11907,11 +11906,12 @@ function debug(message) {
             return tag;
         };
                 
-         // set() 
+        // InputTag.set() -----------------------------
         //-- PARAMETERS: name, value...   
         //----- if name = "tagName" : set the html tagName
         //----- if name = "options" : push to the option in array
         //----- if name set attribute set the option in array
+        
         //-- RETURNS: true of false        
         InputTag.set = function(name, value) {
             if(name.toLowerCase() = 'tagname') {
@@ -11927,6 +11927,7 @@ function debug(message) {
         };
         
         
+        // InputTag.get() -----------------------------
         InputTag.get = function(name) {            
             if (typeof(name)==='undefined') name = 'tag';
             
@@ -11948,17 +11949,7 @@ function debug(message) {
                     
                     
                 }
-                                
-                /*
-                var tag getTag(this.tagName);
-                
-                $.each( inputTag.attributes, function(name, value ) {
-                    tag = tag + name.toLowerCase().replace(/[^a-zA-Z]+/g,"")+'="' + value.toLowerCase().replace(/[^0-9a-z-]/g,"")+'" ';
-                });
-                tag = tag + " />"
-                return tag;
-                */
-               
+                                           
             }
 
             
@@ -11969,6 +11960,31 @@ function debug(message) {
     
     
 }());
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
