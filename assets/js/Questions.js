@@ -408,23 +408,31 @@
         
         //-- RETURNS: 
         //----- if "tagName" : as string
-        //----- if "attribute" : as string
         //----- if "option" : as string
+        //----- if "attribute" : as string
         //----- if all html elements : as string
     
         InputTag.get = function(name) {       
             
-            debug('LOG: InputTag.get( ) : Public ' + name  + ' ------------------------------');
+            debug( 'LOG: InputTag.get( ) : Public ' + name  + ' ------------------------------' );
             
-            if (typeof(name)==='undefined') name = 'tag';
+            if (isNaN(name) === true ) {
+                if(inputTag.options.length > name) {
+                    debug( 'LOG: getting option['+name+'] : '+ inputTag.options[name] );
+                    return inputTag.options[name];
+               } else {
+                    debug( 'WARNING: option['+name+'] greater then options length : ' + options.length );
+                    return inputTag.options[name];
+               }
+            }
             
             if(name === 'tagName') {
-                debug('LOG: getting tagName: '+ inputTag.tagName);
+                debug( 'LOG: getting tagName: '+ inputTag.tagName );
                 return inputTag.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"");
             }
                         
             if(inputTag.attributes.hasOwnProperty(name) === true){
-                debug('LOG: checking and getting attribute: ' + inputTag.attributes[name] );
+                debug( 'LOG: checking and getting attribute: ' + inputTag.attributes[name] );
                 return inputTag.attributes[name];
             }
         };
