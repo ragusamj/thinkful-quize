@@ -29,12 +29,14 @@
     //----- setIncorrect(value) : default is 1
     
     var quizeMaker = function (options) {
-        
-        if (typeof(options)==='undefined') src = {};
-        
         debug('LOG: surveyMaker() =============================');
+        
+        // VALIDATE FUNCTION INPUT  -----------------------------
+
+        if (typeof(options)==='undefined') options = {};
         debug(options);
-                
+
+        // SET PROPERTIES (PRIVATE)  -----------------------------
         var Quize = {},
             src = src,
             debug = debug,
@@ -49,6 +51,7 @@
             }
             
             
+        // $.AJAX : PRIVATE -------------------------------
         $.ajax({
             url:src, 
             dataType: "json",  
@@ -117,28 +120,28 @@
             
         });
                     
-        // Quize.isLoaded() -------------------------------
+        // Quize.isLoaded() : PUBLIC -------------------------------
         //-- RETURNS: protected "loaded"
         Quize.isLoaded = function() {
             debug('LOG: isLoaded() : return ' + loaded + ' ------------------------------');
             return loaded;
         };  
         
-        // Quize.isCompleted() ----------------------------
+        // Quize.isCompleted() : PUBLIC ----------------------------
         //-- RETURNS: protected "completed" property
         Quize.isCompleted = function() {
             debug('LOG: isCompleted() : return ' + completed+ ' ------------------------------');
             return completed;
         };
         
-        // Quize.getCurrent() -----------------------------
+        // Quize.getCurrent() : PUBLIC -----------------------------
         //-- RETURNS: protected "current" property... question
         Quize.getCurrent = function() {
             debug('LOG: getCurrent() : return ' + current+ ' ------------------------------');
             return current;
         };
         
-        // Quize.setCurrent() -----------------------------
+        // Quize.setCurrent() : PUBLIC -----------------------------
         //-- PARAMETERS: value is the current question number to be set... default: 0
         //-- RETURNS: true of false
         Quize.setCurrent = function(value) {
@@ -440,6 +443,13 @@
             
             debug( 'LOG: InputTag.get( ) : Public ' + name  + ' ------------------------------' );
             
+            //- get tagname
+            if( name.toLowerCase() === 'tagname' ) {
+                debug( 'LOG: getting tagName: '+ inputTag.tagName );
+                return inputTag.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"");
+            }
+            
+            //- get option
             if ( isNaN(name) === true ) {
                 if( inputTag.options.length > name ) {
                     debug( 'LOG: getting option['+name+'] : '+ inputTag.options[name] );
@@ -449,16 +459,14 @@
                     return inputTag.options[name];
                }
             }
-            
-            if( name === 'tagName' ) {
-                debug( 'LOG: getting tagName: '+ inputTag.tagName );
-                return inputTag.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"");
-            }
-                        
+       
+            //- get attribute
             if( inputTag.attributes.hasOwnProperty(name) === true ){
                 debug( 'LOG: checking and getting attribute: ' + inputTag.attributes[name] );
                 return inputTag.attributes[name];
             }
+            
+            
         };
     };    
 }());
