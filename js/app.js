@@ -11897,6 +11897,7 @@ function debug(message) {
             debug(tag);
             return tag;
         };
+              
                 
         // InputTag.set() -----------------------------
         //-- PARAMETERS: name, value...   
@@ -11904,7 +11905,9 @@ function debug(message) {
         //----- if name = "options" : push to the option in array
         //----- if name set attribute set the option in array
         
-        //-- RETURNS: true of false        
+        //-- RETURNS: 
+        //----- true of false    
+            
         InputTag.set = function(name, value) {
             if(name.toLowerCase() = 'tagname') {
                 inputTag.tagName = value;
@@ -11920,6 +11923,18 @@ function debug(message) {
         
         
         // InputTag.get() -----------------------------
+        //-- PARAMETERS: name...   
+        //----- name = "tagName" : get the html tagName
+        //----- attrribute check and get the attribute property   
+        //----- option check for int index and get the options property   
+        //----- name fallback get full html elements 
+        
+        //-- RETURNS: 
+        //----- if "tagName" : as string
+        //----- if "attribute" : as string
+        //----- if "option" : as string
+        //----- if all html elements : as string
+    
         InputTag.get = function(name) {       
                  
             if (typeof(name)==='undefined') name = 'tag';
@@ -11931,22 +11946,10 @@ function debug(message) {
                 return inputTag.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"");
             }
                         
-            if(name === 'tag') {
-                
-                if(inputTag.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"") === 'input') {
-                    $.each( inputTag.options, function(name, value ) {
-                    
-                    });
-                }
-                
-                if(this.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"") === 'select') {
-                    
-                }
-                                           
+            if(inputTag.attributes.hasOwnProperty(name) === true){
+                return inputTag.attributes[name];
             }
-
-            debug('LOG: getting attribute ' + name.toLowerCase() + ': '+ inputTag.attributes[name] );
-            return inputTag.attributes[name];
+                        
         };
         
     };
