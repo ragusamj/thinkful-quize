@@ -5,7 +5,7 @@
     // CODING NOTES: Still working this out!
     
     
-    //- QUIZE ( OBJECT ) ==============================================
+    //- QUIZE ( OBJECT ) ==============================================================
     //-- DESCRIPTION: COLLECTION OF QUESTIONS
 
     //-- PRIVATE / PROTECTED PROPERTIES:
@@ -29,7 +29,7 @@
     //----- setIncorrect(value) : default is 1
     
     var quizeMaker = function (options) {
-        debug('LOG: surveyMaker() =============================');
+        debug('LOG: surveyMaker() ==============================================================');
         
         // VALIDATE FUNCTION INPUT  -----------------------------
 
@@ -211,7 +211,7 @@
     
         
     
-    //- QUESTION --------------------------------------
+    //- QUESTION ==============================================================
     //-- NOTES: EACH QUESTION OBJECT
     
     //-- PRIVATE / PROTECTED PROPERTIES:
@@ -231,7 +231,7 @@
     
     var questionMaker = function (attributes) {
         
-        debug('LOG: questionMaker( )'+ ' =============================');
+        debug('LOG: questionMaker( )'+ ' ==============================================================');
         
         // VALIDATE FUNCTION INPUT  -----------------------------
         
@@ -333,7 +333,7 @@
     
     
     
-    //- INPUTTAG  --------------------------------------
+    //- INPUTTAG ==============================================================
     //-- NOTES: INPUT TAG OBJECT.  
     //          EXTENDING TO MERGE OPTION WITH THE TAG & ADD VALIDATION
      
@@ -347,7 +347,7 @@
     
     var inputTagMaker = function (tagName, attributes, options) {
         
-        debug('LOG: inputTagMaker( )'+ ' =============================');
+        debug('LOG: inputTagMaker( )'+ ' ==============================================================');
         
         // VALIDATE FUNCTION INPUT  -----------------------------
         
@@ -391,8 +391,11 @@
             debug(tag);
 
             if(attributes.length > 0) {
+                
+                //BUG "attributes.options"???
+                
                 $.each( attributes.options, function(attributeName, attributeValue ) {
-                    debug('LOG: ADDING: '+attributeName +' = ' + attributeValue);
+                    debug('LOG: ADDING: ' + attributeName + ' = ' + attributeValue);
                     tag.attr(attributeName.toLowerCase().replace(/[^a-zA-Z]+/g,""), attributeValue.toLowerCase().replace(/[^0-9a-z-]/g,""));
                 });
             } 
@@ -400,6 +403,110 @@
             debug(tag);
             return tag;
         };
+        
+        
+        // getSelect() : PRIVATE -----------------------------
+        //-- PARAMETERS:    
+        //----- tagName (string) : sets the html tagName
+        //----- attributes (object) : sets the html attributes
+        
+        //-- RETURNS: 
+        //----- JQUERY Object / JQUERY html elemnt    
+        getSelect = function(attributes, options) {
+            
+            debug('LOG: getSelect( ) : Private ' + ' ------------------------------');
+            
+            var tagAttributes,
+                optionAttributes;
+
+            var parentTag = $('<select/>', inputTag.attributes);
+
+            if(options.length > 0) {
+                $.each( options, function(optionIndex, optionAttributes ) {
+                    debug( 'LOG: ADDING OPTION: ' + optionIndex );
+                    parentTag.append(getTag('option', optionAttributes));
+                });
+            } 
+            
+            debug(parentTag);
+            return parentTag;
+        };
+        
+        
+         // getInput() : PRIVATE -----------------------------
+        //-- PARAMETERS:    
+        //----- tagName (string) : sets the html tagName
+        //----- attributes (object) : sets the html attributes
+        
+        //-- RETURNS: 
+        //----- JQUERY Object / JQUERY html elemnt    
+        getInput = function(attributes, options) {
+            
+            debug('LOG: getSelect( ) : Private ' + ' ------------------------------');
+
+            var parentTag     = $('<div/>');
+            
+            if(options.length > 0) {
+                
+                $.each( options, function(optionIndex, optionAttributes ) {
+                    
+                    debug( 'LOG: ADDING INPUT OPTION: ' + optionIndex );
+                    
+                    var divWrapperTag = $('<div/>'),
+                        labelTag      = $('<label/>');
+                    
+                    if( inputTag.attributes.hasOwnProperty('html') ) {
+                        
+                        debug( 'LOG: LABEL HTML' );
+                        
+                        labelTag = $('<label/>', {
+                            'html' : inputTag.attributes.html
+                        });
+                        
+                        if(inputTag.attributes.hasOwnProperty('id') ) {
+                            labelTag.attr('for', inputTag.attributes.id );
+                        }
+                        
+                        debug( labelTag );
+
+                    } 
+                    
+                    if( inputTag.attributes.hasOwnProperty('text') ) {
+                        
+                        debug( 'LOG: LABEL TEXT' );
+                        
+                        labelTag = $('<label/>', {
+                            'text' : inputTag.attributes.html
+                        });
+                        
+                        if(inputTag.attributes.hasOwnProperty('id') ) {
+                            labelTag.attr('for', inputTag.attributes.id );
+                        }
+                        
+                        debug( labelTag );
+                        
+                    }
+                              
+                    jQuery.extend(optionAttributes, attributes);
+                    
+                    debug( 'LOG: BUILDING INPUT DOM' );
+                    
+                    divWrapperTag.append( inputTag );
+                    divWrapperTag.append( labelTag );
+                    
+                    parentTag.append( divWrapperTag );
+                    
+                    debug( parentTag );
+                    
+                });
+            } 
+            
+            debug(parentTag);
+            return parentTag;
+        };
+
+        
+        
               
                 
         // InputTag.set() : PUBLIC -----------------------------
@@ -443,9 +550,7 @@
         InputTag.get = function(name) {       
             
             debug( 'LOG: InputTag.get( ) : Public ' + name  + ' ------------------------------' );
-            
-            var htmlString = '';
-            
+                        
             //- get tagname
             if( name.toLowerCase() === 'tagname' ) {
                 debug( 'LOG: getting tagName: '+ inputTag.tagName );
@@ -469,38 +574,15 @@
                 return inputTag.attributes[name];
             }
             
-            
-            // SELECT TAG
+            //- get select
             if(inputTag.tagName == 'select') {
-                
-                htmlString =  getTag('select', inputTag.attributes);
-                
-                $.each( inputTag.options, function(index, optionAttributes ) {
-                    select.append(getTag('option', optionAttributes));
-                });
-                
-                htmlString =  '</select>';
-                return htmlString;
-                
+                return getSelect(inputTag.attributes, inputTag.options);                
             }
             
-            // INPUT TAG
+            //- get input
             if(inputTag.tagName == 'input') {
-                
-                if(inputTag.attribute.type == 'checkbox' || inputTag.attribute.type == 'radio') {
-                    // INPUT RADIO AND CHECKBOX
-                    $.each( inputTag.options, function(index, optionAttributes ) {
-                        var inputAttribute = inputTag.attributes;
-                        jQuery.extend(inputAttribute, optionAttributes);
-                        wrapper.append(getTag('option', optionAttributes));
-                    });
-                }
-                
-                
-                
+                return getInput(inputTag.attributes, inputTag.options);                
             }
-                        
-            
             
         };
     };    
