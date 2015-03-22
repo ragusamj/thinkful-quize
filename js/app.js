@@ -11878,6 +11878,14 @@ function debug(message) {
         inputTag.options = options;
                 
         
+        // getTag() : PRIVATE -----------------------------
+        //-- PARAMETERS:    
+        //----- tagName (string) : sets the html tagName
+        //----- attributes (object) : sets the html attributes
+        
+        //-- RETURNS: 
+        //----- JQUERY Object / JQUERY html elemnt    
+        
         getTag = function(tagName, attributes) {
             
             debug('LOG: getTag( ) : Private ' + ' ------------------------------');
@@ -11899,7 +11907,7 @@ function debug(message) {
         };
               
                 
-        // InputTag.set() -----------------------------
+        // InputTag.set() : PUBLIC -----------------------------
         //-- PARAMETERS: name, value...   
         //----- if name = "tagName" : set the html tagName
         //----- if name = "options" : push to the option in array
@@ -11920,9 +11928,9 @@ function debug(message) {
             inputTag.attributes[name.replace(/[^a-zA-Z]+/g,"")] = value.replace(/[^0-9a-z-]/g,"");
             return true;
         };
+    
         
-        
-        // InputTag.get() -----------------------------
+        // InputTag.get() : PUBLIC -----------------------------
         //-- PARAMETERS: name...   
         //----- name = "tagName" : get the html tagName
         //----- attrribute check and get the attribute property   
@@ -11939,8 +11947,8 @@ function debug(message) {
             
             debug( 'LOG: InputTag.get( ) : Public ' + name  + ' ------------------------------' );
             
-            if (isNaN(name) === true ) {
-                if(inputTag.options.length > name) {
+            if ( isNaN(name) === true ) {
+                if( inputTag.options.length > name ) {
                     debug( 'LOG: getting option['+name+'] : '+ inputTag.options[name] );
                     return inputTag.options[name];
                } else {
@@ -11949,12 +11957,12 @@ function debug(message) {
                }
             }
             
-            if(name === 'tagName') {
+            if( name === 'tagName' ) {
                 debug( 'LOG: getting tagName: '+ inputTag.tagName );
                 return inputTag.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"");
             }
                         
-            if(inputTag.attributes.hasOwnProperty(name) === true){
+            if( inputTag.attributes.hasOwnProperty(name) === true ){
                 debug( 'LOG: checking and getting attribute: ' + inputTag.attributes[name] );
                 return inputTag.attributes[name];
             }
