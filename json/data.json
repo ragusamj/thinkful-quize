@@ -37,11 +37,12 @@
         ],
         "options": [
           {
-            "html": "A city in Nebraska",
-            "value": "A city in Nebraska"
+            "html": '<label for="nebraska">A city in Nebraska</label>',
+            "value": "A city in Nebraska",
+            "id" : "nebraska"
           },
           {
-            "html": "A web application for web developers",
+            "html": "<label for="Nebraska">A web application for web developers",
             "value": "A web application for web developers"
           },
           {
@@ -86,20 +87,24 @@
         "tagName": "input",
         "options": [
           {
-            "html": "input>type.text",
-            "value": "input>type.text"
+            "html": '<label for="dot">input>type.text</label>',
+            "value": "input>type.text",
+            "id" : "dot"
           },
           {
-            "html": "input#type>text",
-            "value": "input#type>text"
+            "html": '<label for="pound">input#type>text</label>',
+            "value": "input#type>text",
+            "id" : "pound"
           },
           {
-            "html": "input{type=text}",
+            "html": '<label for="curly-brackets">input{type=text}</label>',
             "value": "input{type=text}"
+            "id" : "curly-brackets"
           },
           {
-            "html": "input[type=text]",
-            "value": "input[type=text]"
+            "html": '<label for="array-brackets">input[type=text]</label>',
+            "value": "input[type=text]",
+            "id" : "array-brackets"
           }
         ],
         "attributes": [
