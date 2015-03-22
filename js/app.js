@@ -11555,7 +11555,7 @@ function debug(message) {
         
         if (typeof(options)==='undefined') src = {};
         
-        debug('LOG: surveyMaker() -----------------');
+        debug('LOG: surveyMaker() =============================');
         debug(options);
                 
         var Quize = {},
@@ -11578,7 +11578,7 @@ function debug(message) {
             beforeSend: function( xhr ) {
                 debug('LOG: GETTING JSON DATA QUESTIONS');
                 debug(xhr); 
-            },
+            }
         })
         .done(function( jsonData ) {
 
@@ -11751,24 +11751,31 @@ function debug(message) {
     
     var questionMaker = function (attributes) {
         
-        debug('LOG: questionMaker( )'+ ' ------------------------------');
+        debug('LOG: questionMaker( )'+ ' =============================');
+        
+        // VALIDATE FUNCTION INPUT  -----------------------------
+        
         debug(attributes);
-                
+        
+        //- attributes
         if(typeof attributes === 'undefined') {
             debug('ERROR: attributes not passed' + attributes + 'returned false' );
             return false;
         }
         
+        //- attributes.question
         if(attributes.hasOwnProperty('question') === false) {
             debug("ERROR: attributes.question not passed returned false" );
             return false;
         }
         
+        //- attributes.answer
         if(attributes.hasOwnProperty('answer') === false) {
             debug("ERROR: attributes.answer not passed returned false" );
             return false;
         }
         
+        //- attributes.required
         if(attributes.hasOwnProperty('required') === false) {
             debug("LOG: required not passed, set to false" ); 
             attributes.required = false;
@@ -11779,6 +11786,8 @@ function debug(message) {
             attributes.required = false;
         }
         
+        
+        // SET PROPERTIES (PRIVATE)  -----------------------------
         var Question = {},
             answer = answer,
             question = question,
@@ -11787,11 +11796,24 @@ function debug(message) {
             correct = false,
             attempts = 0;
             
+            
+        // SET PROPERTIES (PUBLIC)  -----------------------------
         Question.input = "";
-                                
-        Question.validate = function(value) {
-            Question.input = value;
-            if(answer === value) {
+                   
+                   
+        // Question.validate() : PUBLIC -----------------------------
+        //-- PARAMETERS: inputAnswer...   
+        //----- inputAnswer = user attempted answer / input (string)
+        
+        //-- RETURNS: 
+        //----- if "tagName" : as string
+        //----- if "option" : as object (need to change to string)
+        //----- if "attribute" : as string
+        //----- if all html elements : as string
+        
+        Question.validate = function(answerInput) {
+            Question.input = answerInput;
+            if(answer === answerInput) {
                 question.valid = true;
                 return true;
             } else {
@@ -11845,34 +11867,27 @@ function debug(message) {
     
     var inputTagMaker = function (tagName, attributes, options) {
         
+        debug('LOG: inputTagMaker( )'+ ' =============================');
         
+        // VALIDATE FUNCTION INPUT  -----------------------------
+        
+        //- tagName
         if(typeof tagName === 'undefined') {
             debug('ERROR: tagName not passed' +tagName + 'returned false' );
             return false;
         }
         
+        //- attributes
         if (typeof(attributes)==='undefined') attributes = {};
-        if (typeof(options)==='undefined') options = {};
         
-        if(tagName.toLowerCase() === 'input') {
-            
-            if(attributes.hasOwnProperty('type') === false) {
-                debug('ERROR: attributes.type not passed' + attributes + 'returned false' );
-                return false;
-            } 
-            
-            if(attributes.hasOwnProperty('name') === false) {
-                debug('ERROR: attributes.name not passed' + attributes + 'returned false' );
-                return false;
-            }                 
-                
-            debug('ERROR: tagName not passed' +tagName + 'returned false' );
-            return false;
-        }
+        //- options
+        if (typeof(options)==='undefined') options = {};
 
         
-        var InputTag = {};
-        
+        // SET PROPERTIES (PRIVATE)  -----------------------------
+        var InputTag = {};  
+         
+        // SET PROPERTIES (PUBLIC)  -----------------------------
         inputTag.tagName = tagName;
         inputTag.attributes = attributes;
         inputTag.options = options;
@@ -11932,14 +11947,15 @@ function debug(message) {
         
         // InputTag.get() : PUBLIC -----------------------------
         //-- PARAMETERS: name...   
-        //----- name = "tagName" : get the html tagName
-        //----- attrribute check and get the attribute property   
-        //----- option check for int index and get the options property   
-        //----- name fallback get full html elements 
+        //----- name (string / int) : 
+        //---------- "tagName" (string) : get the html tagName
+        //---------- "[optionInt]" (int) : check for int index and get the options property   
+        //---------- "[attributeName]" (string) : check and get the attribute property   
+        //---------- get() : Defualt : get full html string 
         
         //-- RETURNS: 
         //----- if "tagName" : as string
-        //----- if "option" : as string
+        //----- if "option" : as object (need to change to string)
         //----- if "attribute" : as string
         //----- if all html elements : as string
     
