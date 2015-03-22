@@ -21,16 +21,12 @@
     //----- }
     //----- completed = boolean
     
-    //-- PUBLIC PROPERTIES:
-    //----- NULL
-    
     //-- PUBLIC METHODS:
     //----- isLoaded() : return protected "loaded" property
     //----- isCompleted() : return protected "completed" property
     //----- getCurrent() : return protected "current" property
     //----- setCorrect(value) : default is 1
     //----- setIncorrect(value) : default is 1
-    
     
     var quizeMaker = function (options) {
         
@@ -124,21 +120,21 @@
         // Quize.isLoaded() -------------------------------
         //-- RETURNS: protected "loaded"
         Quize.isLoaded = function() {
-            debug('LOG: isLoaded() : return ' + loaded);
+            debug('LOG: isLoaded() : return ' + loaded + ' ------------------------------');
             return loaded;
         };  
         
         // Quize.isCompleted() ----------------------------
         //-- RETURNS: protected "completed" property
         Quize.isCompleted = function() {
-            debug('LOG: isCompleted() : return ' + completed);
+            debug('LOG: isCompleted() : return ' + completed+ ' ------------------------------');
             return completed;
         };
         
         // Quize.getCurrent() -----------------------------
         //-- RETURNS: protected "current" property... question
         Quize.getCurrent = function() {
-            debug('LOG: getCurrent() : return ' + current);
+            debug('LOG: getCurrent() : return ' + current+ ' ------------------------------');
             return current;
         };
         
@@ -146,7 +142,7 @@
         //-- PARAMETERS: value is the current question number to be set... default: 0
         //-- RETURNS: true of false
         Quize.setCurrent = function(value) {
-            debug('LOG: setCurrent() : passed ' + value);
+            debug('LOG: setCurrent() : passed ' + value+ ' ------------------------------');
             
             if(typeof value === 'undefined') {
                 debug("ERROR: value not passed");
@@ -170,7 +166,7 @@
         //- Quize.setCorrect() -----------------------------
         //-- PARAMETERS: value = optional : default will be 1
         Quize.setCorrect = function(value) {
-            debug('LOG: setCorrect( ' + value + ' )');
+            debug('LOG: setCorrect( ' + value + ' )'+ ' ------------------------------');
             
             // SET DEFAULT TO 1 IF "undefined"
             if (typeof(value)==='undefined') value = 1;
@@ -189,7 +185,7 @@
         //- Quize.setIncorrect() -----------------------------
         //-- PARAMETERS: value = optional : default will be 1
         Quize.setIncorrect = function(value) {
-            debug('LOG: setIncorrect( ' + value + ' )');
+            debug('LOG: setIncorrect( ' + value + ' )'+ ' ------------------------------');
             
             // SET DEFAULT TO 1 IF "undefined"
             if (typeof(value)==='undefined') value = 1;
@@ -232,7 +228,7 @@
     
     var questionMaker = function (attributes) {
         
-        debug('LOG: questionMaker( )');
+        debug('LOG: questionMaker( )'+ ' ------------------------------');
         debug(attributes);
                 
         if(typeof attributes === 'undefined') {
@@ -282,7 +278,7 @@
         };
         
         Question.getQuestion = function() {            
-            debug('LOG: getQuestion( )');
+            debug('LOG: getQuestion( )'+ ' ------------------------------');
             
             var questionWrapper = $("<div>", {"class" : "form-group"}),
                 questionLabel = $("<label>", {
@@ -361,10 +357,10 @@
         
         getTag = function(tagName, attributes) {
             
+            debug('LOG: getTag( ) : Private ' + ' ------------------------------');
+            
             if (typeof(attributes)==='undefined') attributes = {};
 
-            debug('LOG: getTag( ) : Private');
-                        
             var tag = $('<' + tagName.toLowerCase().replace(/[^a-zA-Z]+/g) + '/>');
             debug(tag);
 
@@ -401,12 +397,14 @@
         
         
         // InputTag.get() -----------------------------
-        InputTag.get = function(name) {            
+        InputTag.get = function(name) {       
+                 
             if (typeof(name)==='undefined') name = 'tag';
             
-            debug('LOG: get( ) : Public ' + name);
+            debug('LOG: InputTag.get( ) : Public ' + name  + ' ------------------------------');
             
             if(name === 'tagName') {
+                debug('LOG: getting tagName: '+ inputTag.tagName);
                 return inputTag.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"");
             }
                         
@@ -420,12 +418,11 @@
                 
                 if(this.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"") === 'select') {
                     
-                    
                 }
                                            
             }
 
-            
+            debug('LOG: getting attribute ' + name.toLowerCase() + ': '+ inputTag.attributes[name] );
             return inputTag.attributes[name];
         };
         
