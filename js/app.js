@@ -11936,10 +11936,10 @@ function debug(message) {
         //----- if all html elements : as string
     
         InputTag.get = function(name) {       
-                 
-            if (typeof(name)==='undefined') name = 'tag';
             
             debug('LOG: InputTag.get( ) : Public ' + name  + ' ------------------------------');
+            
+            if (typeof(name)==='undefined') name = 'tag';
             
             if(name === 'tagName') {
                 debug('LOG: getting tagName: '+ inputTag.tagName);
@@ -11947,13 +11947,10 @@ function debug(message) {
             }
                         
             if(inputTag.attributes.hasOwnProperty(name) === true){
+                debug('LOG: checking and getting attribute: '+ inputTag.attributes[name]);
                 return inputTag.attributes[name];
             }
-                        
         };
-        
-    };
-    
-    
+    };    
 }());
 
