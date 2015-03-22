@@ -11946,6 +11946,7 @@ function debug(message) {
             inputTag.attributes[name.replace(/[^a-zA-Z]+/g,"")] = value.replace(/[^0-9a-z-]/g,"");
             return true;
         };
+        
     
         
         // InputTag.get() : PUBLIC -----------------------------
@@ -11965,6 +11966,8 @@ function debug(message) {
         InputTag.get = function(name) {       
             
             debug( 'LOG: InputTag.get( ) : Public ' + name  + ' ------------------------------' );
+            
+            var htmlString = '';
             
             //- get tagname
             if( name.toLowerCase() === 'tagname' ) {
@@ -11988,6 +11991,38 @@ function debug(message) {
                 debug( 'LOG: checking and getting attribute: ' + inputTag.attributes[name] );
                 return inputTag.attributes[name];
             }
+            
+            
+            // SELECT TAG
+            if(inputTag.tagName == 'select') {
+                
+                htmlString =  getTag('select', inputTag.attributes);
+                
+                $.each( inputTag.options, function(index, optionAttributes ) {
+                    select.append(getTag('option', optionAttributes));
+                });
+                
+                htmlString =  '</select>';
+                return htmlString;
+                
+            }
+            
+            // INPUT TAG
+            if(inputTag.tagName == 'input') {
+                
+                if(inputTag.attribute.type == 'checkbox' || inputTag.attribute.type == 'radio') {
+                    // INPUT RADIO AND CHECKBOX
+                    $.each( inputTag.options, function(index, optionAttributes ) {
+                        var inputAttribute = inputTag.attributes;
+                        jQuery.extend(inputAttribute, optionAttributes);
+                        wrapper.append(getTag('option', optionAttributes));
+                    });
+                }
+                
+                
+                
+            }
+                        
             
             
         };
