@@ -11856,6 +11856,9 @@ function debug(message) {
     
     
     
+    
+    
+    
     //- INPUTTAG ==============================================================
     //-- NOTES: INPUT TAG OBJECT.  
     //          EXTENDING TO MERGE OPTION WITH THE TAG & ADD VALIDATION
@@ -11930,8 +11933,8 @@ function debug(message) {
         
         // getSelect() : PRIVATE -----------------------------
         //-- PARAMETERS:    
-        //----- tagName (string) : sets the html tagName
-        //----- attributes (object) : sets the html attributes
+        //----- attributes (object) : sets the select html attributes
+        //----- options (object) : sets the select tag child options
         
         //-- RETURNS: 
         //----- JQUERY Object / JQUERY html elemnt    
@@ -11958,8 +11961,8 @@ function debug(message) {
         
          // getInput() : PRIVATE -----------------------------
         //-- PARAMETERS:    
-        //----- tagName (string) : sets the html tagName
-        //----- attributes (object) : sets the html attributes
+        //----- attributes (object) : sets the input[type=radio || type=checkbox] html attributes
+        //----- option specific attributes (object) : merges attributes into the above attributes
         
         //-- RETURNS: 
         //----- JQUERY Object / JQUERY html elemnt    
@@ -11975,9 +11978,9 @@ function debug(message) {
                     
                     debug( 'LOG: ADDING INPUT OPTION: ' + optionIndex );
                     
-                    var divWrapperTag = $('<div/>'),
-                        labelTag      = $('<label/>');
-                    
+                    var labelTag      = $('<label/>'),
+                        inputTag      = $('<input/>', inputTag.attributes);
+                        
                     if( inputTag.attributes.hasOwnProperty('html') ) {
                         
                         debug( 'LOG: LABEL HTML' );
@@ -11986,8 +11989,8 @@ function debug(message) {
                             'html' : inputTag.attributes.html
                         });
                         
-                        if(inputTag.attributes.hasOwnProperty('id') ) {
-                            labelTag.attr('for', inputTag.attributes.id );
+                        if( inputTag.attributes.hasOwnProperty('id') ) {
+                            labelTag.attr( 'for', inputTag.attributes.id );
                         }
                         
                         debug( labelTag );
@@ -11999,33 +12002,33 @@ function debug(message) {
                         debug( 'LOG: LABEL TEXT' );
                         
                         labelTag = $('<label/>', {
-                            'text' : inputTag.attributes.html
+                            'text' : inputTag.attributes.text
                         });
                         
                         if(inputTag.attributes.hasOwnProperty('id') ) {
                             labelTag.attr('for', inputTag.attributes.id );
                         }
-                        
+                                                
                         debug( labelTag );
                         
                     }
-                              
-                    jQuery.extend(optionAttributes, attributes);
                     
-                    debug( 'LOG: BUILDING INPUT DOM' );
-                    
-                    divWrapperTag.append( inputTag );
-                    divWrapperTag.append( labelTag );
-                    
-                    parentTag.append( divWrapperTag );
-                    
-                    debug( parentTag );
-                    
+                    $.each( optionAttributes, function(attributeName, attributeValue ) {
+                        if(attributeName !== 'text' || attributeName !== 'html')  {
+                            debug( 'LOG: ADDING OPTION ATTRIBUTES '+ attributeName + ': ' + attributeValue );
+                            inputTag.attr(attributeName, attributeValue);
+                        }
+                    });
+                                                  
+                    debug( 'LOG: BUILDING INPUT DOM' ); 
+                    parentTag.append( $('<div/>').append(inputTag).append(labelTag) );
                 });
+                
+                debug(parentTag);
+                return parentTag;
             } 
             
-            debug(parentTag);
-            return parentTag;
+            return  $('<input/>', inputTag.attributes);
         };
 
         
