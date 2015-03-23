@@ -12112,6 +12112,11 @@ function debug(message) {
                 return getInput(inputTag.attributes, inputTag.options);                
             }
             
+            //- get textarea
+            if(inputTag.tagName == 'textarea') {
+                debug( 'LOG: get textarea');
+                //return getTextArea(inputTag.attributes, inputTag.options);                
+            }
         };
     };    
 }());
