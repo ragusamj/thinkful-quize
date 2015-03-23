@@ -11843,10 +11843,30 @@ function debug(message) {
             debug( 'ERROR: attributes.answer not passed returned false' );
             return false;
         }
-                
-        if(typeof attributes.required !== boolean) {
-            debug( 'LOG: required missing, set defualt to false' );
-            attributes.required = false;
+        
+        //- attributes.tag
+        if(attributes.hasOwnProperty('tag') === false) {
+            debug( 'ERROR: attributes.tag not passed returned false' );
+            return false;
+        }
+        
+        //- attributes.tag.tagName
+        if(attributes.tag.hasOwnProperty('tagName') === false) {
+            debug( 'ERROR: attributes.tag.tagName not passed returned false' );
+            return false;
+        }
+        
+        
+        //- attributes.tag.tagName
+        if(attributes.tag.hasOwnProperty('attributes') === false) {
+            debug( 'ERROR: attributes.tag.attributes not passed returned false' );
+            return false;
+        }
+        
+        //- attributes.tag.tagName
+        if(attributes.tag.hasOwnProperty('options') === false) {
+            attributes.tag.options = {};
+            return false;
         }
         
         
@@ -11854,17 +11874,16 @@ function debug(message) {
         var Question = {},
             question = attributes.question,
             answer = attributes.answer,
-            tag = attributes.tag,
             correct = false,
-            attempts = 0;
-            
-            
+            attempts = 0,
+            tag = inputTagMaker(attributes.tag.tagName, attributes.tag.attributes, attributes.tag.options);           
+
+        
         // SET PROPERTIES (PUBLIC) ___________________________________
         Question.input = "";
                        
                            
         // SET METHODS (PUBLIC) ______________________________________
-                   
                    
         // Question.validate() : PUBLIC ------------------------------
         //-- PARAMETERS:    
@@ -11884,24 +11903,32 @@ function debug(message) {
             }
         };
         
-        Question.getQuestion = function() {            
-            debug('LOG: getQuestion( )'+ ' ------------------------------');
+        
+        // Question.getQuestion() : PUBLIC ---------------------------
+        //-- RETURNS: 
+        //----- JQUERY Object / JQUERY html input elements  
+                
+        Question.getQuestion = function(question, tag) {            
+            debug('LOG: getQuestion( ) ----');
             
-            var questionWrapper = $("<div>", {"class" : "form-group"}),
-                questionLabel = $("<label>", {
+            var questionLabel = $("<label>", {
                     'id' : "question", 
-                    "text" : question, 
-                    "for": "[ tag.getTagId() ]"
+                    "html" : question, 
                 });
             
-            if(required === true) {
-                questionLabel.addClass('required');
+            if( tag.hasOwnProperty('attributes') ) {
+                if( tag.attributes.hasOwnProperty('id') ) {
+                    questionLabel.attr('for', tag.hasOwnProperty('id') );
+                }
+                if( tag.attributes.hasOwnProperty('required') ) {
+                    if(required === true) {
+                        questionLabel.addClass('required');
+                    }
+                }
             }
             
-            $(questionWrapper).append(questionLabel);
-            
-            // NEED TO BUILD OUT QUESTION INPUTS HERE
-            
+            return $("<div>", { "class" : "form-group" }).append( questionLabel ).append( tag.get() );
+                    
         };
 
         
