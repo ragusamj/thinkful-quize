@@ -1,13 +1,9 @@
+// CODING NOTES: Still working this out!
+
 
 (function () {
     
-    
-    // CODING NOTES: Still working this out!
-    
-    
-    
-    
-    
+            
     // INPUTTAG ====================================================================================
     //-- DESCRIPTION: BUILDS A INPUT, SELECT, TEXTAREA TAG WITH CHILD OPTIONS
      
@@ -271,11 +267,135 @@
                 //return getTextArea(inputTag.attributes, inputTag.options);                
             }
         };
-    };    
+    };     
+    
+    
+    
+        
+    
+    //- QUESTION ==============================================================
+    //-- NOTES: EACH QUESTION OBJECT
+    
+    //-- PARAMETERS:
+    //---- attributes (object) : must have a "attributes.question" and "attributes.answer"
+    
+    //-- PRIVATE / PROTECTED PROPERTIES:
+    //----- question (string)
+    //----- answer (string)
+    //----- correct (boolean)
+    //----- attempts (int)
+    //----- tag (object: inputTag)
+    
+    //-- PUBLIC PROPERTIES:
+    //----- input = string : users attempted answer
 
+    //-- PUBLIC METHODS:
+    //----- validate() : validates user input... returns true or false
+    //----- getQuestion() : return protected "loaded" property
     
     
-    
+    var questionMaker = function (attributes) {
+        
+        debug('LOG: questionMaker( ) ========');
+        
+        
+        // VALIDATE FUNCTION INPUT ___________________________________
+        
+        debug(attributes);
+        
+        //- attributes
+        if(typeof attributes === 'undefined') {
+            debug( 'ERROR: attributes not passed' + attributes + 'returned false' );
+            return false;
+        }
+        
+        //- attributes.question
+        if(attributes.hasOwnProperty('question') === false) {
+            debug( 'ERROR: attributes.question not passed returned false' );
+            return false;
+        }
+        
+        //- attributes.answer
+        if(attributes.hasOwnProperty('answer') === false) {
+            debug( 'ERROR: attributes.answer not passed returned false' );
+            return false;
+        }
+                
+        if(typeof attributes.required !== boolean) {
+            debug( 'LOG: required missing, set defualt to false' );
+            attributes.required = false;
+        }
+        
+        
+        // SET PROPERTIES (PRIVATE) __________________________________
+        var Question = {},
+            question = attributes.question,
+            answer = attributes.answer,
+            tag = attributes.tag,
+            correct = false,
+            attempts = 0;
+            
+            
+        // SET PROPERTIES (PUBLIC) ___________________________________
+        Question.input = "";
+                       
+                           
+        // SET METHODS (PUBLIC) ______________________________________
+                   
+                   
+        // Question.validate() : PUBLIC ------------------------------
+        //-- PARAMETERS:    
+        //----- inputAnswer = user attempted answer / input (string)
+        
+        //-- RETURNS: 
+        //----- true or false
+        
+        Question.validate = function(answerInput) {
+            Question.input = answerInput;
+            if(answer === answerInput) {
+                question.valid = true;
+                return true;
+            } else {
+                question.valid = false;
+                return false;
+            }
+        };
+        
+        Question.getQuestion = function() {            
+            debug('LOG: getQuestion( )'+ ' ------------------------------');
+            
+            var questionWrapper = $("<div>", {"class" : "form-group"}),
+                questionLabel = $("<label>", {
+                    'id' : "question", 
+                    "text" : question, 
+                    "for": "[ tag.getTagId() ]"
+                });
+            
+            if(required === true) {
+                questionLabel.addClass('required');
+            }
+            
+            $(questionWrapper).append(questionLabel);
+            
+            // NEED TO BUILD OUT QUESTION INPUTS HERE
+            
+        };
+
+        
+        return Question;
+        
+    };
+ 
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
    
    
    
@@ -316,7 +436,7 @@
     var quizeMaker = function (options) {
         debug('LOG: surveyMaker() ============================================================================');
         
-        // VALIDATE FUNCTION INPUT  __________________________________
+        // VALIDATE FUNCTION INPUT ___________________________________
 
         if (typeof(options)==='undefined') options = {};
         debug(options);
@@ -412,6 +532,7 @@
             
         });
         
+        
         // SET METHODS (PUBLIC) ______________________________________
                     
         // Quize.isLoaded() : PUBLIC ---------------------------------
@@ -503,123 +624,42 @@
     };
     
     
-        
     
-    //- QUESTION ==============================================================
-    //-- NOTES: EACH QUESTION OBJECT
     
-    //-- PRIVATE / PROTECTED PROPERTIES:
-    //----- answer = string
-    //----- label = string
-    //----- correct = boolean
-    //----- required = boolean
-    //----- attempts = int
-    //----- tag = object -- "inputTag"
     
-    //-- PUBLIC PROPERTIES:
-    //----- input = string : users attempted answer
-
-    //-- PUBLIC METHODS:
-    //----- validate() : validates user input... returns true or false
-    //----- getQuestion() : return protected "loaded" property
     
-    var questionMaker = function (attributes) {
-        
-        debug('LOG: questionMaker( )'+ ' ==============================================================');
-        
-        // VALIDATE FUNCTION INPUT ___________________________________
-        
-        debug(attributes);
-        
-        //- attributes
-        if(typeof attributes === 'undefined') {
-            debug('ERROR: attributes not passed' + attributes + 'returned false' );
-            return false;
-        }
-        
-        //- attributes.question
-        if(attributes.hasOwnProperty('question') === false) {
-            debug("ERROR: attributes.question not passed returned false" );
-            return false;
-        }
-        
-        //- attributes.answer
-        if(attributes.hasOwnProperty('answer') === false) {
-            debug("ERROR: attributes.answer not passed returned false" );
-            return false;
-        }
-        
-        //- attributes.required
-        if(attributes.hasOwnProperty('required') === false) {
-            debug("LOG: required not passed, set to false" ); 
-            attributes.required = false;
-        }
-        
-        if(typeof attributes.required !== boolean) {
-            debug("LOG: required missing, set defualt to false" );
-            attributes.required = false;
-        }
-        
-        
-        // SET PROPERTIES (PRIVATE)  -----------------------------
-        var Question = {},
-            answer = answer,
-            question = question,
-            required = required,
-            tag = tagObj,
-            correct = false,
-            attempts = 0;
-            
-            
-        // SET PROPERTIES (PUBLIC)  -----------------------------
-        Question.input = "";
-                           
-                   
-        // Question.validate() : PUBLIC -----------------------------
-        //-- PARAMETERS: inputAnswer...   
-        //----- inputAnswer = user attempted answer / input (string)
-        
-        //-- RETURNS: 
-        //----- if "tagName" : as string
-        //----- if "option" : as object (need to change to string)
-        //----- if "attribute" : as string
-        //----- if all html elements : as string
-        
-        Question.validate = function(answerInput) {
-            Question.input = answerInput;
-            if(answer === answerInput) {
-                question.valid = true;
-                return true;
-            } else {
-                question.valid = false;
-                return false;
-            }
-        };
-        
-        Question.getQuestion = function() {            
-            debug('LOG: getQuestion( )'+ ' ------------------------------');
-            
-            var questionWrapper = $("<div>", {"class" : "form-group"}),
-                questionLabel = $("<label>", {
-                    'id' : "question", 
-                    "text" : question, 
-                    "for": "[ tag.getTagId() ]"
-                });
-            
-            if(required === true) {
-                questionLabel.addClass('required');
-            }
-            
-            $(questionWrapper).append(questionLabel);
-            
-            // NEED TO BUILD OUT QUESTION INPUTS HERE
-            
-        };
-
-        
-        return Question;
-        
-    };
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }());
 
