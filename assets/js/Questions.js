@@ -392,7 +392,7 @@
         //----- options (object) : sets the select tag child options
         
         //-- RETURNS: 
-        //----- JQUERY Object / JQUERY html elemnt    
+        //----- JQUERY Object / JQUERY html select element    
         getSelect = function(attributes, options) {
             
             debug('LOG: getSelect( ) : Private ' + ' ------------------------------');
@@ -420,54 +420,59 @@
         //----- option specific attributes (object) : merges attributes into the above attributes
         
         //-- RETURNS: 
-        //----- JQUERY Object / JQUERY html elemnt    
+        //----- JQUERY Object / JQUERY html input elements  
         getInput = function(attributes, options) {
             
-            debug('LOG: getSelect( ) : Private ' + ' ------------------------------');
+            debug('LOG: getSelect( ) : Private ------------------------------');
 
             var parentTag     = $('<div/>');
             
+            // check for options
             if(options.length > 0) {
                 
+                // loop options
                 $.each( options, function(optionIndex, optionAttributes ) {
                     
                     debug( 'LOG: ADDING INPUT OPTION: ' + optionIndex );
                     
                     var labelTag      = $('<label/>'),
-                        inputTag      = $('<input/>', inputTag.attributes);
-                        
-                    if( inputTag.attributes.hasOwnProperty('html') ) {
+                        inputTag      = $('<input/>', attributes);
+                    
+                    // handle label for html
+                    if( attributes.hasOwnProperty('html') ) {
                         
                         debug( 'LOG: LABEL HTML' );
                         
                         labelTag = $('<label/>', {
-                            'html' : inputTag.attributes.html
+                            'html' : attributes.html
                         });
                         
-                        if( inputTag.attributes.hasOwnProperty('id') ) {
-                            labelTag.attr( 'for', inputTag.attributes.id );
+                        if( attributes.hasOwnProperty('id') ) {
+                            labelTag.attr( 'for', attributes.id );
                         }
                         
                         debug( labelTag );
 
                     } 
                     
-                    if( inputTag.attributes.hasOwnProperty('text') ) {
+                    // handle label for text 
+                    if( attributes.hasOwnProperty('text') ) {
                         
                         debug( 'LOG: LABEL TEXT' );
                         
                         labelTag = $('<label/>', {
-                            'text' : inputTag.attributes.text
+                            'text' : attributes.text
                         });
                         
-                        if(inputTag.attributes.hasOwnProperty('id') ) {
-                            labelTag.attr('for', inputTag.attributes.id );
+                        if(attributes.hasOwnProperty('id') ) {
+                            labelTag.attr('for', attributes.id );
                         }
                                                 
                         debug( labelTag );
                         
                     }
                     
+                    // loop attributes in options data object
                     $.each( optionAttributes, function(attributeName, attributeValue ) {
                         if(attributeName !== 'text' || attributeName !== 'html')  {
                             debug( 'LOG: ADDING OPTION ATTRIBUTES '+ attributeName + ': ' + attributeValue );
@@ -475,15 +480,28 @@
                         }
                     });
                                                   
-                    debug( 'LOG: BUILDING INPUT DOM' ); 
+                    debug( 'LOG: BUILDING INPUT DOM' );
+                    
+                    // append to parent tag collection
                     parentTag.append( $('<div/>').append(inputTag).append(labelTag) );
+                    
                 });
                 
                 debug(parentTag);
+                                    
+                // return parentTag 
                 return parentTag;
+                
             } 
             
+            // return single input tag 
             return  $('<input/>', inputTag.attributes);
+        };
+        
+        
+        getTextarea = function(attributes) {
+             // return single textarea tag 
+            return  $('<textarea/>', attributes);
         };
 
         
