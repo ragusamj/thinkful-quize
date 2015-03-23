@@ -11870,7 +11870,6 @@ var isDebug = true;
         //- attributes.tag.tagName
         if(attributes.tag.hasOwnProperty('options') === false) {
             attributes.tag.options = {};
-            return false;
         }
         
         
