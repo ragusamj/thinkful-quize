@@ -11579,11 +11579,16 @@ function debug(message) {
             url:src, 
             dataType: "json",  
             beforeSend: function( xhr ) {
+                
+                // $.AJAX.BEFORE : PRIVATE 
+                
                 debug('LOG: GETTING JSON DATA QUESTIONS');
                 debug(xhr); 
             }
         })
         .done(function( jsonData ) {
+            
+            // $.AJAX.DONE : PRIVATE 
 
             debug('LOG: RETURN JSON DATA QUESTIONS');
             debug(jsonData);
@@ -11859,6 +11864,11 @@ function debug(message) {
     
     
     
+    
+    
+    
+    
+    
     //- INPUTTAG ==============================================================
     //-- NOTES: INPUT TAG OBJECT.  
     //          EXTENDING TO MERGE OPTION WITH THE TAG & ADD VALIDATION
@@ -11873,7 +11883,7 @@ function debug(message) {
     
     var inputTagMaker = function (tagName, attributes, options) {
         
-        debug('LOG: inputTagMaker( )'+ ' ==============================================================');
+        debug('LOG: inputTagMaker( ) ==============================================================');
         
         // VALIDATE FUNCTION INPUT  -----------------------------
         
@@ -11897,39 +11907,7 @@ function debug(message) {
         inputTag.tagName = tagName;
         inputTag.attributes = attributes;
         inputTag.options = options;
-                
-        
-        // getTag() : PRIVATE -----------------------------
-        //-- PARAMETERS:    
-        //----- tagName (string) : sets the html tagName
-        //----- attributes (object) : sets the html attributes
-        
-        //-- RETURNS: 
-        //----- JQUERY Object / JQUERY html elemnt    
-        
-        getTag = function(tagName, attributes) {
-            
-            debug('LOG: getTag( ) : Private ' + ' ------------------------------');
-            
-            if (typeof(attributes)==='undefined') attributes = {};
-
-            var tag = $('<' + tagName.toLowerCase().replace(/[^a-zA-Z]+/g) + '/>');
-            debug(tag);
-
-            if(attributes.length > 0) {
-                
-                //BUG "attributes.options"???
-                
-                $.each( attributes.options, function(attributeName, attributeValue ) {
-                    debug('LOG: ADDING: ' + attributeName + ' = ' + attributeValue);
-                    tag.attr(attributeName.toLowerCase().replace(/[^a-zA-Z]+/g,""), attributeValue.toLowerCase().replace(/[^0-9a-z-]/g,""));
-                });
-            } 
-            
-            debug(tag);
-            return tag;
-        };
-        
+                        
         
         // getSelect() : PRIVATE -----------------------------
         //-- PARAMETERS:    
