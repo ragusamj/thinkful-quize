@@ -4,10 +4,9 @@ if(! window.console) {
   console = { log: function(){} };
 }
 
-
  // debug(message) 
 function debug(message) {
-    if(debug === true) {
+    if(isDebug === true) {
         console.log(message);
     }
 }  
