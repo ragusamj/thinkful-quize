@@ -12050,7 +12050,7 @@ function debug(message) {
         
         debug('LOG: questionMaker( )'+ ' ==============================================================');
         
-        // VALIDATE FUNCTION INPUT  -----------------------------
+        // VALIDATE FUNCTION INPUT ___________________________________
         
         debug(attributes);
         
