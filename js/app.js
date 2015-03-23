@@ -11790,6 +11790,8 @@ function debug(message) {
                 //return getTextArea(inputTag.attributes, inputTag.options);                
             }
         };
+        
+        return InputTag;
     };     
     
     
