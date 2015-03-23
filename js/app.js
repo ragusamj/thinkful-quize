@@ -11515,18 +11515,19 @@ if(! window.console) {
   console = { log: function(){} };
 }
 
-
  // debug(message) 
 function debug(message) {
-    if(debug === true) {
+    if(isDebug === true) {
         console.log(message);
     }
-}  ;// CODING NOTES: Still working this out!
+}  
+;// CODING NOTES: Still working this out!
+var isDebug = true;
 
 
 (function () {
     
-            
+    
     // INPUTTAG ====================================================================================
     //-- DESCRIPTION: BUILDS A INPUT, SELECT, TEXTAREA TAG WITH CHILD OPTIONS
      
@@ -11547,6 +11548,7 @@ function debug(message) {
         
     var inputTagMaker = function (tagName, attributes, options) {
         
+
         debug('LOG: inputTagMaker( ) ========');
         
         // VALIDATE FUNCTION INPUT ___________________________________
@@ -11906,11 +11908,11 @@ function debug(message) {
         };
         
         
-        // Question.getQuestion() : PUBLIC ---------------------------
+        // Question.get() : PUBLIC ---------------------------
         //-- RETURNS: 
         //----- JQUERY Object / JQUERY html input elements  
                 
-        Question.getQuestion = function(question, tag) {            
+        Question.get = function() {            
             debug('LOG: getQuestion( ) ----');
             
             var questionLabel = $("<label>", {
@@ -11938,28 +11940,7 @@ function debug(message) {
         
     };
  
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-    
-    
-    
+
     
     
     // QUIZE ( OBJECT ) ====================================================================================
@@ -11986,7 +11967,8 @@ function debug(message) {
     //----- setIncorrect(value) : default is 1
     
     var quizeMaker = function (options) {
-        debug('LOG: surveyMaker() ============================================================================');
+        
+        debug('LOG: surveyMaker() =====');
         
         // VALIDATE FUNCTION INPUT ___________________________________
 
@@ -11995,8 +11977,7 @@ function debug(message) {
 
         // SET PRIVATE PROPERTIES (PRIVATE) __________________________
         var Quize = {},
-            src = src,
-            debug = debug,
+            src = '/json/data.json',
             current = 0,
             loaded = false,
             questions = [],
@@ -12015,17 +11996,13 @@ function debug(message) {
             url:src, 
             dataType: "json",  
             beforeSend: function( xhr ) {
-                
                 // $.AJAX.BEFORE : PRIVATE 
-                
                 debug('LOG: GETTING JSON DATA QUESTIONS');
-                debug(xhr); 
-            }
-        })
-        .done(function( jsonData ) {
+                debug(this); 
+            },
+        }).done(function( jsonData ) {
             
             // $.AJAX.DONE : PRIVATE 
-
             debug('LOG: RETURN JSON DATA QUESTIONS');
             debug(jsonData);
             
@@ -12039,29 +12016,30 @@ function debug(message) {
                 
                 debug('LOG: LOOPING [' + key + '] QUESTION');
                 
-                if(value.hasOwnProperty('question') === false) {
+                if(attributes.hasOwnProperty('question') === false) {
                     debug('ERROR: DATA ' + key + ' RETURN WITH NO "questions"');
                     return false;
                 }
                 
-                if(value.hasOwnProperty('answer') === false) {
+                if(attributes.hasOwnProperty('answer') === false) {
                     debug('ERROR: DATA ' + key + ' RETURN WITH NO "answer"');
                     return false;
                 }
                 
-                if(value.hasOwnProperty('required') === false) {
+                if(attributes.hasOwnProperty('required') === false) {
                     debug('ERROR: DATA ' + key + ' RETURN WITH NO "required"');
                     return false;
                 }
                 
-                if(value.hasOwnProperty('tag') === false) {
+                if(attributes.hasOwnProperty('tag') === false) {
                     debug('ERROR: DATA ' + key + ' RETURN WITH NO "tag"');
                     return false;
                 }
                 
                 debug('LOG: CREATE AND PUSH QUESTION OBJECT to "questions" ARRAY ');
                 questions.push( questionMaker(attributes) );
-                return true;                
+                return true;  
+                              
             });  
             
             debug(questions);                            
@@ -12071,15 +12049,14 @@ function debug(message) {
                 
             window.onhashchange = function () {
                 debug('LOG: onhashchange() Event');
-                //setQuestionNumber();
-                //$("#question").html(data.questions[current].question);
+                index = 0;
+                $("#question").html( questions[index].get() );
             }
                 
             $(document).ready(function(){      
                 debug('LOG: domready() Event');
-                //setQuestionNumber();
-                //$("#question").html(data.questions[current].question);
-                //getQuestionInput();
+                index = 0;
+                $("#question").html( questions[0].get() );
             });
             
         });
@@ -12173,45 +12150,9 @@ function debug(message) {
     
         return Quize;
         
-    };
+    }; 
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    var quize = quizeMaker();
     
 }());
 
