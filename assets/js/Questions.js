@@ -579,11 +579,13 @@
             
             //- get select
             if(inputTag.tagName == 'select') {
+                debug( 'LOG: get select');
                 return getSelect(inputTag.attributes, inputTag.options);                
             }
             
             //- get input
             if(inputTag.tagName == 'input') {
+                debug( 'LOG: get input');
                 return getInput(inputTag.attributes, inputTag.options);                
             }
             
