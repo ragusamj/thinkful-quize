@@ -11570,9 +11570,9 @@ var isDebug = true;
         var InputTag = {};  
          
         // SET PROPERTIES (PUBLIC) ___________________________________
-        inputTag.tagName = tagName;
-        inputTag.attributes = attributes;
-        inputTag.options = options;
+        InputTag.tagName = tagName;
+        InputTag.attributes = attributes;
+        InputTag.options = options;
                         
         
         // SET METHODS (PRIVATE) _____________________________________
@@ -11591,7 +11591,7 @@ var isDebug = true;
             var tagAttributes,
                 optionAttributes;
 
-            var parentTag = $('<select/>', inputTag.attributes);
+            var parentTag = $('<select/>', InputTag.attributes);
 
             if(options.length > 0) {
                 $.each( options, function(optionIndex, optionAttributes ) {
@@ -11686,7 +11686,7 @@ var isDebug = true;
             } 
             
             //- return single input tag 
-            return  $('<input/>', inputTag.attributes);
+            return  $('<input/>', InputTag.attributes);
         };
         
         
@@ -11720,14 +11720,14 @@ var isDebug = true;
             
         InputTag.set = function(name, value) {
             if(name.toLowerCase() = 'tagname') {
-                inputTag.tagName = value;
+                InputTag.tagName = value;
                 return true;
             }
             if(name.toLowerCase() = 'options') {
-                inputTag.options.push(value);
+                InputTag.options.push(value);
                 return true;
             }
-            inputTag.attributes[name.replace(/[^a-zA-Z]+/g,"")] = value.replace(/[^0-9a-z-]/g,"");
+            InputTag.attributes[name.replace(/[^a-zA-Z]+/g,"")] = value.replace(/[^0-9a-z-]/g,"");
             return true;
         };
         
@@ -11754,40 +11754,40 @@ var isDebug = true;
             //- get tagname
             if( name.toLowerCase() === 'tagname' ) {
                 debug( 'LOG: getting tagName: '+ inputTag.tagName );
-                return inputTag.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"");
+                return InputTag.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"");
             }
             
             //- get option
             if ( isNaN(name) === true ) {
-                if( inputTag.options.length > name ) {
-                    debug( 'LOG: getting option['+name+'] : '+ inputTag.options[name] );
-                    return inputTag.options[name];
+                if( InputTag.options.length > name ) {
+                    debug( 'LOG: getting option['+name+'] : '+ InputTag.options[name] );
+                    return InputTag.options[name];
                } else {
                     debug( 'WARNING: option['+name+'] greater then options length : ' + options.length );
-                    return inputTag.options[name];
+                    return InputTag.options[name];
                }
             }
        
             //- get attribute
-            if( inputTag.attributes.hasOwnProperty(name) === true ){
-                debug( 'LOG: checking and getting attribute: ' + inputTag.attributes[name] );
-                return inputTag.attributes[name];
+            if( InputTag.attributes.hasOwnProperty(name) === true ){
+                debug( 'LOG: checking and getting attribute: ' + InputTag.attributes[name] );
+                return InputTag.attributes[name];
             }
             
             //- get select
-            if(inputTag.tagName == 'select') {
+            if(InputTag.tagName == 'select') {
                 debug( 'LOG: get select');
-                return getSelect(inputTag.attributes, inputTag.options);                
+                return getSelect(InputTag.attributes, inputTag.options);                
             }
             
             //- get input
-            if(inputTag.tagName == 'input') {
+            if(InputTag.tagName == 'input') {
                 debug( 'LOG: get input');
-                return getInput(inputTag.attributes, inputTag.options);                
+                return getInput(InputTag.attributes, inputTag.options);                
             }
             
             //- get textarea
-            if(inputTag.tagName == 'textarea') {
+            if(InputTag.tagName == 'textarea') {
                 debug( 'LOG: get textarea');
                 //return getTextArea(inputTag.attributes, inputTag.options);                
             }
