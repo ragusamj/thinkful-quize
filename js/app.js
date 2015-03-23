@@ -12025,12 +12025,7 @@ var isDebug = true;
                     debug('ERROR: DATA ' + key + ' RETURN WITH NO "answer"');
                     return false;
                 }
-                
-                if(attributes.hasOwnProperty('required') === false) {
-                    debug('ERROR: DATA ' + key + ' RETURN WITH NO "required"');
-                    return false;
-                }
-                
+                                
                 if(attributes.hasOwnProperty('tag') === false) {
                     debug('ERROR: DATA ' + key + ' RETURN WITH NO "tag"');
                     return false;
