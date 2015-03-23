@@ -11614,7 +11614,9 @@ var isDebug = true;
         //----- JQUERY Object / JQUERY html input elements  
         getInput = function(attributes, options) {
             
-            debug('LOG: getSelect( ) : Private ----');
+            debug('LOG: getInput( ) : Private ----');
+            debug(attributes);
+            debug(options);
 
             var parentTag     = $('<div/>');
             
@@ -11686,7 +11688,7 @@ var isDebug = true;
             } 
             
             //- return single input tag 
-            return  $('<input/>', InputTag.attributes);
+            return  $('<input/>', attributes);
         };
         
         
@@ -11749,11 +11751,13 @@ var isDebug = true;
     
         InputTag.get = function(name) {       
             
-            debug( 'LOG: InputTag.get( ) : Public ' + name  + ' ----' );
-                        
+            debug( 'LOG: InputTag.get( ) : Public ----' );
+            
+            if (typeof(name)==='undefined') name = '';
+            
             //- get tagname
             if( name.toLowerCase() === 'tagname' ) {
-                debug( 'LOG: getting tagName: '+ inputTag.tagName );
+                debug( 'LOG: getting tagName: '+ InputTag.tagName );
                 return InputTag.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"");
             }
             
@@ -11775,21 +11779,21 @@ var isDebug = true;
             }
             
             //- get select
-            if(InputTag.tagName == 'select') {
-                debug( 'LOG: get select');
-                return getSelect(InputTag.attributes, inputTag.options);                
+            if(InputTag.tagName.toLowerCase() === 'select') {
+                debug( 'LOG: get select ' + InputTag.tagName.toLowerCase());
+                return getSelect(InputTag.attributes, InputTag.options);                
             }
             
             //- get input
-            if(InputTag.tagName == 'input') {
-                debug( 'LOG: get input');
-                return getInput(InputTag.attributes, inputTag.options);                
+            if(InputTag.tagName.toLowerCase() === 'input') {
+                debug( 'LOG: get input '+ InputTag.tagName.toLowerCase());
+                return getInput(InputTag.attributes, InputTag.options);                
             }
             
             //- get textarea
-            if(InputTag.tagName == 'textarea') {
-                debug( 'LOG: get textarea');
-                //return getTextArea(inputTag.attributes, inputTag.options);                
+            if(InputTag.tagName.toLowerCase() === 'textarea') {
+                debug( 'LOG: get textarea '+ InputTag.tagName.toLowerCase());
+                return getTextArea(InputTag.attributes, InputTag.options);                
             }
         };
         
@@ -11912,7 +11916,7 @@ var isDebug = true;
         //----- JQUERY Object / JQUERY html input elements  
                 
         Question.get = function() {            
-            debug('LOG: getQuestion( ) ----');
+            debug('LOG: Question.get( ) ----');
             
             var questionLabel = $("<label>", {
                     'id' : "question", 
@@ -11920,11 +11924,15 @@ var isDebug = true;
                 });
             
             if( tag.hasOwnProperty('attributes') ) {
+                debug('LOG: has attributes');
+                
                 if( tag.attributes.hasOwnProperty('id') ) {
+                    debug('LOG: has attributes');
                     questionLabel.attr('for', tag.hasOwnProperty('id') );
                 }
-                if( tag.attributes.hasOwnProperty('required') ) {
-                    if(required === true) {
+                
+                if( tag.attributes.hasOwnProperty('required') === true ) {
+                    if(tag.attributes.required === true) {
                         questionLabel.addClass('required');
                     }
                 }
@@ -12031,11 +12039,13 @@ var isDebug = true;
                 }
                 
                 debug('LOG: CREATE AND PUSH QUESTION OBJECT to "questions" ARRAY ');
+                
                 questions.push( questionMaker(attributes) );
-                return true;  
+                debug(questions); 
                               
             });  
             
+            debug('LOG: DONE LOOP');
             debug(questions);                            
             
             debug('LOG: ASSIGN DATA TO PRIVATE "data" PROPERTY');
