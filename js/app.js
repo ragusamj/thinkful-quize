@@ -11672,6 +11672,8 @@ var isDebug = true;
                             inputTag.attr(attributeName, attributeValue);
                         }
                     });
+                    
+                    inputTag.addClass('answer');
                                                   
                     debug( 'LOG: BUILDING INPUT DOM' );
                     
@@ -11688,7 +11690,7 @@ var isDebug = true;
             } 
             
             //- return single input tag 
-            return  $('<input/>', attributes);
+            return  $('<input/>', attributes).addClass('answer form-control');
         };
         
         
@@ -11874,8 +11876,7 @@ var isDebug = true;
         //- attributes.tag.tagName
         if(attributes.tag.hasOwnProperty('options') === false) {
             attributes.tag.options = {};
-        }
-        
+        }        
         
         // SET PROPERTIES (PRIVATE) __________________________________
         var Question = {},
@@ -12060,7 +12061,7 @@ var isDebug = true;
             $(document).ready(function(){      
                 debug('LOG: domready() Event');
                 index = 0;
-                $("#question").html( questions[0].get() );
+                $("#questions").html( questions[0].get() );
             });
             
         });
