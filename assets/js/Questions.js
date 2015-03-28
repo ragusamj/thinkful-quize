@@ -548,9 +548,9 @@ var isDebug = true;
                 
                 $("#questions").html( questions[0].get() );
                 
-                $("#btn-next").text("Submit Answer");
+                $("#btn-submit").text("Submit Answer");
                 
-                $("#btn-next").click(function() {
+                $("#btn-submit").click(function() {
                 
                     debug('LOG: NEXT HAS BEEN CLICKED');
                     debug('ANSWER: '+ $('.answer').val() );

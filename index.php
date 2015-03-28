@@ -18,7 +18,7 @@
       </section>
       <section id="actions" class="actions col-xs-12">
       <div class="text-right">	
-        <button id="btn-next" class="btn btn-success" >Next Question <span class="glyphicon glyphicon-chevron-right"></span></button>
+        <button id="btn-submit" class="btn btn-success" >Next Question <span class="glyphicon glyphicon-chevron-right"></span></button>
       </div>
     </section>
   </div>

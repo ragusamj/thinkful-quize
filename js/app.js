@@ -12073,7 +12073,7 @@ var isDebug = true;
                 
                 $("#btn-next").text("Submit Answer");
                 
-                $("#btn-next").click(function() {
+                $("#btn-submit").click(function() {
                 
                     debug('LOG: NEXT HAS BEEN CLICKED');
                     debug('ANSWER: '+ $('.answer').val() );
