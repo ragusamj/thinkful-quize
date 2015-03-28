@@ -151,7 +151,6 @@ var isDebug = true;
                     });
                     
                     inputTag.addClass('answer form-control');
-                                                  
                     debug( 'LOG: BUILDING INPUT DOM' );
                     
                     // append to parent tag collection
@@ -378,7 +377,12 @@ var isDebug = true;
         //----- true or false
         
         Question.validate = function(answerInput) {
+            
+            debug('LOG: Question.validate() : ' + answerInput + '----');
             Question.input = answerInput;
+            
+            debug(answer + ' = ' + answerInput);
+            
             if(answer === answerInput) {
                 question.valid = true;
                 return true;
@@ -386,6 +390,7 @@ var isDebug = true;
                 question.valid = false;
                 return false;
             }
+            
         };
         
         
@@ -393,9 +398,10 @@ var isDebug = true;
         //-- RETURNS: 
         //----- JQUERY Object / JQUERY html input elements  
                 
-        Question.get = function() {            
-            debug('LOG: Question.get( ) ----');
+        Question.get = function(name) {  
             
+            debug('LOG: Question.get( ) ----');
+                        
             var questionLabel = $("<label>", {
                     'id' : "question", 
                     "html" : question, 
@@ -535,10 +541,25 @@ var isDebug = true;
                 $("#question").html( questions[index].get() );
             }
                 
-            $(document).ready(function(){      
+            $(document).ready(function(){ 
+                     
                 debug('LOG: domready() Event');
                 index = 0;
+                
                 $("#questions").html( questions[0].get() );
+                
+                $("#btn-next").text("Submit Answer");
+                
+                $("#btn-next").click(function() {
+                
+                    debug('LOG: NEXT HAS BEEN CLICKED');
+                    debug('ANSWER: '+ $('.answer').val() );
+                    
+                    console.log(index);
+                    console.log(questions[index].validate( $('.answer').val() ));
+                    
+                });
+                
             });
             
         });
