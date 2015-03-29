@@ -11990,7 +11990,7 @@ var isDebug = true;
 
     
     
-    // QUIZE ( OBJECT ) ====================================================================================
+    // Quiz ( OBJECT ) ====================================================================================
     //-- DESCRIPTION: COLLECTION OF QUESTIONS
 
     //-- PRIVATE / PROTECTED PROPERTIES:
@@ -12013,7 +12013,7 @@ var isDebug = true;
     //----- setCorrect(value) : default is 1
     //----- setIncorrect(value) : default is 1
     
-    var quizeMaker = function (options) {
+    var QuizMaker = function (options) {
         
         debug('LOG: surveyMaker() =====');
         
@@ -12023,7 +12023,7 @@ var isDebug = true;
         debug(options);
 
         // SET PRIVATE PROPERTIES (PRIVATE) __________________________
-        var Quize = {},
+        var Quiz = {},
             src = '/json/data.json',
             current = 0,
             loaded = false,
@@ -12177,31 +12177,31 @@ var isDebug = true;
         
         // SET METHODS (PUBLIC) ______________________________________
                     
-        // Quize.isLoaded() : PUBLIC ---------------------------------
+        // Quiz.isLoaded() : PUBLIC ---------------------------------
         //-- RETURNS: protected "loaded"
-        Quize.isLoaded = function() {
+        Quiz.isLoaded = function() {
             debug('LOG: isLoaded() : return ' + loaded + ' ----');
             return loaded;
         };  
         
-        // Quize.isCompleted() : PUBLIC ------------------------------
+        // Quiz.isCompleted() : PUBLIC ------------------------------
         //-- RETURNS: protected "completed" property
-        Quize.isCompleted = function() {
+        Quiz.isCompleted = function() {
             debug('LOG: isCompleted() : return ' + completed+ ' ----');
             return completed;
         };
         
-        // Quize.getCurrent() : PUBLIC -------------------------------
+        // Quiz.getCurrent() : PUBLIC -------------------------------
         //-- RETURNS: protected "current" property... question
-        Quize.getCurrent = function() {
+        Quiz.getCurrent = function() {
             debug('LOG: getCurrent() : return ' + current+ ' ----');
             return current;
         };
         
-        // Quize.setCurrent() : PUBLIC -------------------------------
+        // Quiz.setCurrent() : PUBLIC -------------------------------
         //-- PARAMETERS: value is the current question number to be set... default: 0
         //-- RETURNS: true of false
-        Quize.setCurrent = function(value) {
+        Quiz.setCurrent = function(value) {
             debug('LOG: setCurrent() : passed ' + value+ ' ----');
             
             if(typeof value === 'undefined') {
@@ -12223,9 +12223,9 @@ var isDebug = true;
         };
                 
                 
-        //- Quize.setCorrect() ---------------------------------------
+        //- Quiz.setCorrect() ---------------------------------------
         //-- PARAMETERS: value = optional : default will be 1
-        Quize.setCorrect = function(value) {
+        Quiz.setCorrect = function(value) {
             debug('LOG: setCorrect( ' + value + ' )'+ ' ----');
             
             // SET DEFAULT TO 1 IF "undefined"
@@ -12242,9 +12242,9 @@ var isDebug = true;
         };
         
         
-        //- Quize.setIncorrect() -------------------------------------
+        //- Quiz.setIncorrect() -------------------------------------
         //-- PARAMETERS: value = optional : default will be 1
-        Quize.setIncorrect = function(value) {
+        Quiz.setIncorrect = function(value) {
             debug('LOG: setIncorrect( ' + value + ' )'+ ' ----');
             
             // SET DEFAULT TO 1 IF "undefined"
@@ -12261,11 +12261,11 @@ var isDebug = true;
             
         };
     
-        return Quize;
+        return Quiz;
         
     }; 
     
-    var quize = quizeMaker();
+    var quiz = QuizMaker();
     
 }());
 
