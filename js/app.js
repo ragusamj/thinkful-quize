@@ -12138,22 +12138,26 @@ var isDebug = true;
                             $("fieldset.form-group").removeClass("success");
                             
                             index = index + 1;
+                            
                             $("#questions").fadeOut(800,  function() {
                                 $(this).html( questions[index].get() ).fadeIn();
                                 window.location.hash = index;
-                                return;
-                            });                            
+                            });      
+                                                  
                             return;
                         });
                         
                         return true;
                     }        
                     
-                    $("fieldset.form-group").addClass("error");  
+                    $("fieldset.form-group").addClass("danger");  
                     
                     $(errorSelectorString).after('<div class="bg-danger"><p class="text-danger">Please Try Agian</p></div>');
                     
-                   
+                    $('.bg-danger').delay(800).fadeOut(800, function() {
+                        $(this).remove();
+                        $("fieldset.form-group").removeClass("danger");
+                    });
                            
                     return false;       
                     
