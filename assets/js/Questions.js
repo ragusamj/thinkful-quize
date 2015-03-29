@@ -381,37 +381,17 @@ var isDebug = true;
             Question.input = answerInput;
             
             debug(answer + ' = ' + answerInput);
-            
-            debug("!!!!!!!!!!!!!!!!!");
-            debug(answer);
                         
             if( tag.hasOwnProperty('tagName') ) {
                 if( tag.tagName.toLowerCase() === "textarea" ) {
-                    
                     if(typeof answer === "object") {
                         if(answer instanceof Array) {
-                            
-                            debug("!!!!!!!!!!!!!!!!!");
-                            debug(answer);
-                            
                             for (var i=0, l=answer.length; i<l; i++) {
-                                
-                                debug("----");
-                                debug(i);
-                                debug(answerInput);
-                                debug(answer[i]);
-                                
                                 if(answerInput.toLowerCase().indexOf(answer[i].toLowerCase()) === -1) {
                                     question.valid = false;
                                     return false;
                                 }
-                                
                             }
-                            
-                            debug("!!!!!!!!!!!!!!!!!");
-                            
-                            question.valid = true;
-                            return true;
                         } 
                     }
                 }
