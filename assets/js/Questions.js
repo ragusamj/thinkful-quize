@@ -565,8 +565,8 @@ var isDebug = true;
                 
             window.onhashchange = function () {
                 debug('LOG: onhashchange() Event');
-                index = 0;
-                $("#question").html( questions[index].get() );
+                //index = 0;
+                //$("#question").html( questions[index].get() );
             }
                 
             $(document).ready(function(){ 
@@ -613,6 +613,7 @@ var isDebug = true;
                         index = index + 1;
                         debug(index);
                         $("#questions").html( questions[index].get() );
+                        window.location.hash = index;
                         return true;
                     }                    
                     
