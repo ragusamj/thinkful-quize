@@ -30,16 +30,13 @@ var isDebug = true;
         
         // VALIDATE FUNCTION INPUT ___________________________________
         
-        //- tagName
         if(typeof tagName === 'undefined') {
             debug('ERROR: tagName not passed' +tagName + 'returned false' );
             return false;
         }
         
-        //- attributes
         if (typeof(attributes)==='undefined') attributes = {};
         
-        //- options
         if (typeof(options)==='undefined') options = {};
 
         
@@ -93,6 +90,14 @@ var isDebug = true;
         //----- JQUERY Object / JQUERY html input elements  
         getInput = function(attributes, options) {
             
+            
+            if (typeof(options)==='undefined') options = [];
+
+            if(options.hasOwnProperty('length') === false) {
+                options.length = 0;                
+            }
+            
+            
             debug('LOG: getInput( ) : Private ----');
             debug(attributes);
             debug(options);
@@ -100,42 +105,31 @@ var isDebug = true;
 
             var parentTag     = $('<div/>', { "class" : "input-list" });
             
-            //- check for options
             if(options.length > 0) {
                 
                 debug( 'LOG: MULTIPLE INPUT OPTIONS' );
                 
-                //- loop options
                 $.each( options, function(optionIndex, optionAttributes ) {
                     
                     debug( 'LOG: ADDING INPUT OPTION: ' + optionIndex );
-                    
-                    debug( 'LOG: LABEL HTML ++++++++++++++++++++++++++' );
-                    
+                                        
                     var labelTag      = $('<label/>'),
                         inputTag      = $('<input/>', attributes);
                     
                     //- handle label for html
                     if( optionAttributes.hasOwnProperty('html') ) {
                         
-                        debug( 'LOG: LABEL HTML' );
-                        
                         labelTag = $('<label/>', {
                             'text' : optionAttributes.html
                         });
-                                                
+                        
                         if( optionAttributes.hasOwnProperty('id') ) {
                             labelTag.attr( 'for', optionAttributes.id );
                         }
-                                                
-                        debug( labelTag );
-
                     } 
                     
                     //- handle label for text 
-                    if( attributes.hasOwnProperty('text') ) {
-                        
-                        debug( 'LOG: LABEL TEXT' );
+                    if( attributes.hasOwnProperty('text') ) {                        
                         
                         labelTag = $('<label/>', {
                             'text' : attributes.text
@@ -143,36 +137,28 @@ var isDebug = true;
                         
                         if(attributes.hasOwnProperty('id') ) {
                             labelTag.attr('for', attributes.id );
-                        }
-                                                
-                        debug( labelTag );
-                        
+                        }                        
                     }
                     
                     //- loop attributes in options data object
                     $.each( optionAttributes, function(attributeName, attributeValue ) {
                         if(attributeName !== 'text' || attributeName !== 'html')  {
-                            debug( 'LOG: ADDING OPTION ATTRIBUTES '+ attributeName + ': ' + attributeValue );
+                            console.log( 'LOG: ADDING OPTION ATTRIBUTES '+ attributeName + ': ' + attributeValue );
                             inputTag.attr(attributeName, attributeValue);
                         }
                     });
                     
                     inputTag.addClass('answer');
-                    debug( 'LOG: BUILDING INPUT DOM' );
+                    console.log( 'LOG: BUILDING INPUT DOM' );
                     
-                    // append to parent tag collection
                     parentTag.append( $('<div/>', { "class" : "input-list-item" }).append(inputTag).append(labelTag) );
                     
                 });
                 
-                debug(parentTag);
-                                    
-                //- return parentTag 
                 return parentTag;
                 
             } 
             
-            //- return single input tag 
             return  $('<input/>', attributes).addClass('answer form-control');
         };
         
@@ -564,7 +550,14 @@ var isDebug = true;
             loaded = true; 
                 
             window.onhashchange = function () {
+                
                 debug('LOG: onhashchange() Event');
+                //debug(window.location.hash);
+                
+                //if(index !== window.location.hash.replace(#, '').parseInt()) {
+                    
+                //}
+                
                 //index = 0;
                 //$("#question").html( questions[index].get() );
             }
@@ -581,6 +574,7 @@ var isDebug = true;
                 $("#btn-submit").click(function() {
                 
                     var selectorString = '.answer',
+                        errorSelectorString = 'fieldset.form-group > legend',
                         tagName = questions[index].get("tagName"),
                         tagType = questions[index].get("tagType");
                     
@@ -588,34 +582,57 @@ var isDebug = true;
                     debug('ANSWER: '+ $('.answer').val() );
                     debug( questions[index].get("tagName") );
                     
-                    
                     if(tagName === "select") {
                         selectorString = '#questions select';
+                        errorSelectorString = 'fieldset.form-group > select';
                     }
                     
                     if(tagName === "textarea") {
                         selectorString = '#questions textarea';
+                        errorSelectorString = 'fieldset.form-group > textarea';
                     }
                     
                     if(tagName === "input") {
                         if(tagType === "radio" || tagType === "checkbox" ) {                            
                             selectorString = '#questions input:checked';
+                            errorSelectorString = 'fieldset.form-group > input-list';
                         } else {
                             selectorString = '#questions input';
-                        }                    
+                            errorSelectorString = 'fieldset.form-group > input';
+                        }       
+                                     
                     }
-                    
-                    debug(selectorString);
-                    
+                                        
                     if(questions[index].validate( $(selectorString).val() ) === true) {
-                        debug('CORRECT!');
-                        debug(index);
-                        index = index + 1;
-                        debug(index);
-                        $("#questions").html( questions[index].get() );
-                        window.location.hash = index;
+                        
+                        $("fieldset.form-group").addClass("success");  
+
+                        $(errorSelectorString).after('<div class="bg-success"><p class="text-success">CORRECT!</p></div>');
+
+                        $('.bg-success').delay(800).fadeOut(800, function() {
+                            
+                            $(this).remove(); 
+                            $("fieldset.form-group").removeClass("success");
+                            
+                            index = index + 1;
+                            $("#questions").fadeOut(800,  function() {
+                                $(this).html( questions[index].get() ).fadeIn();
+                                window.location.hash = index;
+                                return;
+                            });                            
+                            return;
+                        });
+                        
                         return true;
-                    }                    
+                    }        
+                    
+                    $("fieldset.form-group").addClass("error");  
+                    
+                    $(errorSelectorString).after('<div class="bg-danger"><p class="text-danger">Please Try Agian</p></div>');
+                    
+                   
+                           
+                    return false;       
                     
                 });
                 
