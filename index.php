@@ -8,8 +8,7 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-  <div class="container-fluid">
-    <section id="breadcrumb" class="col-xs-12"></section>
+  <div id="container" class="container-fluid">
     <section id="questions" class="col-xs-12">	
       <fieldset class="form-group">
         <legend><label id="question" for="answer" class="required">Question</label></legend>

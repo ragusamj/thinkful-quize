@@ -11592,6 +11592,9 @@ var isDebug = true;
             parentTag.addClass("form-control");
 
             if(options.length > 0) {
+                
+                parentTag.append( $('<option/>', { "value" : "", "text" :"Please Select a Option" } ) );
+                
                 $.each( options, function(optionIndex, optionAttributes ) {
                     debug( 'LOG: ADDING OPTION: ' + optionIndex );
                     debug( optionAttributes );
@@ -11933,9 +11936,7 @@ var isDebug = true;
                 }
                 return '';
             }
-                       
-            
-                        
+                                               
             var legend = $("<legend>"),
                 questionLabel = $("<label>", {
                     'id' : "question", 
@@ -11947,7 +11948,7 @@ var isDebug = true;
                 
                 if( tag.attributes.hasOwnProperty('id') ) {
                     debug('LOG: has attributes');
-                    questionLabel.attr('for', tag.hasOwnProperty('id') );
+                    questionLabel.attr('for',  tag.attributes.id );
                 }
                 
                 if( tag.attributes.hasOwnProperty('required') === true ) {
@@ -12071,20 +12072,7 @@ var isDebug = true;
             
             debug('LOG: ASSIGN DATA TO PRIVATE "data" PROPERTY');
             loaded = true; 
-                
-            window.onhashchange = function () {
-                
-                debug('LOG: onhashchange() Event');
-                //debug(window.location.hash);
-                
-                //if(index !== window.location.hash.replace(#, '').parseInt()) {
-                    
-                //}
-                
-                //index = 0;
-                //$("#question").html( questions[index].get() );
-            }
-                
+                                
             $(document).ready(function(){ 
                      
                 debug('LOG: domready() Event');
@@ -12118,37 +12106,32 @@ var isDebug = true;
                     if(tagName === "input") {
                         if(tagType === "radio" || tagType === "checkbox" ) {                            
                             selectorString = '#questions input:checked';
-                            errorSelectorString = 'fieldset.form-group > input-list';
+                            errorSelectorString = 'fieldset.form-group > div.input-list';
                         } else {
                             selectorString = '#questions input';
                             errorSelectorString = 'fieldset.form-group > input';
                         }       
-                                     
                     }
                                         
                     if(questions[index].validate( $(selectorString).val() ) === true) {
                         
+                        index = index + 1;
+                                               
                         $("fieldset.form-group").addClass("success");  
+                        $(errorSelectorString).after('<div class="bg-success"><p class="text-success">CORRECT! Good Job!</p></div>');
 
-                        $(errorSelectorString).after('<div class="bg-success"><p class="text-success">CORRECT!</p></div>');
-
-                        $('.bg-success').delay(800).fadeOut(800, function() {
-                            
-                            $(this).remove(); 
+                        $("#container").delay(800).fadeOut(800,  function() {
+                            $('.bg-success').remove();
                             $("fieldset.form-group").removeClass("success");
-                            
-                            index = index + 1;
-                            
-                            $("#questions").fadeOut(800,  function() {
-                                $(this).html( questions[index].get() ).fadeIn();
-                                window.location.hash = index;
-                            });      
-                                                  
+                            $("#questions").html(questions[index].get());
+                            $(this).fadeIn();
                             return;
-                        });
-                        
+                        });  
+                                                
                         return true;
-                    }        
+                    }       
+                    
+                     
                     
                     $("fieldset.form-group").addClass("danger");  
                     
