@@ -178,7 +178,7 @@ var isDebug = true;
             debug('LOG: getTextarea( ) : Private ----');
             
              //- return single textarea tag 
-            return  $('<textarea/>', attributes);
+            return  $('<textarea/>', attributes).addClass("form-control");
             
         };
 
@@ -267,7 +267,7 @@ var isDebug = true;
             //- get textarea
             if(InputTag.tagName.toLowerCase() === 'textarea') {
                 debug( 'LOG: get textarea '+ InputTag.tagName.toLowerCase());
-                return getTextArea(InputTag.attributes, InputTag.options);                
+                return getTextarea(InputTag.attributes, InputTag.options);                
             }
         };
         
@@ -302,7 +302,6 @@ var isDebug = true;
     var questionMaker = function (attributes) {
         
         debug('LOG: questionMaker( ) ========');
-        
         
         // VALIDATE FUNCTION INPUT ___________________________________
         
@@ -361,7 +360,11 @@ var isDebug = true;
         
         // SET PROPERTIES (PUBLIC) ___________________________________
         Question.input = "";
-                       
+        
+        debug("*******");
+        debug(attributes);
+        debug(answer);
+        debug("*******");        
                            
         // SET METHODS (PUBLIC) ______________________________________
                    
@@ -378,6 +381,41 @@ var isDebug = true;
             Question.input = answerInput;
             
             debug(answer + ' = ' + answerInput);
+            
+            debug("!!!!!!!!!!!!!!!!!");
+            debug(answer);
+                        
+            if( tag.hasOwnProperty('tagName') ) {
+                if( tag.tagName.toLowerCase() === "textarea" ) {
+                    
+                    if(typeof answer === "object") {
+                        if(answer instanceof Array) {
+                            
+                            debug("!!!!!!!!!!!!!!!!!");
+                            debug(answer);
+                            
+                            for (var i=0, l=answer.length; i<l; i++) {
+                                
+                                debug("----");
+                                debug(i);
+                                debug(answerInput);
+                                debug(answer[i]);
+                                
+                                if(answerInput.toLowerCase().indexOf(answer[i].toLowerCase()) === -1) {
+                                    question.valid = false;
+                                    return false;
+                                }
+                                
+                            }
+                            
+                            debug("!!!!!!!!!!!!!!!!!");
+                            
+                            question.valid = true;
+                            return true;
+                        } 
+                    }
+                }
+            }
             
             if(answer === answerInput) {
                 question.valid = true;
@@ -593,17 +631,23 @@ var isDebug = true;
                     if(questions[index].validate( $(selectorString).val() ) === true) {
                         
                         index = index + 1;
-                                               
-                        $("fieldset.form-group").addClass("success");  
-                        $(errorSelectorString).after('<div class="bg-success"><p class="text-success">CORRECT! Good Job!</p></div>');
 
-                        $("#container").delay(800).fadeOut(800,  function() {
-                            $('.bg-success').remove();
-                            $("fieldset.form-group").removeClass("success");
-                            $("#questions").html(questions[index].get());
-                            $(this).fadeIn();
-                            return;
-                        });  
+                        if(index <  questions.length) {
+                            
+                            $("fieldset.form-group").addClass("success");  
+                            $(errorSelectorString).after('<div class="bg-success"><p class="text-success">CORRECT! Good Job!</p></div>');
+
+                            $("#container").delay(800).fadeOut(800,  function() {
+                                $('.bg-success').remove();
+                                $("fieldset.form-group").removeClass("success");
+                                $("#questions").html(questions[index].get());
+                                $(this).fadeIn();
+                                return;
+                            }); 
+                             
+                        }  else {
+                            alert("done!");
+                        }                    
                                                 
                         return true;
                     }       

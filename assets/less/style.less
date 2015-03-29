@@ -43,6 +43,24 @@ fieldset.form-group {
         width: 94%;
     }
     
+    textarea.form-control {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        width: 94%;
+    }
+    
+    // Modify Bootstrap form-control
+    input.form-control[type=text] {
+        border: none;
+        border-bottom: 1px solid #ddd;
+        box-shadow: none!important;
+        border-radius:0;
+        font-size: 3rem;
+        line-height: 3rem;
+        height:auto;
+        font-weight: 100;
+    }
+    
     .input-list {
         margin-bottom:1rem;
     
@@ -122,7 +140,7 @@ fieldset.form-group {
             input[type=radio]:checked:active {
 	            box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
             }
-          
+                      
             label {
                 display: inline-block;
                 line-height: 1.2em;
@@ -133,7 +151,6 @@ fieldset.form-group {
         }
     }
 }
-
 
 
 fieldset.success {
@@ -166,17 +183,4 @@ fieldset.danger {
     line-height: 1.4;
 }
 
-
-
-// Modify Bootstrap form-control
-input.form-control[type=text] {
-  border: none;
-	border-bottom: 1px solid #ddd;
-	box-shadow: none!important;
-	border-radius:0;
-	font-size: 3rem;
-	line-height: 3rem;
-	height:auto;
-	font-weight: 100;
-}
 
