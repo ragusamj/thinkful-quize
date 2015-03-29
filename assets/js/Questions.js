@@ -69,11 +69,13 @@ var isDebug = true;
                 optionAttributes;
 
             var parentTag = $('<select/>', InputTag.attributes);
+            parentTag.addClass("form-control");
 
             if(options.length > 0) {
                 $.each( options, function(optionIndex, optionAttributes ) {
                     debug( 'LOG: ADDING OPTION: ' + optionIndex );
-                    parentTag.append(getTag('option', optionAttributes));
+                    debug( optionAttributes );
+                    parentTag.append( $('<option/>', { "value" : optionAttributes.value, "text" : optionAttributes.html } ) );
                 });
             } 
             
@@ -94,33 +96,38 @@ var isDebug = true;
             debug('LOG: getInput( ) : Private ----');
             debug(attributes);
             debug(options);
+            debug(options.length);
 
-            var parentTag     = $('<div/>');
+            var parentTag     = $('<div/>', { "class" : "input-list" });
             
             //- check for options
             if(options.length > 0) {
+                
+                debug( 'LOG: MULTIPLE INPUT OPTIONS' );
                 
                 //- loop options
                 $.each( options, function(optionIndex, optionAttributes ) {
                     
                     debug( 'LOG: ADDING INPUT OPTION: ' + optionIndex );
                     
+                    debug( 'LOG: LABEL HTML ++++++++++++++++++++++++++' );
+                    
                     var labelTag      = $('<label/>'),
                         inputTag      = $('<input/>', attributes);
                     
                     //- handle label for html
-                    if( attributes.hasOwnProperty('html') ) {
+                    if( optionAttributes.hasOwnProperty('html') ) {
                         
                         debug( 'LOG: LABEL HTML' );
                         
                         labelTag = $('<label/>', {
-                            'html' : attributes.html
+                            'text' : optionAttributes.html
                         });
-                        
-                        if( attributes.hasOwnProperty('id') ) {
-                            labelTag.attr( 'for', attributes.id );
+                                                
+                        if( optionAttributes.hasOwnProperty('id') ) {
+                            labelTag.attr( 'for', optionAttributes.id );
                         }
-                        
+                                                
                         debug( labelTag );
 
                     } 
@@ -150,11 +157,11 @@ var isDebug = true;
                         }
                     });
                     
-                    inputTag.addClass('answer form-control');
+                    inputTag.addClass('answer');
                     debug( 'LOG: BUILDING INPUT DOM' );
                     
                     // append to parent tag collection
-                    parentTag.append( $('<div/>').append(inputTag).append(labelTag) );
+                    parentTag.append( $('<div/>', { "class" : "input-list-item" }).append(inputTag).append(labelTag) );
                     
                 });
                 
@@ -401,8 +408,27 @@ var isDebug = true;
         Question.get = function(name) {  
             
             debug('LOG: Question.get( ) ----');
+
+            if(name === 'tagName') {
+                if( tag.hasOwnProperty('tagName') ) {
+                    return tag.tagName;
+                }
+                return '';
+            }
+            
+            if(name === 'tagType') {
+                if( tag.hasOwnProperty('attributes') ) {
+                    if( tag.attributes.hasOwnProperty('type') ) {
+                        return tag.attributes.type;
+                    }
+                }
+                return '';
+            }
+                       
+            
                         
-            var questionLabel = $("<label>", {
+            var legend = $("<legend>"),
+                questionLabel = $("<label>", {
                     'id' : "question", 
                     "html" : question, 
                 });
@@ -422,7 +448,9 @@ var isDebug = true;
                 }
             }
             
-            return $("<div>", { "class" : "form-group" }).append( questionLabel ).append( tag.get() );
+            legend.append( questionLabel );
+            
+            return $("<fieldset>", { "class" : "form-group" }).append( legend ).append( tag.get() );
                     
         };
 
@@ -546,17 +574,47 @@ var isDebug = true;
                 debug('LOG: domready() Event');
                 index = 0;
                 
-                $("#questions").html( questions[0].get() );
+                $("#questions").html( questions[index].get() );
                 
-                $("#btn-submit").text("Submit Answer");
+                $("#btn-submit").html('Submit Answer <span class="glyphicon glyphicon-chevron-right"></span>');
                 
                 $("#btn-submit").click(function() {
                 
+                    var selectorString = '.answer',
+                        tagName = questions[index].get("tagName"),
+                        tagType = questions[index].get("tagType");
+                    
                     debug('LOG: NEXT HAS BEEN CLICKED');
                     debug('ANSWER: '+ $('.answer').val() );
+                    debug( questions[index].get("tagName") );
                     
-                    console.log(index);
-                    console.log(questions[index].validate( $('.answer').val() ));
+                    
+                    if(tagName === "select") {
+                        selectorString = '#questions select';
+                    }
+                    
+                    if(tagName === "textarea") {
+                        selectorString = '#questions textarea';
+                    }
+                    
+                    if(tagName === "input") {
+                        if(tagType === "radio" || tagType === "checkbox" ) {                            
+                            selectorString = '#questions input:checked';
+                        } else {
+                            selectorString = '#questions input';
+                        }                    
+                    }
+                    
+                    debug(selectorString);
+                    
+                    if(questions[index].validate( $(selectorString).val() ) === true) {
+                        debug('CORRECT!');
+                        debug(index);
+                        index = index + 1;
+                        debug(index);
+                        $("#questions").html( questions[index].get() );
+                        return true;
+                    }                    
                     
                 });
                 
