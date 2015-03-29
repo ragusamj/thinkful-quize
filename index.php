@@ -11,12 +11,12 @@
   <div class="container-fluid">
     <section id="breadcrumb" class="col-xs-12"></section>
     <section id="questions" class="col-xs-12">	
-      <div class="form-group">
-        <label id="question" for="answer" class="required">Question</label>
+      <fieldset class="form-group">
+        <legend><label id="question" for="answer" class="required">Question</label></legend>
         <input id="answer" type="text" value="" class="form-control" />
-      </div>
-      </section>
-      <section id="actions" class="actions col-xs-12">
+      </fieldset>
+    </section>
+    <section id="actions" class="actions col-xs-12">
       <div class="text-right">	
         <button id="btn-submit" class="btn btn-success" >Next Question <span class="glyphicon glyphicon-chevron-right"></span></button>
       </div>
