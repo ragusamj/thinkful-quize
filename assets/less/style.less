@@ -8,8 +8,6 @@
 }
 
 
-
-
 .container {
   width: 100px;
   height: 100px;
@@ -57,12 +55,11 @@
 } 
 
 
-#questions  {
-    margin-top:2rem;
-}
 
+
+fieldset.score-group,
 fieldset.form-group {
-    
+    margin-top:2rem;
     .border-radius();
     border: 1px solid #ddd;
     padding:1.5rem;
@@ -72,8 +69,39 @@ fieldset.form-group {
         padding:0 1rem 0 .5rem;
         width: auto;
         margin-bottom: 0rem;
+        font-weight: 300;
+        line-height: 1.4;
+        font-size:3.5rem;
+        
+        label {
+            display: block;
+            font-size:3.5rem;
+            font-weight: 300;
+            line-height: 1.4;
+        }
     }
     
+}
+
+fieldset.score-group  {
+    .score-value {
+        float: left;
+        width: 25%;  
+        font-size:3.5rem;   
+        font-weight:100;   
+        border-right: 1px solid #ddd;
+    }
+    
+    .score-value:last-child {
+         border-right:none;
+    }
+    
+}
+
+fieldset.form-group {
+    margin-top:4rem!important;
+     
+    // FORM FIELDS
     select.form-control {
         margin-left: 1rem;
         margin-right: 1rem;
@@ -215,11 +243,7 @@ fieldset.danger {
 
 #question {
 	///padding-top:20px;
-	display: block;
-	font-size:3.5rem;
-	//text-align: center;
-	font-weight: 300;
-    line-height: 1.4;
+	
 }
 
 

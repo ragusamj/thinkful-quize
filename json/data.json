@@ -2,14 +2,82 @@
   "form": "Front End Quize",
   "questions": [
     {
+      "question": "What is The DOM?",
+      "answer": [
+        "Document Object Model",
+        "programming interface",
+        "HTML",
+        "XML",
+        "structure"
+      ],
+      "tag": {
+        "tagName": "textarea",
+        "attributes": {
+          "id": "who-is-george",
+          "name": "who-is-george",
+          "required": true
+        },
+        "options": [
+          {
+            "value": "The Document Object Model"
+          },
+          {
+            "value": "application programming interface"
+          },
+          {
+            "value": "HTML"
+          },
+          {
+            "value": "XML"
+          },
+          {
+            "value": "logical structure"
+          }
+        ]
+      }
+    },
+    {
+      "question": "What is Emmet?",
+      "answer": "A plug in for fast code short cuts",
+      "tag": {
+        "tagName": "select",
+        "attributes": {
+          "id": "what-is-emmet",
+          "name": "what-is-emmet",
+          "type": "radio",
+          "required": true
+        },
+        "options": [
+          {
+            "html": "A city in Nebraska",
+            "value": "A city in Nebraska",
+            "id": "nebraska"
+          },
+          {
+            "html": "A web application for web developers",
+            "value": "A web application for web developers"
+          },
+          {
+            "html": "A plug in for fast code short cuts",
+            "value": "A plug in for fast code short cuts"
+          },
+          {
+            "html": "The heraldic ant",
+            "value": "The heraldic ant"
+          }
+        ]
+      }
+    },
+    {
       "question": "What does HTML stand for?",
       "answer": "Hyper Text Markup Language",
       "tag": {
         "tagName": "input",
         "attributes": {
-            "name" : "what-is-html",
-            "type": "text",
-            "required": true
+          "id": "what-is-html",
+          "name": "what-is-html",
+          "type": "text",
+          "required": true
         }
       }
     },
@@ -19,9 +87,9 @@
       "tag": {
         "tagName": "input",
         "attributes": {
-            "name" : "what-is-css",
-            "type": "text",
-            "required": true
+          "name": "what-is-css",
+          "type": "text",
+          "required": true
         }
       }
     },
@@ -31,15 +99,16 @@
       "tag": {
         "tagName": "input",
         "attributes": {
-            "name" : "what-is-emmet",
-            "type": "radio",
-            "required": true
+          "id": "what-is-emmet",
+          "name": "what-is-emmet",
+          "type": "radio",
+          "required": true
         },
         "options": [
           {
             "html": "A city in Nebraska",
             "value": "A city in Nebraska",
-            "id" : "nebraska"
+            "id": "nebraska"
           },
           {
             "html": "A web application for web developers",
@@ -62,9 +131,9 @@
       "tag": {
         "tagName": "input",
         "attributes": {
-            "name" : "what-the-id-selector",
-            "type": "text",
-            "required": true
+          "name": "what-the-id-selector",
+          "type": "text",
+          "required": true
         }
       }
     },
@@ -74,9 +143,10 @@
       "tag": {
         "tagName": "input",
         "attributes": {
-            "name" : "what-the-class-selector",
-            "type": "text",
-            "required": true
+          "id": "what-the-class-selector",
+          "name": "what-the-class-selector",
+          "type": "text",
+          "required": true
         }
       }
     },
@@ -89,28 +159,29 @@
           {
             "html": "input>type.text",
             "value": "input>type.text",
-            "id" : "dot"
+            "id": "dot"
           },
           {
             "html": "input#type>text</label>",
             "value": "input#type>text",
-            "id" : "pound"
+            "id": "pound"
           },
           {
             "html": "input{type=text}",
             "value": "input{type=text}",
-            "id" : "curly-brackets"
+            "id": "curly-brackets"
           },
           {
             "html": "input[type=text]",
             "value": "input[type=text]",
-            "id" : "array-brackets"
+            "id": "array-brackets"
           }
         ],
         "attributes": {
-            "name" : "what-the-attribute-selector",
-            "type": "radio",
-            "required": true
+          "id": "what-the-attribute-selector",
+          "name": "what-the-attribute-selector",
+          "type": "radio",
+          "required": true
         }
       }
     }

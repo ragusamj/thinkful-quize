@@ -11551,17 +11551,23 @@ var isDebug = true;
 
         debug('LOG: inputTagMaker( ) ========');
         
-        // VALIDATE FUNCTION INPUT ___________________________________
         
+        
+        // VALIDATE FUNCTION INPUT ___________________________________
         if(typeof tagName === 'undefined') {
             debug('ERROR: tagName not passed' +tagName + 'returned false' );
             return false;
         }
         
-        if (typeof(attributes)==='undefined') attributes = {};
+        if (typeof(attributes)==='undefined') {
+            attributes = {};
+        }
         
-        if (typeof(options)==='undefined') options = {};
-
+        if (typeof(options)==='undefined') {
+            options = {};
+        }
+        
+        
         
         // SET PROPERTIES (PRIVATE) __________________________________
         var InputTag = {};  
@@ -11570,10 +11576,11 @@ var isDebug = true;
         InputTag.tagName = tagName;
         InputTag.attributes = attributes;
         InputTag.options = options;
+                
                         
         
         // SET METHODS (PRIVATE) _____________________________________
-                        
+
         // getSelect() : PRIVATE -------------------------------------
         //-- PARAMETERS:    
         //----- attributes (object) : sets the select html attributes
@@ -11616,18 +11623,17 @@ var isDebug = true;
         //----- JQUERY Object / JQUERY html input elements  
         getInput = function(attributes, options) {
             
-            
-            if (typeof(options)==='undefined') options = [];
+            if (typeof(options)==='undefined') {
+                options = [];
+            }
 
             if(options.hasOwnProperty('length') === false) {
                 options.length = 0;                
             }
             
-            
             debug('LOG: getInput( ) : Private ----');
             debug(attributes);
             debug(options);
-            debug(options.length);
 
             var parentTag     = $('<div/>', { "class" : "input-list" });
             
@@ -11636,9 +11642,7 @@ var isDebug = true;
                 debug( 'LOG: MULTIPLE INPUT OPTIONS' );
                 
                 $.each( options, function(optionIndex, optionAttributes ) {
-                    
-                    debug( 'LOG: ADDING INPUT OPTION: ' + optionIndex );
-                                        
+                                                            
                     var labelTag      = $('<label/>'),
                         inputTag      = $('<input/>', attributes);
                     
@@ -11669,14 +11673,11 @@ var isDebug = true;
                     //- loop attributes in options data object
                     $.each( optionAttributes, function(attributeName, attributeValue ) {
                         if(attributeName !== 'text' || attributeName !== 'html')  {
-                            console.log( 'LOG: ADDING OPTION ATTRIBUTES '+ attributeName + ': ' + attributeValue );
                             inputTag.attr(attributeName, attributeValue);
                         }
                     });
                     
                     inputTag.addClass('answer');
-                    console.log( 'LOG: BUILDING INPUT DOM' );
-                    
                     parentTag.append( $('<div/>', { "class" : "input-list-item" }).append(inputTag).append(labelTag) );
                     
                 });
@@ -11697,9 +11698,7 @@ var isDebug = true;
         //-- RETURNS: 
         //----- JQUERY Object / JQUERY html textarea elements  
         getTextarea = function(attributes) {
-            
-            debug('LOG: getTextarea( ) : Private ----');
-            
+                        
              //- return single textarea tag 
             return  $('<textarea/>', attributes).addClass("form-control");
             
@@ -11730,7 +11729,6 @@ var isDebug = true;
             return true;
         };
         
-    
         
         // InputTag.get() : PUBLIC -----------------------------------
         //-- PARAMETERS: name...   
@@ -11748,12 +11746,14 @@ var isDebug = true;
     
         InputTag.get = function(name) {       
             
-            debug( 'LOG: InputTag.get( ) : Public ----' );
+            debug( 'LOG: InputTag.get( ' + name + ' ) : Public ----' );
             
-            if (typeof(name)==='undefined') name = '';
+            if ( typeof(name)==='undefined' ) {
+                name = '';
+            }
             
             //- get tagname
-            if( name.toLowerCase() === 'tagname' ) {
+            if ( name.toLowerCase() === 'tagname' ) {
                 debug( 'LOG: getting tagName: '+ InputTag.tagName );
                 return InputTag.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"");
             }
@@ -11883,11 +11883,6 @@ var isDebug = true;
         
         // SET PROPERTIES (PUBLIC) ___________________________________
         Question.input = "";
-        
-        debug("*******");
-        debug(attributes);
-        debug(answer);
-        debug("*******");        
                            
         // SET METHODS (PUBLIC) ______________________________________
                    
@@ -11899,22 +11894,32 @@ var isDebug = true;
         //----- true or false
         
         Question.validate = function(answerInput) {
-            
+           
             debug('LOG: Question.validate() : ' + answerInput + '----');
-            Question.input = answerInput;
             
-            debug(answer + ' = ' + answerInput);
+            Question.input = answerInput;
+            attempts = attempts + 1;
+            
+            $('#attempts').text(attempts);
+            
+            if(attempts > 1) {
+                $('#attempts').addClass("text-danger");
+            } 
+            
+            debug(answer + ' = ' + answerInput);            
                         
             if( tag.hasOwnProperty('tagName') ) {
                 if( tag.tagName.toLowerCase() === "textarea" ) {
                     if(typeof answer === "object") {
                         if(answer instanceof Array) {
-                            for (var i=0, l=answer.length; i<l; i++) {
+                            for (var i=0, l=answer.length; i<l; i++) {                                
                                 if(answerInput.toLowerCase().indexOf(answer[i].toLowerCase()) === -1) {
                                     question.valid = false;
                                     return false;
                                 }
                             }
+                            question.valid = true;
+                            return true;
                         } 
                     }
                 }
@@ -11937,8 +11942,6 @@ var isDebug = true;
                 
         Question.get = function(name) {  
             
-            debug('LOG: Question.get( ) ----');
-
             if(name === 'tagName') {
                 if( tag.hasOwnProperty('tagName') ) {
                     return tag.tagName;
@@ -11954,6 +11957,10 @@ var isDebug = true;
                 }
                 return '';
             }
+            
+            if(name === 'attempts') {
+                return attempts;
+            }
                                                
             var legend = $("<legend>"),
                 questionLabel = $("<label>", {
@@ -11962,10 +11969,8 @@ var isDebug = true;
                 });
             
             if( tag.hasOwnProperty('attributes') ) {
-                debug('LOG: has attributes');
                 
                 if( tag.attributes.hasOwnProperty('id') ) {
-                    debug('LOG: has attributes');
                     questionLabel.attr('for',  tag.attributes.id );
                 }
                 
@@ -11977,7 +11982,6 @@ var isDebug = true;
             }
             
             legend.append( questionLabel );
-            
             return $("<fieldset>", { "class" : "form-group" }).append( legend ).append( tag.get() );
                     
         };
@@ -12093,11 +12097,9 @@ var isDebug = true;
                                 
             $(document).ready(function(){ 
                      
-                debug('LOG: domready() Event');
                 index = 0;
                 
                 $("#questions").html( questions[index].get() );
-                
                 $("#btn-submit").html('Submit Answer <span class="glyphicon glyphicon-chevron-right"></span>');
                 
                 $("#btn-submit").click(function() {
@@ -12107,10 +12109,7 @@ var isDebug = true;
                         tagName = questions[index].get("tagName"),
                         tagType = questions[index].get("tagType");
                     
-                    debug('LOG: NEXT HAS BEEN CLICKED');
-                    debug('ANSWER: '+ $('.answer').val() );
-                    debug( questions[index].get("tagName") );
-                    
+                                        
                     if(tagName === "select") {
                         selectorString = '#questions select';
                         errorSelectorString = 'fieldset.form-group > select';
@@ -12131,6 +12130,7 @@ var isDebug = true;
                         }       
                     }
                                         
+                                        
                     if(questions[index].validate( $(selectorString).val() ) === true) {
                         
                         index = index + 1;
@@ -12144,6 +12144,7 @@ var isDebug = true;
                                 $('.bg-success').remove();
                                 $("fieldset.form-group").removeClass("success");
                                 $("#questions").html(questions[index].get());
+                                $('#attempts').text(0);
                                 $(this).fadeIn();
                                 return;
                             }); 
@@ -12155,15 +12156,18 @@ var isDebug = true;
                         return true;
                     }       
                     
-                     
-                    
                     $("fieldset.form-group").addClass("danger");  
-                    
                     $(errorSelectorString).after('<div class="bg-danger"><p class="text-danger">Please Try Agian</p></div>');
                     
                     $('.bg-danger').delay(800).fadeOut(800, function() {
                         $(this).remove();
                         $("fieldset.form-group").removeClass("danger");
+                        
+                        /*
+                        if(attempt > 3) {
+                            // change up and set to wrong
+                        }
+                        */
                     });
                            
                     return false;       
