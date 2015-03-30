@@ -12151,7 +12151,7 @@ var isDebug = true;
                             
                             $(errorSelectorString).after('<div class="bg-success"><p class="text-success">CORRECT! Good Job!</p></div>');
 
-                            $("#container").delay(800).fadeOut(800,  function() {
+                            $("#questions").delay(800).fadeOut(800,  function() {
                                 $('.bg-success').remove();
                                 $("fieldset.form-group").removeClass("success");
                                 $("#questions").html(questions[index].get());
@@ -12170,18 +12170,18 @@ var isDebug = true;
                     
                     if(questions[index].get('attempts') > 3) {
                         index = index + 1;
-                        $("fieldset.form-group").addClass("danger");  
-                        $(errorSelectorString).after('<div class="bg-danger"><p class="text-danger">Sorry you have exceeded 3 trys</p></div>');
+                        $("fieldset.form-group").removeClass("danger"); 
                         $("#incorrect").text( ( parseInt($("#incorrect").text()) + 1 ) );
-                        
-                        $("#container").delay(800).fadeOut(800,  function() {
-                            $('.bg-success').remove();
+                        $(errorSelectorString).after('<div class="bg-danger"><p class="text-danger">Sorry you have exceeded 3 trys</p></div>');
+                        $("#questions").delay(400).fadeOut(800,  function() {
+                            $('.bg-danger').remove();
                             $("fieldset.form-group").removeClass("success");
                             $("#questions").html(questions[index].get());
                             $('#attempts').text(0);
                             $(this).fadeIn();
                             return;
                         }); 
+                        return false;
                        
                     }
                     

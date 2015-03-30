@@ -2,41 +2,6 @@
   "form": "Front End Quize",
   "questions": [
     {
-      "question": "What is The DOM?",
-      "answer": [
-        "Document Object Model",
-        "programming interface",
-        "HTML",
-        "XML",
-        "structure"
-      ],
-      "tag": {
-        "tagName": "textarea",
-        "attributes": {
-          "id": "who-is-george",
-          "name": "who-is-george",
-          "required": true
-        },
-        "options": [
-          {
-            "value": "The Document Object Model"
-          },
-          {
-            "value": "application programming interface"
-          },
-          {
-            "value": "HTML"
-          },
-          {
-            "value": "XML"
-          },
-          {
-            "value": "logical structure"
-          }
-        ]
-      }
-    },
-    {
       "question": "What is Emmet?",
       "answer": "A plug in for fast code short cuts",
       "tag": {
@@ -183,6 +148,41 @@
           "type": "radio",
           "required": true
         }
+      }
+    },
+    {
+      "question": "What is The DOM?",
+      "answer": [
+        "Document Object Model",
+        "programming interface",
+        "HTML",
+        "XML",
+        "structure"
+      ],
+      "tag": {
+        "tagName": "textarea",
+        "attributes": {
+          "id": "who-is-george",
+          "name": "who-is-george",
+          "required": true
+        },
+        "options": [
+          {
+            "value": "The Document Object Model"
+          },
+          {
+            "value": "application programming interface"
+          },
+          {
+            "value": "HTML"
+          },
+          {
+            "value": "XML"
+          },
+          {
+            "value": "logical structure"
+          }
+        ]
       }
     }
   ]
