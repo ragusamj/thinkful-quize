@@ -574,17 +574,20 @@ var isDebug = true;
                                 
             $(document).ready(function(){ 
                      
-                index = 0;
-                
+                var index = 0;
+                                
+                //-- Load Question In DOM
                 $("#questions").html( questions[index].get() );
+                
                 $("#btn-submit").html('Submit Answer <span class="glyphicon glyphicon-chevron-right"></span>');
                 
-                $("#btn-submit").click(function() {
+                $("#btn-submit").click( function() {
                 
                     var selectorString = '.answer',
                         errorSelectorString = 'fieldset.form-group > legend',
                         tagName = questions[index].get("tagName"),
-                        tagType = questions[index].get("tagType");
+                        tagType = questions[index].get("tagType"),
+                        attempts = questions[index].get("attempts");
                     
                                         
                     if(tagName === "select") {
@@ -609,12 +612,20 @@ var isDebug = true;
                                         
                                         
                     if(questions[index].validate( $(selectorString).val() ) === true) {
-                        
+                                                
                         index = index + 1;
-
+                        
                         if(index <  questions.length) {
                             
                             $("fieldset.form-group").addClass("success");  
+                            
+                            
+                            $("#correct").text( ( parseInt($("#correct").text()) + 1 ) );
+                            
+                            $("#precent").text( ( ( parseInt($("#correct").text()) / questions.length )*100 ) + '%');
+                            
+                            //( parseInt( $("#correct").text() ) ) / questions.length)*100)
+                            
                             $(errorSelectorString).after('<div class="bg-success"><p class="text-success">CORRECT! Good Job!</p></div>');
 
                             $("#container").delay(800).fadeOut(800,  function() {
@@ -633,27 +644,41 @@ var isDebug = true;
                         return true;
                     }       
                     
+                    
+                    if(questions[index].get('attempts') > 3) {
+                        index = index + 1;
+                        $("fieldset.form-group").addClass("danger");  
+                        $(errorSelectorString).after('<div class="bg-danger"><p class="text-danger">Sorry you have exceeded 3 trys</p></div>');
+                        $("#incorrect").text( ( parseInt($("#incorrect").text()) + 1 ) );
+                        
+                        $("#container").delay(800).fadeOut(800,  function() {
+                            $('.bg-success').remove();
+                            $("fieldset.form-group").removeClass("success");
+                            $("#questions").html(questions[index].get());
+                            $('#attempts').text(0);
+                            $(this).fadeIn();
+                            return;
+                        }); 
+                       
+                    }
+                    
+                    
                     $("fieldset.form-group").addClass("danger");  
                     $(errorSelectorString).after('<div class="bg-danger"><p class="text-danger">Please Try Agian</p></div>');
-                    
+                   
                     $('.bg-danger').delay(800).fadeOut(800, function() {
                         $(this).remove();
                         $("fieldset.form-group").removeClass("danger");
-                        
-                        /*
-                        if(attempt > 3) {
-                            // change up and set to perm wrong 
-                        }
-                        */
                     });
-                           
-                    return false;       
+                    
+                    return false; 
                     
                 });
                 
             });
             
         });
+        
         
         
         // SET METHODS (PUBLIC) ______________________________________
