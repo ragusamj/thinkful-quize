@@ -7,6 +7,9 @@
 	border-radius: @radius;
 }
 
+
+
+
 .container {
   width: 100px;
   height: 100px;
@@ -19,10 +22,44 @@
   margin: auto;
 }
 
+
+#intro {
+    background: #333;
+    
+    #main-wrapper {
+        height: 100%;
+        width:auto;
+        color: #fff; 
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        
+        #main-inner {
+            top: 50%;
+            height: 50%;
+            position: relative;
+            width:auto;
+            -webkit-transform: translateY(-50%);
+            -moz-transform:    translateY(-50%);
+            -ms-transform:     translateY(-50%);
+            -o-transform:      translateY(-50%);
+            transform:         translateY(-50%);
+           
+            h1 {
+                color: #fff;
+                font-size: 10rem;
+                font-weight: 100;
+                padding-bottom: 30px;
+            }  
+        }        
+    } 
+} 
+
+
 #questions  {
     margin-top:2rem;
 }
-
 
 fieldset.form-group {
     
@@ -184,5 +221,8 @@ fieldset.danger {
 	font-weight: 300;
     line-height: 1.4;
 }
+
+
+
 
 
