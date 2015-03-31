@@ -11992,6 +11992,8 @@ var isDebug = true;
             loaded = false,
             questions = [],
             completed = false,
+            messages = {      
+            },
             results = {
                 correct: 0,
                 incorrect: 0,
@@ -12075,20 +12077,18 @@ var isDebug = true;
                                                 
                         index = index + 1;
                         
+                        $("fieldset.form-group").addClass("success"); 
+                             
+                        $("#correct-text").text( ( parseInt($("#correct-text").text()) + 1 ) );
+                        $("#precent-text").text( ( ( parseInt($("#correct-text").text()) / questions.length )*100 ) + '%');
+                        $(errorSelectorString).after('<div class="bg-success"><p class="text-success">CORRECT! Good Job!</p></div>');
+                        
                         if(index <  questions.length) {
-                            
-                            $("fieldset.form-group").addClass("success"); 
-                             
-                            $("#correct-text").text( ( parseInt($("#correct-text").text()) + 1 ) );
-                            $("#precent-text").text( ( ( parseInt($("#correct-text").text()) / questions.length )*100 ) + '%');
-                                                        
-                            $(errorSelectorString).after('<div class="bg-success"><p class="text-success">CORRECT! Good Job!</p></div>');
-                            
                             fadeQuestion("success", index, 400, 800);
-                             
-                        }  else {
+                        } else {
                             alert("done!");
-                        }                    
+                        }    
+                                        
                                                 
                         return true;
                     }       
@@ -12144,8 +12144,9 @@ var isDebug = true;
         };
         
         
-        setScore = function(type, value) {
+        completed = function() {
             
+            $("#questions").html("<h1>Congradulations!</h1>")
             
         };
         
