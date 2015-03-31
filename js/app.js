@@ -11544,15 +11544,9 @@ var isDebug = true;
     //-- PUBLIC METHODS:
     //----- set() : set tagName, attributes, and options
     //----- get() : get tagName, options attributes, or full object
-    
         
     var inputTagMaker = function (tagName, attributes, options) {
-        
-
-        debug('LOG: inputTagMaker( ) ========');
-        
-        
-        
+                
         // VALIDATE FUNCTION INPUT ___________________________________
         if(typeof tagName === 'undefined') {
             debug('ERROR: tagName not passed' +tagName + 'returned false' );
@@ -11568,7 +11562,6 @@ var isDebug = true;
         }
         
         
-        
         // SET PROPERTIES (PRIVATE) __________________________________
         var InputTag = {};  
          
@@ -11577,7 +11570,6 @@ var isDebug = true;
         InputTag.attributes = attributes;
         InputTag.options = options;
                 
-                        
         
         // SET METHODS (PRIVATE) _____________________________________
 
@@ -11589,9 +11581,7 @@ var isDebug = true;
         //-- RETURNS: 
         //----- JQUERY Object / JQUERY html select element    
         getSelect = function(attributes, options) {
-            
-            debug('LOG: getSelect( ) : Private ----');
-            
+                        
             var tagAttributes,
                 optionAttributes;
 
@@ -11609,7 +11599,6 @@ var isDebug = true;
                 });
             } 
             
-            debug(parentTag);
             return parentTag;
         };
         
@@ -11630,17 +11619,11 @@ var isDebug = true;
             if(options.hasOwnProperty('length') === false) {
                 options.length = 0;                
             }
-            
-            debug('LOG: getInput( ) : Private ----');
-            debug(attributes);
-            debug(options);
 
             var parentTag     = $('<div/>', { "class" : "input-list" });
             
             if(options.length > 0) {
-                
-                debug( 'LOG: MULTIPLE INPUT OPTIONS' );
-                
+                                
                 $.each( options, function(optionIndex, optionAttributes ) {
                                                             
                     var labelTag      = $('<label/>'),
@@ -11698,7 +11681,6 @@ var isDebug = true;
         //-- RETURNS: 
         //----- JQUERY Object / JQUERY html textarea elements  
         getTextarea = function(attributes) {
-                        
              //- return single textarea tag 
             return  $('<textarea/>', attributes).addClass("form-control");
             
@@ -11745,51 +11727,42 @@ var isDebug = true;
         //----- if all html elements : as string
     
         InputTag.get = function(name) {       
-            
-            debug( 'LOG: InputTag.get( ' + name + ' ) : Public ----' );
-            
-            if ( typeof(name)==='undefined' ) {
+                        
+            if( typeof(name)==='undefined' ) {
                 name = '';
             }
             
             //- get tagname
-            if ( name.toLowerCase() === 'tagname' ) {
-                debug( 'LOG: getting tagName: '+ InputTag.tagName );
+            if( name.toLowerCase() === 'tagname' ) {
                 return InputTag.tagName.toLowerCase().replace(/[^a-zA-Z]+/g,"");
             }
             
             //- get option
-            if ( isNaN(name) === true ) {
+            if( isNaN(name) === true ) {
                 if( InputTag.options.length > name ) {
-                    debug( 'LOG: getting option['+name+'] : '+ InputTag.options[name] );
                     return InputTag.options[name];
                } else {
-                    debug( 'WARNING: option['+name+'] greater then options length : ' + options.length );
                     return InputTag.options[name];
                }
             }
        
             //- get attribute
             if( InputTag.attributes.hasOwnProperty(name) === true ){
-                debug( 'LOG: checking and getting attribute: ' + InputTag.attributes[name] );
                 return InputTag.attributes[name];
             }
             
             //- get select
             if(InputTag.tagName.toLowerCase() === 'select') {
-                debug( 'LOG: get select ' + InputTag.tagName.toLowerCase());
                 return getSelect(InputTag.attributes, InputTag.options);                
             }
             
             //- get input
             if(InputTag.tagName.toLowerCase() === 'input') {
-                debug( 'LOG: get input '+ InputTag.tagName.toLowerCase());
                 return getInput(InputTag.attributes, InputTag.options);                
             }
             
             //- get textarea
             if(InputTag.tagName.toLowerCase() === 'textarea') {
-                debug( 'LOG: get textarea '+ InputTag.tagName.toLowerCase());
                 return getTextarea(InputTag.attributes, InputTag.options);                
             }
         };
@@ -11824,46 +11797,37 @@ var isDebug = true;
     
     var questionMaker = function (attributes) {
         
-        debug('LOG: questionMaker( ) ========');
-        
+                
         // VALIDATE FUNCTION INPUT ___________________________________
-        
-        debug(attributes);
-        
+                
         //- attributes
         if(typeof attributes === 'undefined') {
-            debug( 'ERROR: attributes not passed' + attributes + 'returned false' );
             return false;
         }
         
         //- attributes.question
         if(attributes.hasOwnProperty('question') === false) {
-            debug( 'ERROR: attributes.question not passed returned false' );
             return false;
         }
         
         //- attributes.answer
         if(attributes.hasOwnProperty('answer') === false) {
-            debug( 'ERROR: attributes.answer not passed returned false' );
             return false;
         }
         
         //- attributes.tag
         if(attributes.hasOwnProperty('tag') === false) {
-            debug( 'ERROR: attributes.tag not passed returned false' );
             return false;
         }
         
         //- attributes.tag.tagName
         if(attributes.tag.hasOwnProperty('tagName') === false) {
-            debug( 'ERROR: attributes.tag.tagName not passed returned false' );
             return false;
         }
         
         
         //- attributes.tag.tagName
         if(attributes.tag.hasOwnProperty('attributes') === false) {
-            debug( 'ERROR: attributes.tag.attributes not passed returned false' );
             return false;
         }
         
@@ -11894,20 +11858,16 @@ var isDebug = true;
         //----- true or false
         
         Question.validate = function(answerInput) {
-           
-            debug('LOG: Question.validate() : ' + answerInput + '----');
-            
+                       
             Question.input = answerInput;
             attempts = attempts + 1;
             
-            $('#attempts').text(attempts);
+            $('#attempts-text').text(attempts);
             
             if(attempts > 1) {
-                $('#attempts').addClass("text-danger");
+                $('#attempts-text').addClass("text-danger");
             } 
-            
-            debug(answer + ' = ' + answerInput);            
-                        
+                                    
             if( tag.hasOwnProperty('tagName') ) {
                 if( tag.tagName.toLowerCase() === "textarea" ) {
                     if(typeof answer === "object") {
@@ -12018,13 +11978,12 @@ var isDebug = true;
     //----- setIncorrect(value) : default is 1
     
     var QuizMaker = function (options) {
-        
-        debug('LOG: surveyMaker() =====');
-        
+                
         // VALIDATE FUNCTION INPUT ___________________________________
-
-        if (typeof(options)==='undefined') options = {};
-        debug(options);
+        if (typeof(options)==='undefined') {
+            options = {};
+        }
+        
 
         // SET PRIVATE PROPERTIES (PRIVATE) __________________________
         var Quiz = {},
@@ -12046,61 +12005,39 @@ var isDebug = true;
         $.ajax({
             url:src, 
             dataType: "json",  
-            beforeSend: function( xhr ) {
-                // $.AJAX.BEFORE : PRIVATE 
-                debug('LOG: GETTING JSON DATA QUESTIONS');
-                debug(this); 
-            },
+            beforeSend: function( xhr ) { }
         }).done(function( jsonData ) {
             
             // $.AJAX.DONE : PRIVATE 
-            debug('LOG: RETURN JSON DATA QUESTIONS');
-            debug(jsonData);
-            
             if(jsonData.hasOwnProperty('questions') === false){
-                debug('ERROR: ERROR DATA RETURN WITH NO "questions"');
                 return false;
             }     
             
-            debug('LOG: LOOPING QUESTIONS');
             $.each( jsonData.questions, function( key, attributes ) {
-                
-                debug('LOG: LOOPING [' + key + '] QUESTION');
-                
+                                
                 if(attributes.hasOwnProperty('question') === false) {
-                    debug('ERROR: DATA ' + key + ' RETURN WITH NO "questions"');
                     return false;
                 }
                 
                 if(attributes.hasOwnProperty('answer') === false) {
-                    debug('ERROR: DATA ' + key + ' RETURN WITH NO "answer"');
                     return false;
                 }
                                 
                 if(attributes.hasOwnProperty('tag') === false) {
-                    debug('ERROR: DATA ' + key + ' RETURN WITH NO "tag"');
                     return false;
                 }
                 
-                debug('LOG: CREATE AND PUSH QUESTION OBJECT to "questions" ARRAY ');
-                
                 questions.push( questionMaker(attributes) );
-                debug(questions); 
                               
             });  
             
-            debug('LOG: DONE LOOP');
-            debug(questions);                            
-            
-            debug('LOG: ASSIGN DATA TO PRIVATE "data" PROPERTY');
             loaded = true; 
                                 
             $(document).ready(function(){ 
                      
                 var index = 0;
                                 
-                //-- Load Question In DOM
-                $("#questions").html( questions[index].get() );
+                $("#questions").html(questions[index].get());
                 
                 $("#btn-submit").html('Submit Answer <span class="glyphicon glyphicon-chevron-right"></span>');
                 
@@ -12108,8 +12045,8 @@ var isDebug = true;
                 
                     var selectorString = '.answer',
                         errorSelectorString = 'fieldset.form-group > legend',
-                        tagName = questions[index].get("tagName"),
-                        tagType = questions[index].get("tagType"),
+                        tagName  = questions[index].get("tagName"),
+                        tagType  = questions[index].get("tagType"),
                         attempts = questions[index].get("attempts");
                     
                                         
@@ -12140,25 +12077,14 @@ var isDebug = true;
                         
                         if(index <  questions.length) {
                             
-                            $("fieldset.form-group").addClass("success");  
-                            
-                            
-                            $("#correct").text( ( parseInt($("#correct").text()) + 1 ) );
-                            
-                            $("#precent").text( ( ( parseInt($("#correct").text()) / questions.length )*100 ) + '%');
-                            
-                            //( parseInt( $("#correct").text() ) ) / questions.length)*100)
-                            
+                            $("fieldset.form-group").addClass("success"); 
+                             
+                            $("#correct-text").text( ( parseInt($("#correct-text").text()) + 1 ) );
+                            $("#precent-text").text( ( ( parseInt($("#correct-text").text()) / questions.length )*100 ) + '%');
+                                                        
                             $(errorSelectorString).after('<div class="bg-success"><p class="text-success">CORRECT! Good Job!</p></div>');
-
-                            $("#questions").delay(800).fadeOut(800,  function() {
-                                $('.bg-success').remove();
-                                $("fieldset.form-group").removeClass("success");
-                                $("#questions").html(questions[index].get());
-                                $('#attempts').text(0);
-                                $(this).fadeIn();
-                                return;
-                            }); 
+                            
+                            fadeQuestion("success", index, 400, 800);
                              
                         }  else {
                             alert("done!");
@@ -12167,26 +12093,21 @@ var isDebug = true;
                         return true;
                     }       
                     
-                    
+                    $("fieldset.form-group").addClass("danger"); 
+                     
                     if(questions[index].get('attempts') > 3) {
+                        
                         index = index + 1;
-                        $("fieldset.form-group").removeClass("danger"); 
-                        $("#incorrect").text( ( parseInt($("#incorrect").text()) + 1 ) );
+                        
+                        $("#incorrect-text").text( ( parseInt($("#incorrect-text").text()) + 1 ) );
                         $(errorSelectorString).after('<div class="bg-danger"><p class="text-danger">Sorry you have exceeded 3 trys</p></div>');
-                        $("#questions").delay(400).fadeOut(800,  function() {
-                            $('.bg-danger').remove();
-                            $("fieldset.form-group").removeClass("success");
-                            $("#questions").html(questions[index].get());
-                            $('#attempts').text(0);
-                            $(this).fadeIn();
-                            return;
-                        }); 
+                        
+                        fadeQuestion("danger", index, 400, 800);
+                                                
                         return false;
-                       
                     }
                     
                     
-                    $("fieldset.form-group").addClass("danger");  
                     $(errorSelectorString).after('<div class="bg-danger"><p class="text-danger">Please Try Agian</p></div>');
                    
                     $('.bg-danger').delay(800).fadeOut(800, function() {
@@ -12203,92 +12124,48 @@ var isDebug = true;
         });
         
         
+        fadeQuestion = function(type, index, delay, fade) {
+            
+            $("#questions").delay(delay).fadeOut(fade,  function() {
+                
+                $(".bg-" + type ).remove();
+                $("fieldset.form-group").removeClass( type );
+                $("#questions").html( questions[index].get() );
+
+                $('#attempts-text').removeClass( "text-" + type )
+                $('#attempts-text').text(0);
+                                
+                $(this).fadeIn();
+                return;
+            }); 
+            
+            return
+            
+        };
+        
+        
+        setScore = function(type, value) {
+            
+            
+        };
+        
+        
+        
         
         // SET METHODS (PUBLIC) ______________________________________
                     
         // Quiz.isLoaded() : PUBLIC ---------------------------------
         //-- RETURNS: protected "loaded"
         Quiz.isLoaded = function() {
-            debug('LOG: isLoaded() : return ' + loaded + ' ----');
             return loaded;
         };  
         
         // Quiz.isCompleted() : PUBLIC ------------------------------
         //-- RETURNS: protected "completed" property
         Quiz.isCompleted = function() {
-            debug('LOG: isCompleted() : return ' + completed+ ' ----');
             return completed;
         };
         
-        // Quiz.getCurrent() : PUBLIC -------------------------------
-        //-- RETURNS: protected "current" property... question
-        Quiz.getCurrent = function() {
-            debug('LOG: getCurrent() : return ' + current+ ' ----');
-            return current;
-        };
-        
-        // Quiz.setCurrent() : PUBLIC -------------------------------
-        //-- PARAMETERS: value is the current question number to be set... default: 0
-        //-- RETURNS: true of false
-        Quiz.setCurrent = function(value) {
-            debug('LOG: setCurrent() : passed ' + value+ ' ----');
-            
-            if(typeof value === 'undefined') {
-                debug("ERROR: value not passed");
-            }
-            
-            
-            /*
-                Note: 
-                I Want to prtect set to ensure the UI get updated
-                
-                psuedo code
-                1) if value is int proceed
-                2) if value is in range of questions length proceed
-                3) change up the UI to new set current value?
-                4) once ui is succesfully changed set current?    
-            */
-            
-        };
-                
-                
-        //- Quiz.setCorrect() ---------------------------------------
-        //-- PARAMETERS: value = optional : default will be 1
-        Quiz.setCorrect = function(value) {
-            debug('LOG: setCorrect( ' + value + ' )'+ ' ----');
-            
-            // SET DEFAULT TO 1 IF "undefined"
-            if (typeof(value)==='undefined') value = 1;
-            
-            // IF RESULTS ADDS UP TO TOTAL QUESTIONS.. DECREMENT "incorrect"
-            if(( results.correct + results.incorrect ) === questions.length ) {
-                results.incorrect = results.incorrect - value;
-                debug('LOG: DECREMENT INCORRECT: ' + results.correct );
-            } 
-            
-            results.correct = results.correct + value;
-            debug('LOG: SET CORRECT: ' + results.correct );
-        };
-        
-        
-        //- Quiz.setIncorrect() -------------------------------------
-        //-- PARAMETERS: value = optional : default will be 1
-        Quiz.setIncorrect = function(value) {
-            debug('LOG: setIncorrect( ' + value + ' )'+ ' ----');
-            
-            // SET DEFAULT TO 1 IF "undefined"
-            if (typeof(value)==='undefined') value = 1;
-            
-            // IF RESULTS ADDS UP TO TOTAL QUESTIONS.. DECREMENT "correct"
-            if(( results.incorrect + results.incorrect ) === questions.length ) {
-                results.correct = results.correct - value;
-                debug('LOG: DECREMENT CORRECT: ' + results.correct );
-            } 
-            
-            results.incorrect = results.incorrect + value;
-            debug('LOG: SET INCORRECT: ' + results.incorrect );
-            
-        };
     
         return Quiz;
         
@@ -12297,4 +12174,59 @@ var isDebug = true;
     var quiz = QuizMaker();
     
 }());
+
+
+
+
+/*
+// Quiz.getCurrent() : PUBLIC -------------------------------
+//-- RETURNS: protected "current" property... question
+Quiz.getCurrent = function() {
+    return current;
+};        
+
+// Quiz.setCurrent() : PUBLIC -------------------------------
+//-- PARAMETERS: value is the current question number to be set... default: 0
+//-- RETURNS: true of false
+Quiz.setCurrent = function(value) {
+    
+    if(typeof value === 'undefined') {
+        console.log("ERROR: value not passed");
+    }
+                
+};
+
+        
+        
+//- Quiz.setCorrect() ---------------------------------------
+//-- PARAMETERS: value = optional : default will be 1
+Quiz.setCorrect = function(value) {
+    
+    // SET DEFAULT TO 1 IF "undefined"
+    if (typeof(value)==='undefined') value = 1;
+    
+    // IF RESULTS ADDS UP TO TOTAL QUESTIONS.. DECREMENT "incorrect"
+    if(( results.correct + results.incorrect ) === questions.length ) {
+        results.incorrect = results.incorrect - value;
+    } 
+    
+    results.correct = results.correct + value;
+};
+        
+
+//- Quiz.setIncorrect() -------------------------------------
+//-- PARAMETERS: value = optional : default will be 1
+Quiz.setIncorrect = function(value) {
+    
+    // SET DEFAULT TO 1 IF "undefined"
+    if (typeof(value)==='undefined') value = 1;
+    
+    // IF RESULTS ADDS UP TO TOTAL QUESTIONS.. DECREMENT "correct"
+    if(( results.incorrect + results.incorrect ) === questions.length ) {
+        results.correct = results.correct - value;
+    } 
+    
+    results.incorrect = results.incorrect + value;            
+};
+ */
 
