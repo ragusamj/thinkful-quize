@@ -2,38 +2,6 @@
   "form": "Front End Quize",
   "questions": [
     {
-      "question": "What is Emmet?",
-      "answer": "A plug in for fast code short cuts",
-      "tag": {
-        "tagName": "select",
-        "attributes": {
-          "id": "what-is-emmet",
-          "name": "what-is-emmet",
-          "type": "radio",
-          "required": true
-        },
-        "options": [
-          {
-            "html": "A city in Nebraska",
-            "value": "A city in Nebraska",
-            "id": "nebraska"
-          },
-          {
-            "html": "A web application for web developers",
-            "value": "A web application for web developers"
-          },
-          {
-            "html": "A plug in for fast code short cuts",
-            "value": "A plug in for fast code short cuts"
-          },
-          {
-            "html": "The heraldic ant",
-            "value": "The heraldic ant"
-          }
-        ]
-      }
-    },
-    {
       "question": "What does HTML stand for?",
       "answer": "Hyper Text Markup Language",
       "tag": {
