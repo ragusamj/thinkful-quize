@@ -563,10 +563,9 @@ var isDebug = true;
                         if(index <  questions.length) {
                             fadeQuestion("success", index, 400, 800);
                         } else {
-                            alert("done!");
+                            completed();
                         }    
                                         
-                                                
                         return true;
                     }       
                     
@@ -622,8 +621,27 @@ var isDebug = true;
         
         
         completed = function() {
+            $("#questions").remove();
+            $("#actions").remove();
             
-            $("#questions").html("<h1>Congradulations!</h1>")
+            if( parseInt($("#precent-text").text()) > 90) {
+                $("#container").prepend('<section class="col-xs-12"><h1>Congratulations: <span class="lead">You got an A!</span></h1></section>');
+                return;
+            }
+            
+            if( parseInt($("#precent-text").text()) > 80) {
+                $("#container").prepend('<section class="col-xs-12"><h1>Congratulations: <span class="lead">You got an B!</span></h1></section>');
+                return;
+            }
+            
+            if( parseInt($("#precent-text").text()) > 70) {
+                $("#container").prepend('<section class="col-xs-12"><h1>Congratulations: <span class="lead">You got an C!</span></h1></section>');
+                return;
+            }
+            
+            
+            $("#container").prepend('<section class="col-xs-12"><h1>Sorry: <span class="lead">You got under 70%, please try agian.</span></h1></section>');
+            return;
             
         };
         
