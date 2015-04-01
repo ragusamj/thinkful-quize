@@ -10,7 +10,7 @@ Version 0 -- Work in Progress
 4. RUN: ```npm install -g grunt-cli```
 5. RUN: ```npm install```
 6. RUN ```bower install bootstrap```
-7. Check to ensure "Grunt.js" is in the root folder
+7. Check to ensure "Gruntfile.js" is in the root folder
 8. RUN: ```grunt build```
 
 #####Once installed 
