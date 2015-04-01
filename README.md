@@ -5,10 +5,11 @@ Version 0 -- Work in Progress
 ###Install Front End Scripts
 
 1. Download Gir Repo
-2. Install NPM: http://www.johnpapa.net/how-to-use-npm-global-without-sudo-on-osx/
-3. RUN: ```npm install -g grunt-cli```
-4. RUN: ```npm install```
-5. RUN: ```grunt build```
+2. Check to ensure "package.json" is in the root folder
+3. Install NPM: http://www.johnpapa.net/how-to-use-npm-global-without-sudo-on-osx/
+4. RUN: ```npm install -g grunt-cli```
+5. RUN: ```npm install```
+6. RUN: ```grunt build```
 
 #####Once installed 
 1. You can run ```grunt build``` 
