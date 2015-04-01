@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thinkful Quize App</title>
+  <script src="/js/app.min.js"></script>
+  
+  <script>
+    $.ajax({
+        url: "https://blazing-torch-6437.firebaseio.com/questions.json",
+        context: document.body
+    }).done(function(data) {
+        console.log(data);
+    });
+  </script>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    
+     
+  </style>
+</head>
+<body id="intro">
+  <div id="container" class="container-fluid">
+    <section id="main-wrapper" class="col-xs-12">
+        <div id="main-inner">
+            <h1 class="text-center">&lt; quiz /&gt;</h1>
+            <div class="text-center"><a id="btn-next" class="btn btn-success" href="quiz.html" >Take the Quiz! <span class="glyphicon glyphicon-chevron-right"></span></a></div>
+        </div>
+    </section>
+    <section id="actions" class="actions col-xs-12">
+      <div class="text-center">	
+      </div>
+    </section>
+  </div>
+</body>
+</html>

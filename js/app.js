@@ -11987,7 +11987,8 @@ var isDebug = true;
 
         // SET PRIVATE PROPERTIES (PRIVATE) __________________________
         var Quiz = {},
-            src = '/json/data.json',
+            //src = '/json/data.json',
+            src = 'https://blazing-torch-6437.firebaseio.com/questions.json',
             current = 0,
             loaded = false,
             questions = [],
@@ -12009,13 +12010,12 @@ var isDebug = true;
             dataType: "json",  
             beforeSend: function( xhr ) { }
         }).done(function( jsonData ) {
-            
-            // $.AJAX.DONE : PRIVATE 
-            if(jsonData.hasOwnProperty('questions') === false){
+                        
+            if( Object.prototype.toString.call( jsonData ) !== '[object Array]' ) {
                 return false;
-            }     
+            }   
             
-            $.each( jsonData.questions, function( key, attributes ) {
+            $.each( jsonData, function( key, attributes ) {
                                 
                 if(attributes.hasOwnProperty('question') === false) {
                     return false;
