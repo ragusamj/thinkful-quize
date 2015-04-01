@@ -9,7 +9,8 @@ Version 0 -- Work in Progress
 3. Install NPM: http://www.johnpapa.net/how-to-use-npm-global-without-sudo-on-osx/
 4. RUN: ```npm install -g grunt-cli```
 5. RUN: ```npm install```
-6. RUN: ```grunt build```
+6. RUN ```bower install bootstrap```
+7. RUN: ```grunt build```
 
 #####Once installed 
 1. You can run ```grunt build``` 
