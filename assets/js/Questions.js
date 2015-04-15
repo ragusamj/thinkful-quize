@@ -557,7 +557,7 @@ var isDebug = true;
                         $("fieldset.form-group").addClass("success"); 
                              
                         $("#correct-text").text( ( parseInt($("#correct-text").text()) + 1 ) );
-                        $("#precent-text").text( ( ( parseInt($("#correct-text").text()) / questions.length )*100 ) + '%');
+                        $("#precent-text").text( (Math.round(( parseInt($("#correct-text").text()) / questions.length )*100 )) + '%');
                         $(errorSelectorString).after('<div class="bg-success"><p class="text-success">CORRECT! Good Job!</p></div>');
                         
                         if(index <  questions.length) {
@@ -571,7 +571,7 @@ var isDebug = true;
                     
                     $("fieldset.form-group").addClass("danger"); 
                      
-                    if(questions[index].get('attempts') > 3) {
+                    if(questions[index].get('attempts') > 2) {
                         
                         index = index + 1;
                         
