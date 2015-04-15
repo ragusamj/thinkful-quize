@@ -7,11 +7,9 @@ Version 0 -- Work in Progress
 1. Download Gir Repo
 2. Check to ensure "package.json" is in the root folder
 3. Install NPM: http://www.johnpapa.net/how-to-use-npm-global-without-sudo-on-osx/
-4. RUN: ```npm install -g grunt-cli```
-5. RUN: ```npm install```
-6. RUN ```bower install bootstrap```
-7. Check to ensure "Gruntfile.js" is in the root folder
-8. RUN: ```grunt build```
+4. RUN: ```bash npm install && bower install````
+5. Check to ensure "Gruntfile.js" and "bower_components" is in the root folder
+8. RUN: ```bash grunt build``` or  ```bash grunt watch```
 
 #####Once installed 
 1. You can run ```grunt build``` 
