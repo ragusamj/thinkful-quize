@@ -19,3 +19,6 @@ Version 0 -- Work in Progress
 1. Apache
 2. Local Development: MAMP 3.0
 3. PHP: 5.6.2
+4. 
+
+https://sgehringDesign.github.io/thinkful-quize/

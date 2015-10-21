@@ -1,5 +1,5 @@
 {
-  "name": "thinkful-deployment-ui",
+  "name": "thinkful-quize-app",
   "dependencies": {
     "bootstrap": "~3.3.2"
   }
