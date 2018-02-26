@@ -464,8 +464,8 @@ var isDebug = true;
 
         // SET PRIVATE PROPERTIES (PRIVATE) __________________________
         var Quiz = {},
-            //src = '/json/data.json',
-            src = 'https://quizeapp-96831.firebaseio.com/questions.json',
+            src = '/json/data.json',
+            //src = 'https://quizeapp-96831.firebaseio.com/questions.json',
             current = 0,
             loaded = false,
             questions = [],
@@ -641,7 +641,7 @@ var isDebug = true;
             
             
             $("#container").prepend('<section class="col-xs-12"><h1>Sorry: <span class="lead">You got under 70%, please try agian.</span></h1></section>');
-            return;
+            return;  
             
         };
         
@@ -670,59 +670,3 @@ var isDebug = true;
     var quiz = QuizMaker();
     
 }());
-
-
-
-
-/*
-// Quiz.getCurrent() : PUBLIC -------------------------------
-//-- RETURNS: protected "current" property... question
-Quiz.getCurrent = function() {
-    return current;
-};        
-
-// Quiz.setCurrent() : PUBLIC -------------------------------
-//-- PARAMETERS: value is the current question number to be set... default: 0
-//-- RETURNS: true of false
-Quiz.setCurrent = function(value) {
-    
-    if(typeof value === 'undefined') {
-        console.log("ERROR: value not passed");
-    }
-                
-};
-
-        
-        
-//- Quiz.setCorrect() ---------------------------------------
-//-- PARAMETERS: value = optional : default will be 1
-Quiz.setCorrect = function(value) {
-    
-    // SET DEFAULT TO 1 IF "undefined"
-    if (typeof(value)==='undefined') value = 1;
-    
-    // IF RESULTS ADDS UP TO TOTAL QUESTIONS.. DECREMENT "incorrect"
-    if(( results.correct + results.incorrect ) === questions.length ) {
-        results.incorrect = results.incorrect - value;
-    } 
-    
-    results.correct = results.correct + value;
-};
-        
-
-//- Quiz.setIncorrect() -------------------------------------
-//-- PARAMETERS: value = optional : default will be 1
-Quiz.setIncorrect = function(value) {
-    
-    // SET DEFAULT TO 1 IF "undefined"
-    if (typeof(value)==='undefined') value = 1;
-    
-    // IF RESULTS ADDS UP TO TOTAL QUESTIONS.. DECREMENT "correct"
-    if(( results.incorrect + results.incorrect ) === questions.length ) {
-        results.correct = results.correct - value;
-    } 
-    
-    results.incorrect = results.incorrect + value;            
-};
- */
-

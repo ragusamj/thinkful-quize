@@ -56,7 +56,7 @@ module.exports = function(grunt) {
                 './bower_components/bootstrap/dist/js/bootstrap.js',
                 './assets/js/*.js'
                 ],
-                tasks: ['concat', 'uglify'],
+                tasks: ['concat'],
                 options: {
                     livereload: true
                 }
@@ -80,5 +80,6 @@ module.exports = function(grunt) {
     // Task definition
     grunt.registerTask('default', ['watch']);
 
-    grunt.registerTask('build', ['concat','uglify','less']);
-}; 
+    grunt.registerTask('build', ['concat', 'less']); // 'uglify'
+
+};
