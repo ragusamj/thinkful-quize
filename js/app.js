@@ -13205,8 +13205,8 @@ var isDebug = true;
 
         // SET PRIVATE PROPERTIES (PRIVATE) __________________________
         var Quiz = {},
-            src = '/json/data.json',
-            //src = 'https://quizeapp-96831.firebaseio.com/questions.json',
+            //src = '/json/data.json',
+            src = 'https://quizeapp-96831.firebaseio.com/questions.json',
             current = 0,
             loaded = false,
             questions = [],
