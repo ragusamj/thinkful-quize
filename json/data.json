@@ -3,7 +3,7 @@
   "questions": [
     {
       "question": "What does HTML stand for?",
-      "answer": "Hyper Text Markup Language",
+      "answer": "Hypertext Markup Language",
       "tag": {
         "tagName": "input",
         "attributes": {

@@ -492,6 +492,8 @@ var isDebug = true;
                 return false;
             }   
             
+            console.log(jsonData);
+            
             $.each( jsonData, function( key, attributes ) {
                                 
                 if(attributes.hasOwnProperty('question') === false) {
