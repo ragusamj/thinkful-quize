@@ -561,10 +561,12 @@ var isDebug = true;
                         $("#correct-text").text( ( parseInt($("#correct-text").text()) + 1 ) );
                         $("#precent-text").text( (Math.round(( parseInt($("#correct-text").text()) / questions.length )*100 )) + '%');
                         $(errorSelectorString).after('<div class="bg-success"><p class="text-success">CORRECT! Good Job!</p></div>');
-                        
+
                         if(index <  questions.length) {
+                          console.log('###############');
                             fadeQuestion("success", index, 400, 800);
                         } else {
+                          console.log('!!!!!!!!!!!!!');
                             completed();
                         }    
                                         
@@ -579,7 +581,12 @@ var isDebug = true;
                         
                         $("#incorrect-text").text( ( parseInt($("#incorrect-text").text()) + 1 ) );
                         $(errorSelectorString).after('<div class="bg-danger"><p class="text-danger">Sorry you have exceeded 3 trys</p></div>');
-                        
+
+                        if(index ==  questions.length) {
+                          completed();
+                          return false;
+                        }
+
                         fadeQuestion("danger", index, 400, 800);
                                                 
                         return false;
@@ -592,6 +599,12 @@ var isDebug = true;
                         $(this).remove();
                         $("fieldset.form-group").removeClass("danger");
                     });
+                    
+                    
+                    if(index ==  questions.length) {
+                      completed();
+                      return false;
+                    }
                     
                     return false; 
                     
