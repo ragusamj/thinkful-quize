@@ -13304,11 +13304,9 @@ var isDebug = true;
                         $(errorSelectorString).after('<div class="bg-success"><p class="text-success">CORRECT! Good Job!</p></div>');
 
                         if(index <  questions.length) {
-                          console.log('###############');
-                            fadeQuestion("success", index, 400, 800);
+                          fadeQuestion("success", index, 400, 800);
                         } else {
-                          console.log('!!!!!!!!!!!!!');
-                            completed();
+                          completed();
                         }    
                                         
                         return true;
