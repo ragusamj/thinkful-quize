@@ -22,36 +22,43 @@
 
 
 #intro {
-    background: #333;
-    
-    #main-wrapper {
-        height: 100%;
+  background: #333;
+
+  #main-wrapper {
+    height: 100%;
+    width:auto;
+    color: #fff; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    #main-inner {
+        top: 50%;
+        height: 50%;
+        position: relative;
         width:auto;
-        color: #fff; 
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        
-        #main-inner {
-            top: 50%;
-            height: 50%;
-            position: relative;
-            width:auto;
-            -webkit-transform: translateY(-50%);
-            -moz-transform:    translateY(-50%);
-            -ms-transform:     translateY(-50%);
-            -o-transform:      translateY(-50%);
-            transform:         translateY(-50%);
-           
-            h1 {
-                color: #fff;
-                font-size: 10rem;
-                font-weight: 700;
-                padding-bottom: 30px;
-            }  
-        }        
-    } 
+        -webkit-transform: translateY(-50%);
+        -moz-transform:    translateY(-50%);
+        -ms-transform:     translateY(-50%);
+        -o-transform:      translateY(-50%);
+        transform:         translateY(-50%);
+
+        h1 {
+            color: #fff;
+            font-size: 10rem;
+            font-weight: 700;
+            padding-bottom: 30px;
+        }  
+
+        @media (min-width: 576px) { 
+          h1 {
+            font-size: 5rem;
+          }
+        }
+
+    }
+  } 
 } 
 
 
@@ -247,8 +254,7 @@ fieldset.danger {
 }
 
 #question {
-	///padding-top:20px;
-	
+	// padding-top:20px;
 }
 
 
